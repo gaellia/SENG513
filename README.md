@@ -13,6 +13,7 @@
 * `npm install` at /functions
 * `firebase serve` at main directory
 * load "Local server" on browser
+* (Ctrl + C) then `Y` when finished
 
 ### Making changes
 
