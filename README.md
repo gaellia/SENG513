@@ -32,13 +32,13 @@
 #### Help I don't understand web development
 
 * `/public` - contains the front-end (client side) html, css, and javascript
-** Communicates to the backend only through api calls
-** No file sharing and using require between front and back. Ever.
-*** I'd rather you have two copies of the same file if absolutely needed
-** Import javascript dependencies using CDNs or literally copying the js file and putting it somewhere in public
+  * Communicates to the backend only through api calls
+  * No file sharing and using require between front and back. Ever.
+    * I'd rather you have two copies of the same file if absolutely needed
+    * Import javascript dependencies using CDNs or literally copying the js file and putting it somewhere in public
 * `/functions` - contains the back-end (server side) javascript
-** Communicates to database (will probably be mongo)
-** Easily testable with mocha - complicated logic belongs here
+  * Communicates to database (will probably be mongo)
+  * Easily testable with mocha - complicated logic belongs here
 * `package.json` - keeps track of dependencies. When `npm install`, it refers to package.json to determine what dependencies to install
 * What's a dependency?
-** Code that you didn't write
+  * Code that you didn't write
