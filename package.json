@@ -1,0 +1,27 @@
+{
+  "name": "seng513",
+  "version": "1.0.0",
+  "description": "A party organiser web app for SENG 513 w\u001b[D\u001b[D\u001b[D\u001b[D\u001b[\u001b[C\u001b[C\u001b[C\u001b[D\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C19",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elvinlimpin/SENG513.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elvinlimpin/SENG513/issues"
+  },
+  "homepage": "https://github.com/elvinlimpin/SENG513#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.12.1",
+    "express": "^4.16.4",
+    "gulp": "^4.0.0",
+    "mocha": "^5.2.0",
+    "mongoose": "^5.4.8"
+  }
+}
