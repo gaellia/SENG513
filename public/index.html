@@ -1,54 +1,82 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<!doctype html>
+<html lang='en'>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/5.8.2/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/5.8.2/firebase-auth.js"></script>
-    <script defer src="/__/firebase/5.8.2/firebase-database.js"></script>
-    <script defer src="/__/firebase/5.8.2/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/5.8.2/firebase-storage.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
-    
+        <title>Shoebox</title>
 
-    <link rel='stylesheet' href='style.css' type="text/css" media="screen">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
+        <!-- Google font Ubuntu Mono -->
 
-  </head>
-  <body>
-    <div id="message">
-      <h2>Hello world</h2>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- bootstrap and jquery -->
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        <script
+            src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"
+            integrity="sha384-VgZgZqjY9Fh+YsIGYp/Vzpbz9fdsC3TLwB4MrpOstd9QcaJdH/8aYw5vwisv8i8d"
+            crossorigin="anonymous">
+        </script>
+        <!--babel-->
 
-        try {
-          let app = firebase.app();
-          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
-          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-    
-    <!-- ES6 SUPPORT WITH BABEL -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  </body>
+        <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-functions.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-storage.js"></script>
+        <!-- Everything I'm using from firebase -->
+        <script>
+            // Initialize Firebase
+            var config = {
+              apiKey: "AIzaSyCWDLUnZT_vMrb-SdURr-C8_YqE2YjGwbw",
+              authDomain: "shoebox513.firebaseapp.com",
+              databaseURL: "https://shoebox513.firebaseio.com",
+              projectId: "shoebox513",
+              storageBucket: "shoebox513.appspot.com",
+              messagingSenderId: "419498851892"
+            };
+            firebase.initializeApp(config);
+          </script>
+
+        <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+        <link rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+            crossorigin="anonymous">
+        <!-- font awesome -->
+
+        <link href="./style.css" rel='stylesheet'>
+        <!-- extra css -->
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-3" id="left-container">
+                    <br>
+                </div>
+                <div class="col-6" id="middle-container">
+                    <br>
+                </div>
+                <div class="col-3" id="right-container">
+                    <br>
+                </div>
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js">
+        </script>
+        <!-- js cookie -->
+
+        <script src='./model.js'></script>
+        <script src='./view.js'></script>
+        <script src="./authCtrl.js"></script>
+        <script src='./controller.js'> </script>
+    </body>
 </html>

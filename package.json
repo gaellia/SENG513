@@ -1,10 +1,10 @@
 {
-  "name": "seng513",
+  "name": "shoebox",
   "version": "1.0.0",
-  "description": "A party organiser web app for SENG 513 w\u001b[D\u001b[D\u001b[D\u001b[D\u001b[\u001b[C\u001b[C\u001b[C\u001b[D\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C19",
+  "description": "A party social medida",
   "main": "index.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -17,11 +17,6 @@
   },
   "homepage": "https://github.com/elvinlimpin/SENG513#readme",
   "dependencies": {
-    "chai": "^4.2.0",
-    "eslint": "^5.12.1",
-    "express": "^4.16.4",
-    "gulp": "^4.0.0",
-    "mocha": "^5.2.0",
-    "mongoose": "^5.4.8"
+    "firebase-admin": "^7.1.0"
   }
 }
