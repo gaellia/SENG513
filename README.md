@@ -11,6 +11,12 @@
 * `git clone` this repository
 * `npm install` at the main directory
 * `npm install` at /functions
+
+
+#### Front End
+* Open index.html USING FIREFOX
+
+#### Back End (functions)
 * `firebase serve` at main directory
 * load "Local server" on browser
 * (Ctrl + C) then `Y` when finished
