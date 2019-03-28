@@ -34,10 +34,12 @@ const m = () => {
  *  description: String,
  *  members: [{
  *      userID: String,
+ *      email: String,
  *      role: ["owner", "member", "invited"]
  *  }],
  *  messages: [{
  *      userID: String,
+ *      email: String,
  *      message: String,
  *      timestamp: Date,
  *  }],
