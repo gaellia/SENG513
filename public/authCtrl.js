@@ -30,8 +30,11 @@ auth.onAuthStateChanged(user => {
       if(!docs.map(docs => docs.data()).some(({uid}) => uid==user.uid)) {
         const {uid, displayName, email} = user
         model.user().add({uid, displayName, email})
+        
+        model.local('boxes', [])
+        model.local('user', {uid, displayName, email})
 
-        // onboarding hook
+        view.selectShoeBox()
       } else {
 
         // fetch my shoeboxes

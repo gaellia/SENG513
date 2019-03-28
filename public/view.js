@@ -40,10 +40,8 @@ const v = () => ({
                     <ul class="list-group list-group-flush">
                         ${boxList}
                         <li class="list-group-item box-btn" id="box-new">
-                            <a>
-                                <i class="fas fa-plus-circle"></i>
-                                Create new...
-                            </a>
+                            <i class="fas fa-plus-circle"></i>
+                            Create new...
                         </li>
                     </ul>
                 </div>

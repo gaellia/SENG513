@@ -38,7 +38,7 @@ const m = () => {
  *      message: String,
  *      timestamp: Date,
  *  }],
- *  media: [{
+ *  cards: [{
  *      mediaType: ["picture", "video", "text"],
  *      storageID: String,
  *      display: {
