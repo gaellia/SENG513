@@ -56,10 +56,13 @@ const v = () => ({
     },
 
     chatButton: () => {
+        console.log("LOADING THIS")
         RIGHT.html(`
             <div style='align: center'>
                 <button class="btn btn-primary" id="load-chatbox">
-                    Load Chat
+                    <a>
+                    load shoe box
+                    </a>
                 </button>
             </div>
         `)
