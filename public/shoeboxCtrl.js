@@ -3,7 +3,7 @@ $(document).on('click', '.box-btn', ({target: {id}}) => {
         case "box-new":
             view.createShoebox()
             break
-            
+
         case 'invite-new':
             view.inviteMember()
     }
@@ -22,9 +22,9 @@ $(document).on('click', '#create-shoebox-submit', e => {
     model.shoebox().add({
         name: $('#shoebox-name').val(),
         description: $('#shoebox-description').val(),
-        members: members,
-        messages: new Array(),
-        media: new Array()
+        members,
+        messages: [],
+        cards: []
     })
 
     alert('New Shoebox created!')
