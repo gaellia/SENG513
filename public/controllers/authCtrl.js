@@ -40,7 +40,7 @@ auth.onAuthStateChanged(user => {
           const activeMember = ({userID, role}) => userID==user.uid&&['owner', 'member'].some(e=> e==role)
           const myShoeBoxes = docs.map(docs => docs.data()).filter(({members}) => members.some(activeMember))
 
-
+          
           model.local('user', {uid: user.uid, displayName: user.displayName, email: user.email})
           model.local('boxes', myShoeBoxes)
 
