@@ -30,9 +30,14 @@ const m = () => {
 
 /**
  * shoebox: {
+ *  boxID: String,
  *  name: String,
  *  description: String,
- *  members: [{
+ *  memberEmails: [String]
+ * }
+ * 
+ * collections in shoebox:
+ *   members: [{
  *      email: String,
  *      role: ["owner", "member", "invited"]
  *  }],
@@ -52,8 +57,11 @@ const m = () => {
  *          height: Number
  *      }
  * }]
- *  
- * }
+ * 
+ * example:
+ * 
+ * model.shoebox('vET5va5u3J5V2gPieine').collection('members').get()
+ * 
  */
         shoebox: (docID, callback) => {
             // get ref for all

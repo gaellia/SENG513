@@ -32,7 +32,7 @@ const v = () => ({
                 </li>`
             });
         }
-
+        
         MID.html(`
             <div style="text-align: center">
                 <br>

@@ -26,15 +26,21 @@ $(document).on('click', '#create-shoebox-submit', e => {
         role: "owner"
     })
 
-    model.shoebox().add({
-        name: $('#shoebox-name').val(),
-        description: $('#shoebox-description').val(),
-        members,
-        messages: [],
-        cards: []
-    })
+    model.shoebox().add({}).then(({id}) => {
+        model.shoebox(id).set({
+            name: $('#shoebox-name').val(),
+            description: $('#shoebox-description').val(),
+            boxID: id,
+            memberEmails: members.map(({email}) => email)
+        })
+        
+        for(let member of members)
+            model.shoebox(id).collection('members').add(member)
 
-    alert('New Shoebox created!')
-    authGlobal.fetchBoxes(model.local('user'))
-    view.selectShoeBox()
+            authGlobal.fetchBoxes(model.local('user'))
+            view.selectShoeBox()
+
+    }).catch(err => {
+        console.log('err', err)
+    })
 })
