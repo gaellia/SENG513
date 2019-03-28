@@ -17,7 +17,9 @@
 * Open index.html USING FIREFOX
 
 #### Back End (functions)
-* `firebase serve` at main directory
+* `npm install firebase-tools -g` at main directory to install firebase
+* `firebase login` to login
+* `firebase serve` at main directory to start server
 * load "Local server" on browser
 * (Ctrl + C) then `Y` when finished
 
