@@ -69,16 +69,17 @@ const m = () => {
 
         local: (name, value, log) => {
             switch(value) {
+                // When null passed, clear the item from local storage
                 case null:
-                    Cookies.remove(name)
+                    localStorage.removeItem(name)
                     if(log) console.log(`REMOVED ${name}`)
                     break
-                
+                // When undefined, return the value from local storage
                 case undefined:
-                    return Cookies.getJSON(name)
-                
+                    return localStorage.getItem(name)
+                // Otherwise set the value for the given key
                 default:
-                    Cookies.set(name, value)
+                    localStorage.setItem(name, value)
                     if(log) {
                         console.log(`SET ${name} TO:`)
                         console.log(value)
