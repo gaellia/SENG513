@@ -22,7 +22,7 @@ const v = () => ({
         const user = model.local('user')
         const boxes = model.local('boxes')
 
-        const boxList = ``
+        let boxList = ``
         if(boxes.length!==0) {
             boxes.forEach(box => {
                 boxList = `${boxList}
@@ -39,14 +39,12 @@ const v = () => ({
                 <h1>Welcome, ${user.displayName}</h1>
                 <br>
                 ${(() => boxes.length===0? `<p>Create a new shoebox to get started.</p><br>` : '')()}
-                <div class="card" style="width: 18rem; text-align: left">
+                <div class="card" style="text-align: left">
                     <ul class="list-group list-group-flush">
                         ${boxList}
                         <li class="list-group-item box-btn" id="box-new">
-                            <a>
-                                <i class="fas fa-plus-circle"></i>
-                                Create new...
-                            </a>
+                            <i class="fas fa-plus-circle"></i>
+                            Create new...
                         </li>
                     </ul>
                 </div>
