@@ -66,16 +66,17 @@ const m = () => {
 
         local: (name, value, log) => {
             switch(value) {
+                // When null passed, clear the user from local storage
                 case null:
-                    Cookies.remove(name)
+                    localStorage.removeItem(name)
                     if(log) console.log(`REMOVED ${name}`)
                     break
-                
+                // When undefined, return the user from local storage
                 case undefined:
-                    return Cookies.getJSON(name)
-                
+                    return localStorage.getItem(name)
+                // Otherwise set the user that is passed
                 default:
-                    Cookies.set(name, value)
+                    localStorage.setItem(name, value)
                     if(log) {
                         console.log(`SET ${name} TO:`)
                         console.log(value)
