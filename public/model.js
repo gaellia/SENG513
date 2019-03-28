@@ -19,7 +19,7 @@ const m = () => {
             if(!docID) return db.collection('user')
             // get ref for one
             else if(!callback) {
-                return db.collection('user')
+                return db.collection('user').doc(docID)
             }
             // listener for one user
             // no use cases currently
@@ -59,7 +59,7 @@ const m = () => {
             if(!docID) return db.collection('shoebox')
             // get ref for one
             else if(!callback) {
-                return db.collection('shoebox')
+                return db.collection('shoebox').doc(docID)
             }
             // listener for changes of one shoebox
             else {

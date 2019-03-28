@@ -5,7 +5,24 @@ $(document).on('click', '.box-btn', e => {
 })
 
 $('#load-chatbox').click(() => {
-    console.log("HELLEREE")
 
     // model.shoebox(,)
+    RIGHT.html(`
+    <div id='chat-container'>
+        <ul id='chat'>
+            <li>
+                TESTING
+            </li>
+        </ul>
+    </div>`)
+
+    // testing with the only shoebox that exists lol
+    model.shoebox("vET5va5u3J5V2gPieine").get().then(doc => {
+        if(doc.exists) {
+            const messages = doc.data().messages
+            console.log('messages', messages)
+        } else {
+            console.log("no doc ")
+        }
+    })
 })

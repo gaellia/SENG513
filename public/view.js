@@ -60,7 +60,7 @@ const v = () => ({
             <div style='align: center'>
                 <button class="btn btn-primary" id="load-chatbox">
                     <a>
-                    load shoe box
+                    load chat
                     </a>
                 </button>
             </div>
