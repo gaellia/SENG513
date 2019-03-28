@@ -88,6 +88,18 @@ const v = () => ({
                 <input type="text" class="form-control" placeholder="Email">
             </li>
         `)
+    },
+
+    chatButton: () => {
+        RIGHT.html(`
+            <div style='align: center'>
+                <button class="btn btn-primary" id="load-chatbox">
+                    <a>
+                    load chat
+                    </a>
+                </button>
+            </div>
+        `)
     }
 })
 
