@@ -6,6 +6,7 @@ $(document).on('click', '.box-btn', e => {
     }
 })
 
-$('#creat-shoebox').submit(() => {
-    
+$('#create-shoebox').submit((e) => {
+    e.preventDefault()
+    alert('Submit');
 })
