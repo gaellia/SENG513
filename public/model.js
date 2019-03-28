@@ -14,16 +14,16 @@ const m = () => {
  */
 
 //
-        user: param => {
+        user: (param, docID) => {
             // get ref for all
             if(!param) return db.collection('user')
             // get ref for one
-            else if(typeof(param)!=='function') {
+            else if(!docID) {
                 return db.collection('user')
             }
             // listener
             else {
-                return db.collection('user').onSnapshot(param)
+                return db.collection('user').doc(docID).onSnapshot(param)
             }
         },
 
@@ -53,16 +53,16 @@ const m = () => {
  *  
  * }
  */
-        shoebox: param => {
+        shoebox: (param, docID) => {
             // get ref for all
             if(!param) return db.collection('shoebox')
             // get ref for one
-            else if(typeof(param)!=='function') {
+            else if(!docID) {
                 return db.collection('shoebox')
             }
             // listener for changes of shoebox
             else {
-                return db.collection('shoebox').onSnapshot(param)
+                return db.collection('shoebox').doc(docID).onSnapshot(param)
             }
         },
 
