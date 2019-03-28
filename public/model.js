@@ -14,16 +14,17 @@ const m = () => {
  */
 
 //
-        user: (param, docID) => {
+        user: (docID, callback) => {
             // get ref for all
-            if(!param) return db.collection('user')
+            if(!docID) return db.collection('user')
             // get ref for one
-            else if(!docID) {
+            else if(!callback) {
                 return db.collection('user')
             }
-            // listener
+            // listener for one user
+            // no use cases currently
             else {
-                return db.collection('user').doc(docID).onSnapshot(param)
+                return db.collection('user').doc(docID).onSnapshot(callback)
             }
         },
 
@@ -53,16 +54,16 @@ const m = () => {
  *  
  * }
  */
-        shoebox: (param, docID) => {
+        shoebox: (docID, callback) => {
             // get ref for all
-            if(!param) return db.collection('shoebox')
+            if(!docID) return db.collection('shoebox')
             // get ref for one
-            else if(!docID) {
+            else if(!callback) {
                 return db.collection('shoebox')
             }
-            // listener for changes of shoebox
+            // listener for changes of one shoebox
             else {
-                return db.collection('shoebox').doc(docID).onSnapshot(param)
+                return db.collection('shoebox').doc(docID).onSnapshot(callback)
             }
         },
 
