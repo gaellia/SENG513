@@ -26,7 +26,7 @@ const v = () => ({
         if(boxes.length!==0) {
             boxes.forEach(box => {
                 boxList = `${boxList}
-                <li class="list-group-item id="box-${box.id}">
+                <li class="list-group-item box-btn" id="box-${box.id}">
                     <i class="fas fa-shapes"></i>
                     ${box.name}
                 </li>`
@@ -42,11 +42,11 @@ const v = () => ({
                 <div class="card" style="width: 18rem; text-align: left">
                     <ul class="list-group list-group-flush">
                         ${boxList}
-                        <li class="list-group-item id="box-new">
-                            <a href="#">
-                                <i class="fas fa-plus-circle"></i>
-                                Create new...
-                            </a>
+                        <li class="list-group-item box-btn" id='box-new'>
+                                <a>
+                                    <i class="fas fa-plus-circle"></i>
+                                    Create new...
+                                </a>
                         </li>
                     </ul>
                 </div>
@@ -56,7 +56,6 @@ const v = () => ({
     },
 
     chatButton: () => {
-        console.log("LOADING THIS")
         RIGHT.html(`
             <div style='align: center'>
                 <button class="btn btn-primary" id="load-chatbox">

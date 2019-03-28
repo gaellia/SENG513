@@ -14,16 +14,17 @@ const m = () => {
  */
 
 //
-        user: param => {
+        user: (docID, callback) => {
             // get ref for all
-            if(!param) return db.collection('user')
+            if(!docID) return db.collection('user')
             // get ref for one
-            else if(typeof(param)!=='function') {
-                return db.collection('user')
+            else if(!callback) {
+                return db.collection('user').doc(docID)
             }
-            // listener
+            // listener for one user
+            // no use cases currently
             else {
-                return db.collection('user').onSnapshot(param)
+                return db.collection('user').doc(docID).onSnapshot(callback)
             }
         },
 
@@ -53,31 +54,32 @@ const m = () => {
  *  
  * }
  */
-        shoebox: param => {
+        shoebox: (docID, callback) => {
             // get ref for all
-            if(!param) return db.collection('shoebox')
+            if(!docID) return db.collection('shoebox')
             // get ref for one
-            else if(typeof(param)!=='function') {
-                return db.collection('shoebox')
+            else if(!callback) {
+                return db.collection('shoebox').doc(docID)
             }
-            // listener for changes of shoebox
+            // listener for changes of one shoebox
             else {
-                return db.collection('shoebox').onSnapshot(param)
+                return db.collection('shoebox').doc(docID).onSnapshot(callback)
             }
         },
 
         local: (name, value, log) => {
             switch(value) {
+                // When null passed, clear the item from local storage
                 case null:
-                    Cookies.remove(name)
+                    localStorage.removeItem(name)
                     if(log) console.log(`REMOVED ${name}`)
                     break
-                
+                // When undefined, return the value from local storage
                 case undefined:
-                    return Cookies.getJSON(name)
-                
+                    return localStorage.getItem(name)
+                // Otherwise set the value for the given key
                 default:
-                    Cookies.set(name, value)
+                    localStorage.setItem(name, value)
                     if(log) {
                         console.log(`SET ${name} TO:`)
                         console.log(value)
