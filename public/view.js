@@ -40,7 +40,7 @@ const v = () => ({
                     <ul class="list-group list-group-flush">
                         ${boxList}
                         <li class="list-group-item box-btn" id="box-new">
-                            <a href="#">
+                            <a>
                                 <i class="fas fa-plus-circle"></i>
                                 Create new...
                             </a>
@@ -59,7 +59,7 @@ const v = () => ({
                 <h1>New Shoebox</h1>
                 <br>
                 <div>
-                    <form id="create-shoebox">
+                    <form id="create-shoebox-form">
                         <div class="form-group">
                             <label for="shoebox-name">Shoebox Name</label>
                             <input type="text" class="form-control" id="shoebox-name">
@@ -74,7 +74,7 @@ const v = () => ({
                                 </li>
                             </ul>
                         </div>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button id="create-shoebox-submit" class="btn btn-primary">Create</button>
                     </form>
                 </div>
             </div>

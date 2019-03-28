@@ -6,7 +6,7 @@ $(document).on('click', '.box-btn', e => {
     }
 })
 
-$('#create-shoebox').submit((e) => {
+$(document).on('click', '#create-shoebox-submit', e => {
     e.preventDefault()
-    alert('Submit');
+    $('#create-shoebox-form') // access form elements here
 })
