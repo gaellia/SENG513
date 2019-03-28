@@ -11,9 +11,16 @@ $(document).on('click', '.box-btn', ({target: {id}}) => {
 
 $(document).on('click', '#create-shoebox-submit', e => {
     e.preventDefault() // access form elements here
-    let inviteList = $('#invite-list li input')
+    const inviteList = $('#invite-list li input')
 
-    let members = inviteList.map(({value}) => ({email: value, role: 'invited'}))
+    const members = []
+    for(let member of inviteList) {
+        members.push({
+            email: member.value,
+            role: 'invited'
+        })
+    }
+
     members.push({
         email: model.local('user').email,
         role: "owner"

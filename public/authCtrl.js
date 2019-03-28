@@ -36,7 +36,7 @@ auth.onAuthStateChanged(user => {
 
         view.selectShoeBox()
       } else {
-
+        
         // fetch my shoeboxes
         authGlobal.fetchBoxes(user)
       }
