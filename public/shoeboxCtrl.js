@@ -2,6 +2,8 @@ $(document).on('click', '.box-btn', ({target: {id}}) => {
     switch(id) {
         case "box-new":
             view.createShoebox()
+            break
+            
         case 'invite-new':
             view.inviteMember()
     }
