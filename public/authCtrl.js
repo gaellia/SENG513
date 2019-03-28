@@ -35,17 +35,23 @@ auth.onAuthStateChanged(user => {
       } else {
 
         // fetch my shoeboxes
-        model.shoebox().get().then(({docs}) => {
-          const activeMember = ({userID, role}) => userID==user.uid&&['owner', 'member'].some(e=> e==role)
-          const myShoeBoxes = docs.map(docs => docs.data()).filter(({members}) => members.some(activeMember))
-
-          
-          model.local('user', {uid: user.uid, displayName: user.displayName, email: user.email})
-          model.local('boxes', myShoeBoxes)
-
-          view.selectShoeBox()
-        })
+        authGlobal.fetchBoxes(user)
       }
     })
   }
 })
+
+const authGlobal = {
+  fetchBoxes: function(user) {
+    model.shoebox().get().then(({docs}) => {
+      const activeMember = ({email, role}) => email==user.email&&['owner', 'member'].some(e=> e==role)
+      const myShoeBoxes = docs.map(docs => docs.data()).filter(({members}) => members.some(activeMember))
+
+
+      model.local('user', {uid: user.uid, displayName: user.displayName, email: user.email})
+      model.local('boxes', myShoeBoxes)
+
+      view.selectShoeBox()
+    })
+  }
+}

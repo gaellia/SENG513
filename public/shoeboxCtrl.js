@@ -30,4 +30,6 @@ $(document).on('click', '#create-shoebox-submit', e => {
     })
 
     alert('New Shoebox created!')
+    authGlobal.fetchBoxes(model.local('user'))
+    view.selectShoeBox()
 })
