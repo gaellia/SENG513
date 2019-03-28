@@ -5,7 +5,6 @@ $(document).on('click', '.box-btn', e => {
 })
 
 $('#load-chatbox').click(() => {
-
     // model.shoebox(,)
     RIGHT.html(`
     <div id='chat-container'>
@@ -69,10 +68,16 @@ $('#load-chatbox').click(() => {
 
             // show all messages in the shoebox
             for (let i in messages) {
-                $('#chat').append($('<li>').html(`<i class='fas fa-user'><span id='username'>${model.user().where('email', '==', messages[i].email).displayName}</span></i><br>
+                let timestamp = messages[i].timestamp.toDate().toString()
+                timestamp = timestamp.substr(0, timestamp.indexOf(':')+3)   //goes up to the minute 
+
+                $('#chat').append($('<li>').html(`<i class='fas fa-user'><span id='username'>${messages[i].displayName}</span></i><br>
                                                   <p id='message'>${messages[i].message}</p>
-                                                  <span id='time'>${messages[i].timestamp}</span>`))
+                                                  <span id='time'>${timestamp}</span>`))
             }
+
+            // scroll to bottom
+            $('#chat').scrollTop($('#chat')[0].scrollHeight);
 
         } else {
             console.log("no doc ")
