@@ -12,16 +12,19 @@ const m = () => {
  *  email: String,
  * }
  */
-        user: param => {
+
+//
+        user: (docID, callback) => {
             // get ref for all
-            if(!param) return db.collection('user')
+            if(!docID) return db.collection('user')
             // get ref for one
-            else if(typeof(param)!=='function') {
-                return db.collection('user')
+            else if(!callback) {
+                return db.collection('user').doc(docID)
             }
-            // listener
+            // listener for one user
+            // no use cases currently
             else {
-                return db.collection('user').onSnapshot(param)
+                return db.collection('user').doc(docID).onSnapshot(callback)
             }
         },
 
@@ -35,6 +38,7 @@ const m = () => {
  *  }],
  *  messages: [{
  *      email: String,
+ *      displayName: String,
  *      message: String,
  *      timestamp: Date,
  *  }],
@@ -51,16 +55,16 @@ const m = () => {
  *  
  * }
  */
-        shoebox: param => {
+        shoebox: (docID, callback) => {
             // get ref for all
-            if(!param) return db.collection('shoebox')
+            if(!docID) return db.collection('shoebox')
             // get ref for one
-            else if(typeof(param)!=='function') {
-                return db.collection('shoebox')
+            else if(!callback) {
+                return db.collection('shoebox').doc(docID)
             }
-            // listener for changes of shoebox
+            // listener for changes of one shoebox
             else {
-                return db.collection('shoebox').onSnapshot(param)
+                return db.collection('shoebox').doc(docID).onSnapshot(callback)
             }
         },
 

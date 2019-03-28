@@ -1,8 +1,11 @@
 // all code view related go here
+const MID = $('#middle-container')
+const LEFT = $('#left-container')
+const RIGHT = $('#right-container')
 
 const v = () => ({
     auth: () => {
-        $("#middle-container").html(`
+        MID.html(`
         <div style="text-align: center">
             <img style="width: 150px; display:block; margin-left: auto; margin-right: auto; margin-top: 2em; margin-bottom: 2em" src="./Illustration.png" />
             <h1>Shoebox</h1>
@@ -23,14 +26,14 @@ const v = () => ({
         if(boxes.length!==0) {
             boxes.forEach(box => {
                 boxList = `${boxList}
-                <li class="list-group-item id="box-${box.id}">
+                <li class="list-group-item box-btn" id="box-${box.id}">
                     <i class="fas fa-shapes"></i>
                     ${box.name}
                 </li>`
             });
         }
-        
-        $('#middle-container').html(`
+
+        MID.html(`
             <div style="text-align: center">
                 <br>
                 <h1>Welcome, ${user.displayName}</h1>
@@ -51,7 +54,7 @@ const v = () => ({
     },
 
     createShoebox: () => {
-        $('#middle-container').html(`
+        MID.html(`
             <div style="text-align: center">
                 <br>
                 <h1>New Shoebox</h1>
@@ -84,6 +87,18 @@ const v = () => ({
             <li class="box-btn" style="list-style-type: none;">
                 <input type="text" class="form-control" placeholder="Email">
             </li>
+        `)
+    },
+
+    chatButton: () => {
+        RIGHT.html(`
+            <div style='align: center'>
+                <button class="btn btn-primary" id="load-chatbox">
+                    <a>
+                    load chat
+                    </a>
+                </button>
+            </div>
         `)
     }
 })
