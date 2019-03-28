@@ -6,7 +6,7 @@ $('#load-chatbox').click(() => {
     <div id='chat-container'>
         <ul id='chat'>
             <li>
-                TESTING
+                <i class='fas fa-user'><span id='username'>USERNAME</span></i>
             </li>
         </ul>
     </div>`)

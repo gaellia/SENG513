@@ -3,8 +3,15 @@
     height: 100%;
 }
 
+#chat {
+    padding: 5px;
+    list-style-type: none;
+}
+
 #chat li {
     background-color: aqua;
-    list-style-position: outside;
-    list-style-type: none;
+}
+
+#username {
+    padding: 10px;
 }
