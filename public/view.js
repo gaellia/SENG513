@@ -39,7 +39,7 @@ const v = () => ({
                 <div class="card" style="width: 18rem; text-align: left">
                     <ul class="list-group list-group-flush">
                         ${boxList}
-                        <li class="list-group-item id="box-new">
+                        <li class="list-group-item box-btn" id="box-new">
                             <a href="#">
                                 <i class="fas fa-plus-circle"></i>
                                 Create new...
@@ -49,6 +49,43 @@ const v = () => ({
                 </div>
                 <!-- card -->
             </div>
+        `)
+    },
+
+    createShoebox: () => {
+        $('#middle-container').html(`
+            <div style="text-align: center">
+                <br>
+                <h1>New Shoebox</h1>
+                <br>
+                <div>
+                    <form id="create-shoebox">
+                        <div class="form-group">
+                            <label for="shoebox-name">Shoebox Name</label>
+                            <input type="text" class="form-control" id="shoebox-name">
+                            <label for="shoebox-description">Description</label>
+                            <input type="text" class="form-control" id="shoebox-description">
+                            <br>
+                            <label for="invite-list">Invite Members</label>
+                            <ul class="list-group list-group-flush" id="invite-list">
+                                <li class="list-group-item box-btn" id="invite-new">
+                                    <i class="fas fa-plus-circle"></i>
+                                    Invite by email
+                                </li>
+                            </ul>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </form>
+                </div>
+            </div>
+        `)
+    },
+
+    inviteMember: () => {
+        $('#invite-new').prepend(`
+            <li class="box-btn" style="list-style-type: none;">
+                <input type="text" class="form-control" placeholder="Email">
+            </li>
         `)
     }
 })
