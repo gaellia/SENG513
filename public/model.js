@@ -30,11 +30,11 @@ const m = () => {
  *  name: String,
  *  description: String,
  *  members: [{
- *      userID: String,
+ *      email: String,
  *      role: ["owner", "member", "invited"]
  *  }],
  *  messages: [{
- *      userID: String,
+ *      email: String,
  *      message: String,
  *      timestamp: Date,
  *  }],
@@ -64,6 +64,9 @@ const m = () => {
             }
         },
 
+        /**
+         * Only supports: [array, object, string]
+         */
         local: (name, value, log) => {
             switch(value) {
                 // When null passed, clear the item from local storage
@@ -73,10 +76,12 @@ const m = () => {
                     break
                 // When undefined, return the value from local storage
                 case undefined:
-                    return localStorage.getItem(name)
+                    const result = localStorage.getItem(name)
+                    return JSON.parse(result)
                 // Otherwise set the value for the given key
                 default:
-                    localStorage.setItem(name, value)
+
+                    localStorage.setItem(name, typeof(value)==='object'? JSON.stringify(value): result)
                     if(log) {
                         console.log(`SET ${name} TO:`)
                         console.log(value)
