@@ -1,8 +1,11 @@
 // all code view related go here
+const MID = $('#middle-container')
+const LEFT = $('#left-container')
+const RIGHT = $('#right-container')
 
 const v = () => ({
     auth: () => {
-        $("#middle-container").html(`
+        MID.html(`
         <div style="text-align: center">
             <img style="width: 150px; display:block; margin-left: auto; margin-right: auto; margin-top: 2em; margin-bottom: 2em" src="./Illustration.png" />
             <h1>Shoebox</h1>
@@ -30,7 +33,7 @@ const v = () => ({
             });
         }
 
-        $('#middle-container').html(`
+        MID.html(`
             <div style="text-align: center">
                 <br>
                 <h1>Welcome, ${user.displayName}</h1>
@@ -48,6 +51,16 @@ const v = () => ({
                     </ul>
                 </div>
                 <!-- card -->
+            </div>
+        `)
+    },
+
+    chatButton: () => {
+        RIGHT.html(`
+            <div style='align: center'>
+                <button class="btn btn-primary" id="load-chatbox">
+                    Load Chat
+                </button>
             </div>
         `)
     }

@@ -12,6 +12,8 @@ const m = () => {
  *  email: String,
  * }
  */
+
+//
         user: param => {
             // get ref for all
             if(!param) return db.collection('user')

@@ -32,6 +32,7 @@ auth.onAuthStateChanged(user => {
         model.user().add({uid, displayName, email})
 
         // onboarding hook
+        
       } else {
 
         // fetch my shoeboxes
