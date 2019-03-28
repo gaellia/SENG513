@@ -11,7 +11,48 @@ $('#load-chatbox').click(() => {
     <div id='chat-container'>
         <ul id='chat'>
             <li>
-                <i class='fas fa-user'><span id='username'>USERNAME</span></i>
+                <i class='fas fa-user'><span id='username'>USERNAME</span></i><br>
+                <span id='message'>This is a message a user has sent</span>
+            </li>
+            <li>
+            <i class='fas fa-user'><span id='username'>USERNAME 2</span></i><br>
+            <span id='message'>Wazzup losers</span>
+            </li>
+            <li>
+            <i class='fas fa-user'><span id='username'>USERNAME</span></i><br>
+            <span id='message'>message</span>
+            </li>
+            <li>
+            <i class='fas fa-user'><span id='username'>USERNAME</span></i><br>
+            <span id='message'>message</span>
+            </li>
+            <li>
+            <i class='fas fa-user'><span id='username'>USERNAME</span></i><br>
+            <span id='message'>message</span>
+            </li>
+            <li>
+            <i class='fas fa-user'><span id='username'>USERNAME</span></i><br>
+            <span id='message'>message</span>
+            </li>
+            <li>
+            <i class='fas fa-user'><span id='username'>USERNAME</span></i><br>
+            <span id='message'>message</span>
+            </li>
+            <li>
+            <i class='fas fa-user'><span id='username'>USERNAME</span></i><br>
+            <span id='message'>message</span>
+            </li>
+            <li>
+            <i class='fas fa-user'><span id='username'>USERNAME</span></i><br>
+            <span id='message'>message qwekahwl wke jlkasjdlq wejklqwej klqwje lkqjl qwklejlqkwje  qwek jqlwkej lq qwek lkqw je</span>
+            </li>
+            <li>
+            <i class='fas fa-user'><span id='username'>USERNAME</span></i><br>
+            <span id='message'>message</span>
+            </li>
+            <li>
+            <i class='fas fa-user'><span id='username'>USERNAME</span></i><br>
+            <span id='message'>message</span>
             </li>
         </ul>
     </div>`)
