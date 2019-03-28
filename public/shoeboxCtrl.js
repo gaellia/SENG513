@@ -8,5 +8,6 @@ $(document).on('click', '.box-btn', e => {
 
 $(document).on('click', '#create-shoebox-submit', e => {
     e.preventDefault()
-    $('#create-shoebox-form') // access form elements here
+    let form = $('#create-shoebox-form') // access form elements here
+
 })

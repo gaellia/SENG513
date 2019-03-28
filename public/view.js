@@ -18,6 +18,7 @@ const v = () => ({
     selectShoeBox: () => {
         const user = model.local('user')
         const boxes = model.local('boxes')
+        console.log(JSON.stringify(user))
 
         const boxList = ``
         if(boxes.length!==0) {

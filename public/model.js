@@ -73,10 +73,10 @@ const m = () => {
                     break
                 // When undefined, return the value from local storage
                 case undefined:
-                    return localStorage.getItem(name)
+                    return JSON.parse(localStorage.getItem(name))
                 // Otherwise set the value for the given key
                 default:
-                    localStorage.setItem(name, value)
+                    localStorage.setItem(name, JSON.stringify(value))
                     if(log) {
                         console.log(`SET ${name} TO:`)
                         console.log(value)
