@@ -6,7 +6,7 @@ $(document).on('click', '.box-btn', e => {
     }
 })
 
-$(document).on('click', '#create-shoebox-submit', e => {
+$(document).on('click', '#upload-button', e => {
     e.preventDefault() // access form elements here
     let members = new Array()
     let inviteList = $('#invite-list li input')

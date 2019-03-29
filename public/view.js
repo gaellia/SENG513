@@ -31,6 +31,7 @@ const v = () => ({
         }
         
         $('#middle-container').html(`
+            <i class="fas fa-bars" id="bar-menu"></i>
             <div style="text-align: center">
                 <br>
                 <h1>Welcome, ${user.displayName}</h1>
