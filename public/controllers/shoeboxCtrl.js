@@ -9,6 +9,12 @@ $(document).on('click', '.box-btn', ({target: {id}}) => {
     }
 })
 
+$(document).on('click', '.view-box-btn', ({target: {id}}) => {
+    model.shoebox().where('boxID', '==', id).get().then(response => {
+        view.viewShoebox(response.docs.map(docs => docs.data())[0])
+    })
+})
+
 $(document).on('click', '#create-shoebox-submit', e => {
     e.preventDefault() // access form elements here
     const inviteList = $('#invite-list li input')

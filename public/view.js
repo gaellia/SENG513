@@ -26,7 +26,7 @@ const v = () => ({
         if(boxes.length!==0) {
             boxes.forEach(box => {
                 boxList = `${boxList}
-                <li class="list-group-item box-btn" id="box-${box.id}">
+                <li class="list-group-item box-btn view-box-btn" id="${box.boxID}">
                     <i class="fas fa-shapes"></i>
                     ${box.name}
                 </li>`
@@ -78,6 +78,14 @@ const v = () => ({
                         <button id="create-shoebox-submit" class="btn btn-primary">Create</button>
                     </form>
                 </div>
+            </div>
+        `)
+    },
+
+    viewShoebox: (box) => {
+        MID.html(`
+            <div style="text-align: center;">
+                <h1>${box.name}</h1>
             </div>
         `)
     },
