@@ -10,6 +10,7 @@ $(document).on('click', '.box-btn', ({target: {id}}) => {
 })
 
 $(document).on('click', '.view-box-btn', ({target: {id}}) => {
+    console.error("CLICKY")
     model.shoebox().where('boxID', '==', id).get().then(response => {
         view.viewShoebox(response.docs.map(docs => docs.data())[0])
     })

@@ -67,6 +67,9 @@ const v = () => ({
                             <label for="shoebox-description">Description</label>
                             <input type="text" class="form-control" id="shoebox-description">
                             <br>
+                            <label for="take-photo">Take Photo</label>
+                            <button> <i class="fas fa-camera"></i> </button>
+                            <br>
                             <label for="invite-list">Invite Members</label>
                             <ul class="list-group list-group-flush" id="invite-list">
                                 <li class="list-group-item box-btn" id="invite-new">
@@ -83,11 +86,50 @@ const v = () => ({
     },
 
     viewShoebox: (box) => {
+
+        const user = model.local('user')
+        const boxes = model.local('boxes')
+
+
+        let boxList = ``
+        if(boxes.length!==0) {
+            boxes.forEach(box => {
+                boxList = `${boxList}
+                <li class="list-group-item box-btn view-box-btn" id="${box.boxID}">
+                    <i class="fas fa-shapes"></i>
+                    ${box.name}
+                </li>`
+            });
+        }
+        LEFT.html( `
+        <div class="main-wrapper">      
+     
+        <div class="drawer">
+           <div class="card" style="text-align: left">
+                    <ul class="list-group list-group-flush">
+                        ${boxList}
+                       
+                    </ul>
+                </div>
+            
+    </div>
+  
+</div>`)
+
+
         MID.html(`
+
             <div style="text-align: center;">
                 <h1>${box.name}</h1>
             </div>
+            
+     
         `)
+
+
+
+
+
     },
 
     inviteMember: () => {
