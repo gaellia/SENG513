@@ -34,6 +34,7 @@ const v = () => ({
         }
         
         MID.html(`
+            <i class="fas fa-bars" id="bar-menu"></i>
             <div style="text-align: center">
                 <br>
                 <h1>Welcome, ${user.displayName}</h1>
@@ -101,7 +102,7 @@ const v = () => ({
                 </li>`
             });
         }
-        LEFT.html( `
+        LEFT.html(`
         <div class="main-wrapper">      
      
         <div class="drawer">

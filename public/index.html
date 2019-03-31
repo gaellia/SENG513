@@ -56,15 +56,29 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-3" id="left-container">
+                <div class="col-xs-12 col-md-3" id="left-container">
+                    <label class="upload-group">
+                        Upload file
+                        <input type="file" class="upload-group" id="file">
+                    </label>
+                    <button type="button" class="btn btn-primary" id="uploadButton">Submit</button>
+
                     <br>
                 </div>
-                <div class="col-6" id="middle-container">
+
+                <div class="col-xs-12 col-md-6">
+                    <i class="fas fa-bars" id="bar-menu"></i>
+                    <i class="fas fa-comments" id="chat-btn"></i>
+
+                    <div  id="middle-container">
+                        <br>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-3" id="right-container">
                     <br>
                 </div>
-                <div class="col-3" id="right-container">
-                    <br>
-                </div>
+
             </div>
             <!-- row -->
         </div>
@@ -72,10 +86,12 @@
 
         <script src='./model.js'></script>
         <script src='./view.js'></script>
-        
         <script src="./controllers/authCtrl.js"></script>
         <script src="./controllers/shoeboxCtrl.js"></script>
         <script src="./controllers/chatCtrl.js"></script>
         <script src='./controllers/controller.js'> </script>
-    </body>
+        <script src="./authCtrl.js"></script>
+        <script src="./shoeboxCtrl.js"></script>
+        <script src="./uploadController.js"></script>
+]    </body>
 </html>
