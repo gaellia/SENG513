@@ -56,9 +56,10 @@ const v = () => ({
 
     createShoebox: () => {
         MID.html(`
-            <div style="text-align: center">
+            <img style="text-align: center">
                 <br>
                 <h1>New Shoebox</h1>
+                <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src="Illustration.png" </img>
                 <br>
                 <div>
                     <form id="create-shoebox-form">
@@ -68,8 +69,11 @@ const v = () => ({
                             <label for="shoebox-description">Description</label>
                             <input type="text" class="form-control" id="shoebox-description">
                             <br>
-                            <label for="take-photo">Take Photo</label>
-                            <button> <i class="fas fa-camera"></i> </button>
+
+                            <div class="fas fa-camera"> 
+                        <input type="file" id="file">
+                    <button type="button"  id="uploadButton">Submit</button>
+                    </div>
                             <br>
                             <label for="invite-list">Invite Members</label>
                             <ul class="list-group list-group-flush" id="invite-list">
@@ -126,11 +130,6 @@ const v = () => ({
             
      
         `)
-
-
-
-
-
     },
 
     inviteMember: () => {

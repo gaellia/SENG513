@@ -1,3 +1,5 @@
+view.createShoebox()
+
 var selectedFile;
 
 $(document).on('click', '#uploadButton', e => {
@@ -44,11 +46,17 @@ $(document).on('click', '#uploadButton', e => {
             uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
                 //firebase.database().ref("shoebox/" + shoebox())
                 console.log('File available at', downloadURL);
+
+
+                $('#shoebox-image').attr("src", downloadURL)
+                console.error(  $('#shoebox-image'))
+
             });
         });
 
 })
 
 $("#file").on("change", function(event) {
+    console.error("WE HAVE CHANGED FILE ")
     selectedFile = event.target.files[0];
 });
