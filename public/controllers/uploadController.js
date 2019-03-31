@@ -1,8 +1,20 @@
-view.createShoebox()
+$(document).on('click', '.box-btn', ({target: {id}}) => {
+    switch(id) {
+    case "box-new":
+        view.createShoebox()
+        $("#file").on("change", function(event) {
+            console.error("WE HAVE CHANGED FILE ")
+            selectedFile = event.target.files[0];
+        });
+        break
 
-var selectedFile;
+    case 'invite-new':
+        view.inviteMember()
+    }
+})
 
 $(document).on('click', '#uploadButton', e => {
+
     var filename = selectedFile.name;
 
     //var storageRef = firebase.storage().ref();
