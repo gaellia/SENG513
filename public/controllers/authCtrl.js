@@ -2,27 +2,13 @@ const developmentMode = true
 
 const auth = firebase.auth()
 
-view.auth()
-
-if(developmentMode)
-  auth.setPersistence(firebase.auth.Auth.Persistence.NONE)
-else
-  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-
-// auth ctrl inner
-new firebaseui.auth.AuthUI(auth).start('#firebaseui-auth-container', {
-  callbacks: {
-    signInSuccessWithAuthResult: (authResult, redirectUrl) => false,
-  },
-  signInFlow: 'popup',
-  signInOptions: [
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-  ],
-})
-
+// on login listener
 auth.onAuthStateChanged(user => {
+  
+  // reset local storage
   model.local('user', null)
   model.local('boxes', null)
+
   if(user) {
     model.user().get().then(({docs}) => {
 
@@ -45,6 +31,7 @@ auth.onAuthStateChanged(user => {
 })
 
 const authGlobal = {
+  // returns shoeboxes of user
   fetchBoxes: function(user) {
     model.shoebox().where('memberEmails', 'array-contains', user.email).get().then(response => {
 
@@ -52,6 +39,27 @@ const authGlobal = {
       model.local('boxes', response.docs.map(docs => docs.data()))
 
       view.selectShoeBox()
+    })
+  },
+
+  // initializes login module
+  init() {
+    view.auth()
+
+    if(developmentMode)
+      auth.setPersistence(firebase.auth.Auth.Persistence.NONE)
+    else
+      auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    
+    // auth ctrl inner
+    new firebaseui.auth.AuthUI(auth).start('#firebaseui-auth-container', {
+      callbacks: {
+        signInSuccessWithAuthResult: (authResult, redirectUrl) => false,
+      },
+      signInFlow: 'popup',
+      signInOptions: [
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      ],
     })
   }
 }

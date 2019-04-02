@@ -90,9 +90,8 @@ const v = () => ({
         `)
     },
 
-    viewShoebox: (box) => {
-
-        const user = model.local('user')
+    viewShoebox: box => {
+        
         const boxes = model.local('boxes')
 
 

@@ -1,7 +1,16 @@
+let GLOBAL_FILE
+
+// create new shoebox workflow button listeners
 $(document).on('click', '.box-btn', ({target: {id}}) => {
     switch(id) {
         case "box-new":
             view.createShoebox()
+            $("#file").on("change", function(event) {
+                console.log("WE HAVE CHANGED FILE ")
+                GLOBAL_FILE = event.target.files[0]
+
+            })
+
             break
 
         case 'invite-new':
@@ -9,13 +18,14 @@ $(document).on('click', '.box-btn', ({target: {id}}) => {
     }
 })
 
+// view all shoeboxes button listener
 $(document).on('click', '.view-box-btn', ({target: {id}}) => {
-    console.error("CLICKY")
     model.shoebox().where('boxID', '==', id).get().then(response => {
         view.viewShoebox(response.docs.map(docs => docs.data())[0])
     })
 })
 
+// create new shoebox form submit
 $(document).on('click', '#create-shoebox-submit', e => {
     e.preventDefault() // access form elements here
     const inviteList = $('#invite-list li input')
@@ -38,7 +48,8 @@ $(document).on('click', '#create-shoebox-submit', e => {
             name: $('#shoebox-name').val(),
             description: $('#shoebox-description').val(),
             boxID: id,
-            memberEmails: members.map(({email}) => email)
+            memberEmails: members.map(({email}) => email),
+            logoURL: downloadURL
         })
         
         for(let member of members)

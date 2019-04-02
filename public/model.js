@@ -33,7 +33,8 @@ const m = () => {
  *  boxID: String,
  *  name: String,
  *  description: String,
- *  memberEmails: [String]
+ *  memberEmails: [String],
+ *  logoURL: String,
  * }
  * 
  * collections in shoebox:
@@ -92,8 +93,8 @@ const m = () => {
                     return JSON.parse(result)
                 // Otherwise set the value for the given key
                 default:
-
-                    localStorage.setItem(name, typeof(value)==='object'? JSON.stringify(value): result)
+                
+                    localStorage.setItem(name, typeof(value)==='object'? JSON.stringify(value): value)
                     if(log) {
                         console.log(`SET ${name} TO:`)
                         console.log(value)
