@@ -1,0 +1,3 @@
+// initialize app
+
+authGlobal.init()

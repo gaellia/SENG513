@@ -4,6 +4,27 @@
     width: 95%;
     position: absolute;
 }
+.main-wrapper {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding-top: 50px;
+}
+
+.drawer {
+    width: 10vw;
+    height:100vh;
+    background-color: lightblue;
+    margin-left: fill;
+    left: 0;
+    position: fixed;
+    top:0
+
+}
+
+
 
 #chat {
     padding: 5px;
@@ -50,3 +71,39 @@ form button {
     background-color: lightblue;
     color: royalblue;
 }
+@media only screen and (max-width: 720px) {
+    #right-container {
+        display: none;
+    }
+
+    #left-container {
+        display: none;
+    }
+    #bar-menu {
+        padding: 20px;
+        display: block;
+    }
+
+    #chat-btn{
+        display: block;
+        padding: 30px;
+        position: fixed;
+        bottom:0;
+        right: 0;
+    }
+}
+
+@media only screen and (min-width: 720px) {
+    #right-container {
+        display: block;
+    }
+
+    #left-container {
+        display: block;
+    }
+
+    #bar-menu, #chat-btn {
+        display: none;
+    }
+}
+

@@ -1,7 +1,9 @@
+// init
 view.chatButton()
 
+// show chatbox listener
 $('#load-chatbox').click(() => {
-    // model.shoebox(,)
+    
     RIGHT.html(`
     <div id='chat-container'>
         <ul id='chat'>

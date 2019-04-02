@@ -26,7 +26,7 @@ const v = () => ({
         if(boxes.length!==0) {
             boxes.forEach(box => {
                 boxList = `${boxList}
-                <li class="list-group-item box-btn" id="box-${box.id}">
+                <li class="list-group-item box-btn view-box-btn" id="${box.boxID}">
                     <i class="fas fa-shapes"></i>
                     ${box.name}
                 </li>`
@@ -34,6 +34,7 @@ const v = () => ({
         }
         
         MID.html(`
+            <i class="fas fa-bars" id="bar-menu"></i>
             <div style="text-align: center">
                 <br>
                 <h1>Welcome, ${user.displayName}</h1>
@@ -55,9 +56,10 @@ const v = () => ({
 
     createShoebox: () => {
         MID.html(`
-            <div style="text-align: center">
+            <img style="text-align: center">
                 <br>
                 <h1>New Shoebox</h1>
+                <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src="Illustration.png" </img>
                 <br>
                 <div>
                     <form id="create-shoebox-form">
@@ -66,6 +68,12 @@ const v = () => ({
                             <input type="text" class="form-control" id="shoebox-name">
                             <label for="shoebox-description">Description</label>
                             <input type="text" class="form-control" id="shoebox-description">
+                            <br>
+
+                            <div class="fas fa-camera"> 
+                        <input type="file" id="file">
+                    <button type="button"  id="uploadButton">Submit</button>
+                    </div>
                             <br>
                             <label for="invite-list">Invite Members</label>
                             <ul class="list-group list-group-flush" id="invite-list">
@@ -79,6 +87,47 @@ const v = () => ({
                     </form>
                 </div>
             </div>
+        `)
+    },
+
+    viewShoebox: box => {
+        
+        const boxes = model.local('boxes')
+
+
+        let boxList = ``
+        if(boxes.length!==0) {
+            boxes.forEach(box => {
+                boxList = `${boxList}
+                <li class="list-group-item box-btn view-box-btn" id="${box.boxID}">
+                    <i class="fas fa-shapes"></i>
+                    ${box.name}
+                </li>`
+            });
+        }
+        LEFT.html(`
+        <div class="main-wrapper">      
+     
+        <div class="drawer">
+           <div class="card" style="text-align: left">
+                    <ul class="list-group list-group-flush">
+                        ${boxList}
+                       
+                    </ul>
+                </div>
+            
+    </div>
+  
+</div>`)
+
+
+        MID.html(`
+
+            <div style="text-align: center;">
+                <h1>${box.name}</h1>
+            </div>
+            
+     
         `)
     },
 
