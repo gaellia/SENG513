@@ -110,9 +110,11 @@ const v = () => ({
      
         <div class="drawer">
            <div class="card" style="text-align: left">
+                    <button class="btn btn=default" id="profile-btn" data-toggle="modal" data-target="#modal-container">
+                    <i class="far fa-user-circle"></i> Profile
+                    </button>
                     <ul class="list-group list-group-flush">
                         ${boxList}
-                       
                     </ul>
                 </div>
             
@@ -154,6 +156,13 @@ const v = () => ({
                 </button>
             </div>
         `)
+    },
+
+    profileModal: () => {
+        const user = model.local('user')
+        $(".modal-title").html(`Hi, ${user.displayName}`)
+        console.log(JSON.stringify(user))
+        $('modal-body').html(JSON.stringify(user))
     }
 })
 

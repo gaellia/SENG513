@@ -1,4 +1,4 @@
-const developmentMode = true
+const developmentMode = false
 
 const auth = firebase.auth()
 
@@ -28,6 +28,11 @@ auth.onAuthStateChanged(user => {
       }
     })
   }
+})
+
+// profile button listener
+$(document).on('click', '#profile-btn', () => {
+  view.profileModal()
 })
 
 const authGlobal = {
