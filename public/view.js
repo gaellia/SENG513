@@ -32,9 +32,9 @@ const v = () => ({
                 </li>`
             });
         }
-        
+
+
         MID.html(`
-            <i class="fas fa-bars" id="bar-menu"></i>
             <div style="text-align: center">
                 <br>
                 <h1>Welcome, ${user.displayName}</h1>
@@ -122,6 +122,11 @@ const v = () => ({
 
 
         MID.html(`
+             <div id="mobile">                
+                <button id="bar-menu"><i class="fas fa-bars"></i></button>
+                <button id="chat-btn"><i class="fas fa-comments"></i></button>
+                
+            </div>
 
             <div style="text-align: center;">
                 <h1>${box.name}</h1>
