@@ -121,9 +121,7 @@ const v = () => ({
     },
 
     viewShoebox: box => {
-        
         const boxes = model.local('boxes')
-
 
         let boxList = ``
         if(boxes.length!==0) {
@@ -187,11 +185,41 @@ const v = () => ({
             <button class="fas fa-plus"></button>
 
         `)
+       
+        RIGHT.html(`
+        <div id='chat-container'>
+            <ul id='chat'>
+            </ul>
+    
+            <!-- Message input -->
+            <div class="send">
+                <form id="msg-form" actions="">
+                    <input id="m" autocomplete="off" /><button><i class="far fa-paper-plane"></i></button>
+                </form>
+            </div>
+    
+        </div>`)
 
-        })})
+        // loads the chat history for this box
+        model.shoebox(model.local('currentBox').boxID).collection('messages').orderBy('timestamp').get().then(snapshot => {
+            snapshot.forEach(doc => {
+    
+                // show all messages in the shoebox
+                let timestamp = doc.data().timestamp.toDate().toString()
+                timestamp = timestamp.substr(0, timestamp.indexOf(':')+3)   //goes up to the minute 
+    
+                $('#chat').append($('<li>').html(`<i class='fas fa-user'><span id='username'>${doc.data().displayName}</span></i><br>
+                                                <p id='message'>${doc.data().message}</p>
+                                                <span id='time'>${timestamp}</span>`))
+            });
+    
+            // scroll to bottom
+            $('#chat').scrollTop($('#chat')[0].scrollHeight);
+        })
 
-        //TEMP TEST
-        
+        })
+    })
+
     },
 
     inviteMember: () => {
@@ -199,18 +227,6 @@ const v = () => ({
             <li class="box-btn" style="list-style-type: none;">
                 <input type="text" class="form-control" placeholder="Email">
             </li>
-        `)
-    },
-
-    chatButton: () => {
-        RIGHT.html(`
-            <div style='align: center'>
-                <button class="btn btn-primary" id="load-chatbox">
-                    <a>
-                    load chat
-                    </a>
-                </button>
-            </div>
         `)
     },
 
