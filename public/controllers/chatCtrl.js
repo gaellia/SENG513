@@ -2,51 +2,11 @@
 view.chatButton()
 
 // show chatbox listener
-$('#load-chatbox').click(() => {
+$('#load-chatbox').click( () => {
     
     RIGHT.html(`
     <div id='chat-container'>
         <ul id='chat'>
-            <li>
-                <i class='fas fa-user'><span id='username'>USERNAME</span></i><br>
-                <p id='message'>This is a message a user has sent</p>
-                <span id='time'>10:30</span>
-            </li>
-            <li>
-                <i class='fas fa-user'><span id='username'>USERNAME 2</span></i><br>
-                <p id='message'>This is a message a user has sent</p>
-                <span id='time'>10:30</span>
-            </li>
-            <li>
-                <i class='fas fa-user'><span id='username'>USERNAME 2</span></i><br>
-                <p id='message'>This is a message a user has sent</p>
-                <span id='time'>10:30</span>
-            </li>
-            <li>
-                <i class='fas fa-user'><span id='username'>USERNAME 2</span></i><br>
-                <p id='message'>This is a message a user has sent</p>
-                <span id='time'>10:30</span>
-            </li>
-            <li>
-                <i class='fas fa-user'><span id='username'>USERNAME 2</span></i><br>
-                <p id='message'>This is a message a user has sent</p>
-                <span id='time'>10:30</span>
-            </li>
-            <li>
-                <i class='fas fa-user'><span id='username'>USERNAME 2</span></i><br>
-                <p id='message'>This is a message a user has sent</p>
-                <span id='time'>10:30</span>
-            </li>
-            <li>
-                <i class='fas fa-user'><span id='username'>USERNAME 2</span></i><br>
-                <p id='message'>This is a message a user has sent</p>
-                <span id='time'>10:30</span>
-            </li>
-            <li>
-                <i class='fas fa-user'><span id='username'>USERNAME 2</span></i><br>
-                <p id='message'>This is a message a user has sent</p>
-                <span id='time'>10:30</span>
-            </li>
         </ul>
 
         <!-- Message input -->
@@ -59,7 +19,7 @@ $('#load-chatbox').click(() => {
     </div>`)
 
     // testing with the 'Mexico' shoebox
-    model.shoebox('0nixBz2gEv0vP0yZlY4p').collection('messages').orderBy('timestamp').get().then(snapshot => {
+    model.shoebox(model.local('currentBox').boxID).collection('messages').orderBy('timestamp').get().then(snapshot => {
         snapshot.forEach(doc => {
 
             // show all messages in the shoebox
@@ -79,13 +39,36 @@ $('#load-chatbox').click(() => {
 // listener for sending a message
 $(document).on('submit', '#msg-form', e => {
     e.preventDefault()
-    console.log($('#m').val())
-    let currentTime = firebase.firestore.Timestamp.fromDate(new Date()) // for storing into database
+    if ( $('#m').val() !== "") {
+        let name = model.local('user').displayName
+        let currentTime = firebase.firestore.Timestamp.fromDate(new Date()) // for storing into database
+        let bid = model.local('currentBox').boxID
+        
+        let msg = {displayName: name, 
+                    message: $('#m').val(),
+                    timestamp: currentTime}
+    
+        // add to database
+        model.shoebox(bid).collection('messages').add(msg)
+    
+        $('#m').val("") // clear send box
+    }
+})
 
-    // Testing
-    let simpleTime = currentTime.toDate().toString()
-    simpleTime = simpleTime.substr(0, simpleTime.indexOf(':')+3)
-    console.log(simpleTime)
+// listen for added messages
+let messageListener = model.shoebox(model.local('currentBox').boxID).collection('messages').onSnapshot(s => {
+    s.docChanges().forEach( change => {
+        if (change.type === 'added') {
+            // display new messages
+            let timestamp = change.doc.data().timestamp.toDate().toString()
+            timestamp = timestamp.substr(0, timestamp.indexOf(':')+3)   //goes up to the minute 
 
-    $('#m').val("") // clear send box
+            $('#chat').append($('<li>').html(`<i class='fas fa-user'><span id='username'>${change.doc.data().displayName}</span></i><br>
+            <p id='message'>${change.doc.data().message}</p>
+            <span id='time'>${timestamp}</span>`))
+
+            // scroll to bottom
+            $('#chat').scrollTop($('#chat')[0].scrollHeight);
+        }
+    })
 })

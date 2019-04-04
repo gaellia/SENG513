@@ -8,6 +8,7 @@ auth.onAuthStateChanged(user => {
   // reset local storage
   model.local('user', null)
   model.local('boxes', null)
+  model.local('currentBox', null)
 
   if(user) {
     model.user().get().then(({docs}) => {

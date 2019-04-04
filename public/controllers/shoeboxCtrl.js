@@ -21,6 +21,7 @@ $(document).on('click', '.box-btn', ({target: {id}}) => {
 // view all shoeboxes button listener
 $(document).on('click', '.view-box-btn', ({target: {id}}) => {
     model.shoebox().where('boxID', '==', id).get().then(response => {
+        model.local('currentBox', response.docs.map(docs => docs.data())[0])
         view.viewShoebox(response.docs.map(docs => docs.data())[0])
     })
 })

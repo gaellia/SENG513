@@ -43,7 +43,6 @@ const m = () => {
  *      role: ["owner", "member", "invited"]
  *  }],
  *  messages: [{
- *      email: String,
  *      displayName: String,
  *      message: String,
  *      timestamp: Date,
@@ -93,13 +92,13 @@ const m = () => {
                     return JSON.parse(result)
                 // Otherwise set the value for the given key
                 default:
-                
-                    localStorage.setItem(name, typeof(value)==='object'? JSON.stringify(value): value)
+                    const obj = typeof(value)==='object'? JSON.stringify(value): value
+                    localStorage.setItem(name, obj)
                     if(log) {
                         console.log(`SET ${name} TO:`)
                         console.log(value)
                     }
-
+                    return obj
             }
         }
     })
