@@ -1,5 +1,6 @@
 let GLOBAL_FILE
 let downloadURL
+let messageListener
 
 // Temp(?) Solution for default logos
 const default_logos = ["https://firebasestorage.googleapis.com/v0/b/shoebox513.appspot.com/o/images%2Fdefault_logos%2FShoebox0.png?alt=media&token=ea1cd29c-6939-498b-8717-711f56dc5f56",
@@ -27,11 +28,12 @@ $(document).on('click', '.box-btn', ({target: {id}}) => {
 
 // view all shoeboxes button listener
 $(document).on('click', '.view-box-btn', ({target: {id}}) => {
-    let messageListener
     model.shoebox().where('boxID', '==', id).get().then(response => {
         let bid = response.docs.map(docs => docs.data())[0]
+        
         // listen for added messages
-        if (messageListener) off(messageListener)
+        if (messageListener) 
+            messageListener()
         messageListener = model.shoebox(response.docs[0].id).collection('messages').onSnapshot(s => {
             s.docChanges().forEach( change => {
                 if (change.type === 'added') {
