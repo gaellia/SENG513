@@ -54,6 +54,7 @@ $(document).on('click', '.view-box-btn', ({target: {id}}) => {
     })
 })
 
+
 // create new shoebox form submit
 $(document).on('click', '#create-shoebox-submit', e => {
     e.preventDefault() // access form elements here

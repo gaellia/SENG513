@@ -14,14 +14,8 @@
 }
 
 .drawer {
-    width: 10vw;
-    height:100vh;
     background-color: lightblue;
     margin-left: fill;
-    left: 0;
-    position: fixed;
-    top:0
-
 }
 
 
@@ -87,6 +81,7 @@ form button {
     #left-container {
         display: none;
     }
+
     #bar-menu {
         padding: 20px;
         display: block;
@@ -103,11 +98,11 @@ form button {
 
 @media only screen and (min-width: 720px) {
     #right-container {
-        display: block;
+        display: inline-block;
     }
 
     #left-container {
-        display: block;
+        display: inline-block;
     }
 
     #bar-menu, #chat-btn {
