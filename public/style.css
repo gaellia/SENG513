@@ -25,6 +25,14 @@
 }
 
 
+.card-header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.delete-card-icon {
+    max-width: 25%;
+}
 
 #chat {
     padding: 5px;

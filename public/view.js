@@ -3,6 +3,36 @@ const MID = $('#middle-container')
 const LEFT = $('#left-container')
 const RIGHT = $('#right-container')
 
+// For parsing cards (TODO get it out of here)
+   
+// Returns HTML for a given card
+function getHTMLFor(card) {
+    let cardBody = `<div style="text-align: center"><div class="card" style="width: 18rem;"><div class="card-header">
+    <div class="delete-card-icon">
+        <i class="fas fa-trash"></i>
+    </div></div>`
+    if (card.mediaType !== "text"){
+        cardBody += `<img class="card-img-top" src="${card.resourceURL}">`
+    }
+    cardBody += `<div class="card-body"><h5 class="card-title">${card.title}</h5><p class="card-text">${card.text}</p></div></div></div>`
+
+    return cardBody;
+}
+
+// Returns an array containing the HTML of each column in the main view as a string
+function loadCards(cards){
+    let cols = ["", "", ""]
+
+    let index = 0
+
+    cards.forEach(card => {
+        cols[index%cols.length] += getHTMLFor(card)
+        index++
+    });
+
+    return cols
+}
+
 const v = () => ({
     auth: () => {
         MID.html(`
@@ -122,20 +152,46 @@ const v = () => ({
   
 </div>`)
 
+        MID.html(`
+
+            <div style="text-align: center;">
+                <h1>${box.name}</h1>
+            </div>
+            <h1>Loading cards...</h1>
+
+        `)
+
+        
+        // Asynchronously access the cards from the shoebox
+        model.getByBoxID(box.boxID, "cards").then(res => {
+            res.get().then(cards => {
+            cards.docs.map(doc => doc.data());
+            
+            let columnHTML = loadCards(cards)
 
         MID.html(`
 
             <div style="text-align: center;">
                 <h1>${box.name}</h1>
             </div>
-            
-            
+            <div class="col-sm">
+                ${columnHTML[0]}
+            </div>
+            <div class="col-sm">
+                ${columnHTML[1]}
+            </div>
+            <div class="col-sm">
+                ${columnHTML[2]}
+            </div>
+
             <button class="fas fa-plus"></button>
 
-
-            
-     
         `)
+
+        })})
+
+        //TEMP TEST
+        
     },
 
     inviteMember: () => {
