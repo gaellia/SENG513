@@ -52,7 +52,6 @@ $(document).on('click', '#create-shoebox-submit', e => {
     })
 
     model.shoebox().add({}).then(({id}) => {
-
         // In the case that a logo image failed to upload, grab random default
         if (!downloadURL)
             downloadURL = default_logos[Math.floor(Math.random()*default_logos.length)]

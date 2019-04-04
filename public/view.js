@@ -27,7 +27,7 @@ const v = () => ({
             boxes.forEach(box => {
                 boxList = `${boxList}
                 <li class="list-group-item box-btn view-box-btn" id="${box.boxID}">
-                    <i class="fas fa-shapes"></i>
+                    <image src="${box.logoURL}" style="width: 64px; height: 64px"></image>
                     ${box.name}
                 </li>`
             });
@@ -100,7 +100,7 @@ const v = () => ({
             boxes.forEach(box => {
                 boxList = `${boxList}
                 <li class="list-group-item box-btn view-box-btn" id="${box.boxID}">
-                    <i class="fas fa-shapes"></i>
+                    <image src="${box.logoURL}" style="width: 64px; height: 64px""></image>
                     ${box.name}
                 </li>`
             });
