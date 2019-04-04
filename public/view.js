@@ -121,6 +121,8 @@ const v = () => ({
     },
 
     viewShoebox: box => {
+        $("#banner").css({'visibility': 'visible'})
+
         const boxes = model.local('boxes')
 
         let boxList = ``
@@ -151,12 +153,6 @@ const v = () => ({
 </div>`)
 
         MID.html(`
-             <div id="mobile">                
-                <button id="bar-menu"><i class="fas fa-bars"></i></button>
-                <button id="chat-btn"><i class="fas fa-comments"></i></button>
-                
-            </div>
-
             <div style="text-align: center;">
                 <h1>${box.name}</h1>
             </div>
@@ -219,7 +215,7 @@ const v = () => ({
             });
     
             // scroll to bottom
-            $('#chat').scrollTop($('#chat')[0].scrollHeight);
+            $('#chat').scrollTop($('#chat')[0].scrollHeight)
         })
 
         })
@@ -237,8 +233,8 @@ const v = () => ({
 
     profileModal: () => {
         const user = model.local('user')
-        $(".modal-title").html(`Hi, ${user.displayName}`)
-        $('modal-body').html(JSON.stringify(user))
+        $(".modal-title").html(`Hello, ${user.displayName}`)
+        $('.modal-body').html(JSON.stringify(user))
     }
 })
 

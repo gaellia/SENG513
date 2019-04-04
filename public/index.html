@@ -56,15 +56,30 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-12 col-md-3" id="left-container">
+                <div class="d-flex justify-content-between" id="banner">
+                    <div class="p-2">
+                        <button class="btn btn-secondary btn-lg" id="bar-menu"><i class="fas fa-bars"></i></button>
+                    </div>
+
+                    <div class="p-2" id="banner-header">
+                        <img style="width: 50px" src="./Illustration.png" />
+                    </div>
+                    <div class="p-2">
+                        <button class="btn btn-secondary btn-lg" id="chat-btn"><i class="fas fa-comments"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="main-row">
+                <div class="col-md-3" id="left-container"></div>
+
+                <div class="col-md-6" id="outer-middle-container">
+                    <div id="middle-container">
+                        </div>
                     <br>
                 </div>
 
-                <div class="col-xs-12 col-md-6" id="middle-container">
-                    <br>
-                </div>
-
-                <div class="col-xs-12 col-md-3" id="right-container">
+                <div class="col-md-3" id="right-container">
                     <br>
                 </div>
 
@@ -99,6 +114,7 @@
 
         <script src='./model.js'></script>
         <script src='./view.js'></script>
+        <script src="./controllers/viewCtrl.js"></script>
         <script src="./controllers/authCtrl.js"></script>
         <script src="./controllers/shoeboxCtrl.js"></script>
         <script src="./controllers/chatCtrl.js"></script>

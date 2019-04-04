@@ -1,7 +1,7 @@
 #chat-container {
     background-color: lightblue;
     height: 100vh;
-    width: 95%;
+    width: 100%;
     position: absolute;
 }
 .main-wrapper {
@@ -13,12 +13,6 @@
     padding-top: 50px;
 }
 
-.drawer {
-    background-color: lightblue;
-    margin-left: fill;
-}
-
-
 .card-header {
     display: flex;
     justify-content: flex-end;
@@ -28,10 +22,20 @@
     max-width: 25%;
 }
 
+.drawer {
+    max-width: 90%;
+    margin: auto;
+    margin-top: 
+}
+
+#main-row {
+    max-height: 100%;
+}
+
 #chat {
     padding: 5px;
     list-style-type: none;
-    height: 90%;
+    height: 100%;
     overflow-y: auto;
     position: relative;
 }
@@ -73,41 +77,28 @@ form button {
     background-color: lightblue;
     color: royalblue;
 }
-@media only screen and (max-width: 720px) {
-    #right-container {
-        display: none;
-    }
 
-    #left-container {
-        display: none;
-    }
-
-    #bar-menu {
-        padding: 20px;
-        display: block;
-    }
-
-    #chat-btn{
-        display: block;
-        padding: 30px;
-        position: fixed;
-        bottom:0;
-        right: 0;
-    }
+#banner {
+    overflow: hidden;
+    background-color: rgb(108, 117, 125);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 0.5em;
+    z-index: 2;
+    visibility: hidden;
 }
 
-@media only screen and (min-width: 720px) {
-    #right-container {
-        display: inline-block;
-    }
+#chat-btn {
+    margin-right: 1em;
+}
 
-    #left-container {
-        display: inline-block;
-    }
+#right-container, #left-container {
+    margin-top: 5em;
+}
 
-    #bar-menu, #chat-btn {
-        display: none;
-    }
+#middle-container {
+    margin-top: 7em;
 }
 
 /* Scrollbar things*/
@@ -117,7 +108,7 @@ form button {
 }
 #chat::-webkit-scrollbar-track {
     background-color:lightblue;
-}
+}   
 #chat::-webkit-scrollbar-thumb {
     background-color:#babac0;
     border-radius: 16px;
