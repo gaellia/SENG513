@@ -214,6 +214,7 @@ const v = () => ({
                 ${columnHTML[2]}
             </div>
             
+            <button class="fas fa-plus"></button>
 
         `)
     },
