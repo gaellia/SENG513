@@ -56,6 +56,10 @@ const m = () => {
  *          width: Number,
  *          height: Number
  *      }
+ *      title: String,
+ *      text: String.
+ *      author: String (user.email),
+ *      resourceURL: String
  * }]
  * 
  * example:

@@ -31,6 +31,11 @@ auth.onAuthStateChanged(user => {
   }
 })
 
+// profile button listener
+$(document).on('click', '#profile-btn', () => {
+  view.profileModal()
+})
+
 const authGlobal = {
   // returns shoeboxes of user
   fetchBoxes: function(user) {
