@@ -8,9 +8,9 @@ const RIGHT = $('#right-container')
 // Returns HTML for a given card
 function getHTMLFor(card) {
     let cardBody = `<div style="text-align: center"><div class="card" style="width: 18rem;"><div class="card-header">
-            <div class="delete-card-icon">
-                <i class="fas fa-trash"></i>
-            </div>`
+    <div class="delete-card-icon">
+        <i class="fas fa-trash"></i>
+    </div></div>`
     if (card.mediaType !== "text"){
         cardBody += `<img class="card-img-top" src="${card.resourceURL}">`
     }
@@ -150,54 +150,22 @@ const v = () => ({
   
 </div>`)
 
-        let columnHTML = loadCards(box.cards)
+        MID.html(`
+
+            <div style="text-align: center;">
+                <h1>${box.name}</h1>
+            </div>
+            <h1>Loading cards...</h1>
+
+        `)
+
         
-        //TEMP TEST
-        columnHTML[0] += `<div style="text-align: center">
-        <div class="card" style="width: 18rem;"><div class="card-header">
-            <div class="delete-card-icon">
-                <i class="fas fa-trash"></i>
-            </div>
-            <img class="card-img-top" src="https://www.w3schools.com/images/colorpicker.gif">
-            <div class="card-body">
-                <h5 class="card-title">TEST</h5>  
-                <p class="card-text">textextext</p>
-            </div>
-        </div>
-    </div><div style="text-align: center">
-    <div class="card" style="width: 18rem;"><div class="card-header">
-        <div class="delete-card-icon">
-            <i class="fas fa-trash"></i>
-        </div>
-        <img class="card-img-top" src="https://www.w3schools.com/images/colorpicker.gif">
-        <div class="card-body">
-            <h5 class="card-title">TEST</h5>  
-            <p class="card-text">textextext</p>
-        </div>
-    </div>
-</div><div style="text-align: center">
-<div class="card" style="width: 18rem;"><div class="card-header">
-    <div class="delete-card-icon">
-        <i class="fas fa-trash"></i>
-    </div>
-    <img class="card-img-top" src="https://www.w3schools.com/images/colorpicker.gif">
-    <div class="card-body">
-        <h5 class="card-title">TEST</h5>  
-        <p class="card-text">textextext</p>
-    </div>
-</div>
-</div><div style="text-align: center">
-<div class="card" style="width: 18rem;"><div class="card-header">
-    <div class="delete-card-icon">
-        <i class="fas fa-trash"></i>
-    </div>
-    <img class="card-img-top" src="https://www.w3schools.com/images/colorpicker.gif">
-    <div class="card-body">
-        <h5 class="card-title">TEST</h5>  
-        <p class="card-text">textextext</p>
-    </div>
-</div>
-</div>`
+        // Asynchronously access the cards from the shoebox
+        model.getByBoxID(box.boxID, "cards").then(res => {
+            res.get().then(cards => {
+            cards.docs.map(doc => doc.data());
+            
+            let columnHTML = loadCards(cards)
 
         MID.html(`
 
@@ -213,10 +181,15 @@ const v = () => ({
             <div class="col-sm">
                 ${columnHTML[2]}
             </div>
-            
+
             <button class="fas fa-plus"></button>
 
         `)
+
+        })})
+
+        //TEMP TEST
+        
     },
 
     inviteMember: () => {
