@@ -15,10 +15,6 @@ $(document).on('click', '#uploadButton', e => {
 
     const fileURL = `/images/${slugify(selectedFile.name)}`
 
-    console.log('here')
-    console.log(selectedFile)
-    console.log(fileURL)
-
     // back end call here
 
     const uploadTask = firebase.storage().ref(fileURL).child(fileURL).put(selectedFile, { contentType: 'image/jpeg' })
@@ -64,7 +60,6 @@ $(document).on('click', '#uploadButton', e => {
                 console.log('File available at', downloadURL)
     
                 $('#shoebox-image').attr("src", downloadURL)
-                console.log(  $('#shoebox-image'))
     
             })
         }

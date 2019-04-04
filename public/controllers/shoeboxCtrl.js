@@ -14,7 +14,6 @@ $(document).on('click', '.box-btn', ({target: {id}}) => {
         case "box-new":
             view.createShoebox()
             $("#file").on("change", function(event) {
-                console.log("WE HAVE CHANGED FILE ")
                 GLOBAL_FILE = event.target.files[0]
 
             })

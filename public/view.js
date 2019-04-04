@@ -238,7 +238,6 @@ const v = () => ({
     profileModal: () => {
         const user = model.local('user')
         $(".modal-title").html(`Hi, ${user.displayName}`)
-        console.log(JSON.stringify(user))
         $('modal-body').html(JSON.stringify(user))
     }
 })
