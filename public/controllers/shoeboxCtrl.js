@@ -44,6 +44,7 @@ $(document).on('click', '#create-shoebox-submit', e => {
     })
 
     model.shoebox().add({}).then(({id}) => {
+
         model.shoebox(id).set({
             name: $('#shoebox-name').val(),
             description: $('#shoebox-description').val(),
