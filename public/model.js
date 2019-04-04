@@ -78,11 +78,11 @@ const m = () => {
 
         //model.getByBoxID(boxID, 'members')
         // you may chain .add() || .set() || .get() || .where() || .orderBy() || .onSnapshot
-        getByBoxID: (id, collectionName) => {
+        getByBoxID: (id, collectionName) => new Promise ((resolve, reject) => {
             db.collection('shoebox').where('boxID', '==', id).get().then(({docs}) => {
-                return db.collection('shoebox').doc(docs[0].id).collection(collectionName)
+                resolve(db.collection('shoebox').doc(docs[0].id).collection(collectionName))
             })
-        },
+        }),
 
         /**
          * Only supports: [array, object, string]

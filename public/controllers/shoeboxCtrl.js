@@ -20,9 +20,29 @@ $(document).on('click', '.box-btn', ({target: {id}}) => {
 
 // view all shoeboxes button listener
 $(document).on('click', '.view-box-btn', ({target: {id}}) => {
+    let messageListener
     model.shoebox().where('boxID', '==', id).get().then(response => {
-        model.local('currentBox', response.docs.map(docs => docs.data())[0])
-        view.viewShoebox(response.docs.map(docs => docs.data())[0])
+        let bid = response.docs.map(docs => docs.data())[0]
+        // listen for added messages
+        if (messageListener) off(messageListener)
+        messageListener = model.shoebox(response.docs[0].id).collection('messages').onSnapshot(s => {
+            s.docChanges().forEach( change => {
+                if (change.type === 'added') {
+                    // display new messages
+                    let timestamp = change.doc.data().timestamp.toDate().toString()
+                    timestamp = timestamp.substr(0, timestamp.indexOf(':')+3)   //goes up to the minute 
+
+                    $('#chat').append($('<li>').html(`<i class='fas fa-user'><span id='username'>${change.doc.data().displayName}</span></i><br>
+                    <p id='message'>${change.doc.data().message}</p>
+                    <span id='time'>${timestamp}</span>`))
+
+                    // scroll to bottom
+                    $('#chat').scrollTop($('#chat')[0].scrollHeight);
+                }
+            })
+        })
+        model.local('currentBox', bid)
+        view.viewShoebox(bid)
     })
 })
 

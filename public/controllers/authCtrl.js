@@ -1,4 +1,4 @@
-const developmentMode = true
+const developmentMode = false
 
 const auth = firebase.auth()
 
