@@ -45,12 +45,13 @@ $(document).on('click', '#create-shoebox-submit', e => {
     })
 
     model.shoebox().add({}).then(({id}) => {
+
         model.shoebox(id).set({
             name: $('#shoebox-name').val(),
             description: $('#shoebox-description').val(),
             boxID: id,
             memberEmails: members.map(({email}) => email),
-            logoURL: downloadURL
+            logoURL: $('#shoebox-image').attr('src')
         })
         
         for(let member of members)
