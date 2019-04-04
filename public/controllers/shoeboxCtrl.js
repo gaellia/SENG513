@@ -50,7 +50,7 @@ $(document).on('click', '#create-shoebox-submit', e => {
             description: $('#shoebox-description').val(),
             boxID: id,
             memberEmails: members.map(({email}) => email),
-            logoURL: downloadURL
+            logoURL: $('#shoebox-image').attr('src')
         })
         
         for(let member of members)

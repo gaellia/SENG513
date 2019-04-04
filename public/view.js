@@ -127,6 +127,11 @@ const v = () => ({
                 <h1>${box.name}</h1>
             </div>
             
+            
+            <button class="fas fa-plus"></button>
+
+
+            
      
         `)
     },
