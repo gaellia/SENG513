@@ -1,5 +1,5 @@
 // this code is stolen. we'll use an npm package later
-const GLOBAL_DOWNLOAD
+let GLOBAL_DOWNLOAD
 
 function slugify(text) {
   return text.toString().toLowerCase()

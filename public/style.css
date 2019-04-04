@@ -1,6 +1,6 @@
 #chat-container {
     background-color: lightblue;
-    height:100%;
+    height: 100vh;
     width: 95%;
     position: absolute;
 }
@@ -16,6 +16,16 @@
 .drawer {
     background-color: lightblue;
     margin-left: fill;
+}
+
+
+.card-header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.delete-card-icon {
+    max-width: 25%;
 }
 
 #chat {
@@ -100,5 +110,19 @@ form button {
     }
 }
 
-
-
+/* Scrollbar things*/
+#chat::-webkit-scrollbar {
+    background-color:lightblue;
+    width: 8px;
+}
+#chat::-webkit-scrollbar-track {
+    background-color:lightblue;
+}
+#chat::-webkit-scrollbar-thumb {
+    background-color:#babac0;
+    border-radius: 16px;
+    border:4px solid #babac0;
+}
+#chat::-webkit-scrollbar-button {
+    display: none;
+}

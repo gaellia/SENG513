@@ -3,6 +3,36 @@ const MID = $('#middle-container')
 const LEFT = $('#left-container')
 const RIGHT = $('#right-container')
 
+// For parsing cards (TODO get it out of here)
+   
+// Returns HTML for a given card
+function getHTMLFor(card) {
+    let cardBody = `<div style="text-align: center"><div class="card" style="width: 18rem;"><div class="card-header">
+    <div class="delete-card-icon">
+        <i class="fas fa-trash"></i>
+    </div></div>`
+    if (card.mediaType !== "text"){
+        cardBody += `<img class="card-img-top" src="${card.resourceURL}">`
+    }
+    cardBody += `<div class="card-body"><h5 class="card-title">${card.title}</h5><p class="card-text">${card.text}</p></div></div></div>`
+
+    return cardBody;
+}
+
+// Returns an array containing the HTML of each column in the main view as a string
+function loadCards(cards){
+    let cols = ["", "", ""]
+
+    let index = 0
+
+    cards.forEach(card => {
+        cols[index%cols.length] += getHTMLFor(card)
+        index++
+    });
+
+    return cols
+}
+
 const v = () => ({
     auth: () => {
         MID.html(`
@@ -27,7 +57,7 @@ const v = () => ({
             boxes.forEach(box => {
                 boxList = `${boxList}
                 <li class="list-group-item box-btn view-box-btn" id="${box.boxID}">
-                    <i class="fas fa-shapes"></i>
+                    <image src="${box.logoURL}" style="width: 64px; height: 64px"></image>
                     ${box.name}
                 </li>`
             });
@@ -91,16 +121,14 @@ const v = () => ({
     },
 
     viewShoebox: box => {
-        
         const boxes = model.local('boxes')
-
 
         let boxList = ``
         if(boxes.length!==0) {
             boxes.forEach(box => {
                 boxList = `${boxList}
                 <li class="list-group-item box-btn view-box-btn" id="${box.boxID}">
-                    <i class="fas fa-shapes"></i>
+                    <image src="${box.logoURL}" style="width: 64px; height: 64px""></image>
                     ${box.name}
                 </li>`
             });
@@ -110,16 +138,17 @@ const v = () => ({
      
         <div class="drawer">
            <div class="card" style="text-align: left">
+                    <button class="btn btn=default" id="profile-btn" data-toggle="modal" data-target="#modal-container">
+                    <i class="far fa-user-circle"></i> Profile
+                    </button>
                     <ul class="list-group list-group-flush">
                         ${boxList}
-                       
                     </ul>
                 </div>
             
     </div>
   
 </div>`)
-
 
         MID.html(`
              <div id="mobile">                
@@ -131,9 +160,71 @@ const v = () => ({
             <div style="text-align: center;">
                 <h1>${box.name}</h1>
             </div>
-            
-     
+            <h1>Loading cards...</h1>
+
         `)
+
+        
+        // Asynchronously access the cards from the shoebox
+        model.getByBoxID(box.boxID, "cards").then(res => {
+            res.get().then(cards => {
+            cards.docs.map(doc => doc.data());
+            
+            let columnHTML = loadCards(cards)
+
+        MID.html(`
+
+            <div style="text-align: center;">
+                <h1>${box.name}</h1>
+            </div>
+            <div class="col-sm">
+                ${columnHTML[0]}
+            </div>
+            <div class="col-sm">
+                ${columnHTML[1]}
+            </div>
+            <div class="col-sm">
+                ${columnHTML[2]}
+            </div>
+
+            <button class="fas fa-plus"></button>
+
+        `)
+       
+        RIGHT.html(`
+        <div id='chat-container'>
+            <ul id='chat'>
+            </ul>
+    
+            <!-- Message input -->
+            <div class="send">
+                <form id="msg-form" actions="">
+                    <input id="m" autocomplete="off" /><button><i class="far fa-paper-plane"></i></button>
+                </form>
+            </div>
+    
+        </div>`)
+
+        // loads the chat history for this box
+        model.shoebox(model.local('currentBox').boxID).collection('messages').orderBy('timestamp').get().then(snapshot => {
+            snapshot.forEach(doc => {
+    
+                // show all messages in the shoebox
+                let timestamp = doc.data().timestamp.toDate().toString()
+                timestamp = timestamp.substr(0, timestamp.indexOf(':')+3)   //goes up to the minute 
+    
+                $('#chat').append($('<li>').html(`<i class='fas fa-user'><span id='username'>${doc.data().displayName}</span></i><br>
+                                                <p id='message'>${doc.data().message}</p>
+                                                <span id='time'>${timestamp}</span>`))
+            });
+    
+            // scroll to bottom
+            $('#chat').scrollTop($('#chat')[0].scrollHeight);
+        })
+
+        })
+    })
+
     },
 
     inviteMember: () => {
@@ -144,16 +235,11 @@ const v = () => ({
         `)
     },
 
-    chatButton: () => {
-        RIGHT.html(`
-            <div style='align: center'>
-                <button class="btn btn-primary" id="load-chatbox">
-                    <a>
-                    load chat
-                    </a>
-                </button>
-            </div>
-        `)
+    profileModal: () => {
+        const user = model.local('user')
+        $(".modal-title").html(`Hi, ${user.displayName}`)
+        console.log(JSON.stringify(user))
+        $('modal-body').html(JSON.stringify(user))
     }
 })
 

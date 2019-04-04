@@ -1,4 +1,4 @@
-const developmentMode = true
+const developmentMode = false
 
 const auth = firebase.auth()
 
@@ -8,6 +8,7 @@ auth.onAuthStateChanged(user => {
   // reset local storage
   model.local('user', null)
   model.local('boxes', null)
+  model.local('currentBox', null)
 
   if(user) {
     model.user().get().then(({docs}) => {
@@ -28,6 +29,11 @@ auth.onAuthStateChanged(user => {
       }
     })
   }
+})
+
+// profile button listener
+$(document).on('click', '#profile-btn', () => {
+  view.profileModal()
 })
 
 const authGlobal = {
