@@ -1,6 +1,4 @@
 // this code is stolen. we'll use an npm package later
-let GLOBAL_DOWNLOAD
-
 function slugify(text) {
   return text.toString().toLowerCase()
     .replace(/\s+/g, '-')           // Replace spaces with -
