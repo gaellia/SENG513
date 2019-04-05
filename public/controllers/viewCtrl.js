@@ -33,6 +33,8 @@
         if(!RIGHT.is(':visible')) {
             hide([MID, OUT, LEFT])
             RIGHT.show()
+            // scroll to bottom
+            $('#chat').scrollTop($('#chat')[0].scrollHeight)
             $("html, body").animate({ scrollTop: $(document).height() }, "slow")
         } else {
             mediaCheck()

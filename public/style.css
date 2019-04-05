@@ -1,7 +1,7 @@
 #chat-container {
     background-color: lightblue;
-    height: 100vh;
-    width: 100%;
+    height: calc(90vh - 125px); /* take banner into account */
+    width: 95%;
     position: absolute;
 }
 .main-wrapper {
@@ -25,7 +25,6 @@
 .drawer {
     max-width: 90%;
     margin: auto;
-    margin-top: 
 }
 
 #main-row {
@@ -46,7 +45,7 @@
 }
 
 #chat li:nth-child(even) {
-    background-color: cornflowerblue;
+    background-color: rgb(190, 207, 238);
 }
 
 #username {
