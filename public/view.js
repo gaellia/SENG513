@@ -121,9 +121,12 @@ const v = () => ({
     },
 
     viewShoebox: box => {
+        const user = model.local('user')
+        const boxes = model.local('boxes')
+
+
         $("#banner").css({'visibility': 'visible'})
 
-        const boxes = model.local('boxes')
 
         let boxList = ``
         if(boxes.length!==0) {
@@ -141,7 +144,7 @@ const v = () => ({
         <div class="drawer">
            <div class="card" style="text-align: left">
                     <button class="btn btn=default" id="profile-btn" data-toggle="modal" data-target="#modal-container">
-                    <i class="far fa-user-circle"></i> Profile
+                    <h4 style="text-align: center; padding: 0.75em"><i class="far fa-user-circle"></i> ${user.displayName}</h4>
                     </button>
                     <ul class="list-group list-group-flush">
                         ${boxList}
