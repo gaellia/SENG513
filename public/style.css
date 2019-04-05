@@ -58,17 +58,17 @@
     color: gray;
 }
 
-form { 
+#msg-form { 
     padding: 3px; 
     width: 100%; 
     height: 100%;
 }
-form input { 
+#msg-form input { 
     width: 90%; 
     padding: 5px;
     margin-right: .5%; 
 }
-form button { 
+#msg-form button { 
     width: 9%;
     padding: 5px;
     border-radius: 5px;
