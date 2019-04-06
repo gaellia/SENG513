@@ -58,7 +58,8 @@ const authGlobal = {
       auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     
     // auth ctrl inner
-    new firebaseui.auth.AuthUI(auth).start('#firebaseui-auth-container', {
+    let ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth)
+    ui.start('#firebaseui-auth-container', {
       callbacks: {
         signInSuccessWithAuthResult: (authResult, redirectUrl) => false,
       },
@@ -69,3 +70,12 @@ const authGlobal = {
     })
   }
 }
+
+// listener for the logout button
+$(document).on('click', '#logout', () => {
+  console.log("Logging out...")
+  firebase.auth().signOut().then( () => {
+      console.log("Sign out successful")
+      location.reload()
+  })
+})

@@ -14,14 +14,22 @@ $(document).on('click', '#edit-btn', () => {
 // listener for the save button
 $(document).on('click', '#save', () => {
     const user = model.local('user')
-    if (user.displayName !== $('#edit-name').html()) {
+    let newName = $('#edit-name').html()
+
+    if (user.displayName !== newName) {
+        // update database with edited name
         model.user().where('uid', '==', user.uid).get().then(response => {
             response.docs.map(doc => {
                 // update database with edited name
-                model.user(doc.id).update({"displayName": $('#edit-name').html()})
+                model.user(doc.id).update({"displayName": newName})
             })
         })
+
         // update local with edited name
-        model.local('user', {uid: user.uid, displayName: $('#edit-name').html(), email: user.email})
+        model.local('user', {uid: user.uid, displayName: newName, email: user.email})
+
+        // update auth profile with edited name
+        let authUser = firebase.auth().currentUser
+        authUser.updateProfile({displayName: newName})
     }
 })
