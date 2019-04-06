@@ -4,6 +4,19 @@
     width: 95%;
     position: absolute;
 }
+
+@media only screen and (max-width: 768px) {
+    #chat-container {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    #chat-container {
+        width: 95%;
+    }
+}
+
 .main-wrapper {
     height: 100%;
     width: 100%;
@@ -74,18 +87,23 @@
     border-radius: 5px;
     border: none;
     background-color: lightblue;
-    color: royalblue;
+    color: rgb(108, 117, 125);
 }
 
 #banner {
     overflow: hidden;
-    background-color: rgb(108, 117, 125);
+    background-color: #aab5c4;
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 0.5em;
     z-index: 2;
     visibility: hidden;
+    margin-left: 15px;
+}
+
+.btn-secondary {
+    background-color: #aab5c4;
+    border-color: #aaa6b2
 }
 
 #chat-btn {
@@ -93,12 +111,17 @@
 }
 
 #right-container, #left-container {
-    margin-top: 5em;
+    margin-top: 3.5em;
 }
 
 #middle-container {
-    margin-top: 7em;
+    margin-top: 6em;
 }
+
+.container-fluid {
+    padding-left: 0px;
+}
+
 
 /* Scrollbar things*/
 #chat::-webkit-scrollbar {
