@@ -1,18 +1,20 @@
 #chat-container {
     background-color: lightblue;
-    height: calc(90vh - 125px); /* take banner into account */
+    height: calc(100vh - 125px); /* take banner into account */
     width: 95%;
     position: absolute;
 }
 
 @media only screen and (max-width: 768px) {
     #chat-container {
-        width: 100%;
+        height: calc(100vh - 125px); /* take banner into account */
+        width: 95%;
     }
 }
 
 @media only screen and (min-width: 769px) {
     #chat-container {
+        height: calc(100vh - 125px); /* take banner into account */
         width: 95%;
     }
 }
