@@ -40,7 +40,7 @@ $(document).on('click', '.view-box-btn', ({target: {id}}) => {
             })
         })
         model.local('currentBox', bid)
-        view.viewShoebox(bid)
+        view.viewShoeBox(bid)
     })
 })
 

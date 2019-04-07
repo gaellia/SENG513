@@ -6,7 +6,7 @@
     const BAR_MENU = $('#bar-menu')
     const WINDOW = $(window)
     const BANNER = $("#banner")
-
+    
     const hide = (arr, speed) => arr.forEach(e => e.hide(speed))
     const show = (arr, speed) => arr.forEach(e => e.show(speed))
 
