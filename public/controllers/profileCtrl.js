@@ -2,11 +2,15 @@
 $(document).on('click', '#edit-btn', () => {
     // toggle edits
     if ($('#edit-name').find('#change-name').length > 0) {
-        $('#edit-name').html(`${$('#change-name').val()}`)
+        $('#edit-name').html($('#change-name').val())
+        $('#edit-btn').html('Edit...')
+
         // only shows save when it is not editable
         $('#save').show()
     } else {
         $('#edit-name').html(`<input id="change-name" value="${$('#edit-name').html()}"></input>`)
+        $('#edit-btn').html('Save')
+
         $('#save').hide()
     }
 })

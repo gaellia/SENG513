@@ -9,22 +9,34 @@
 
 #chat-container {
     background-color: lightblue;
-    height: calc(100vh - 125px); /* take banner into account */
-    width: 95%;
     position: absolute;
 }
 
+/** smol **/
 @media only screen and (max-width: 768px) {
     #chat-container {
         height: calc(100vh - 125px); /* take banner into account */
-        width: 95%;
+        width: 100%;
+    }
+
+    #middle-container {
+        margin-left: 15px;
     }
 }
 
+#msg-form input {
+    width: 80%!important;
+}
+
+/** big **/
 @media only screen and (min-width: 769px) {
     #chat-container {
         height: calc(100vh - 125px); /* take banner into account */
-        width: 95%;
+        width: 92%;
+    }
+
+    #middle-container {
+        margin-left: 0px;
     }
 }
 
@@ -127,7 +139,6 @@
 
 #middle-container {
     margin-top: 6em;
-    margin-left: 15px;
 }
 
 .container-fluid {

@@ -1,35 +1,46 @@
-const createShoeBoxView = ({MID}) => {
-    MID.html(`
-        <img style="text-align: center">
-            <br>
-            <h1>New Shoebox</h1>
-            <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src="Illustration.png" </img>
-            <br>
-            <div>
-                <form id="create-shoebox-form">
-                    <div class="form-group">
-                        <label for="shoebox-name">Shoebox Name</label>
-                        <input type="text" class="form-control" id="shoebox-name">
-                        <label for="shoebox-description">Description</label>
-                        <input type="text" class="form-control" id="shoebox-description">
-                        <br>
+const createShoeBoxView = () => {
+    (() => ({}))()// magic
+    
+    $('.modal-title').html(`New Shoebox`)
 
-                        <div class="fas fa-camera"> 
+    $(".modal-footer").html(`
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="create-shoebox-submit" data-dismiss="modal" id="save">Create</button>
+    `)
+    $('.modal-body').html(`
+    <div style="text-align: center">
+        <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src="Illustration.png">
+        <br>
+        <form id="create-shoebox-form">
+            <div class="form-group">
+                <div> <!-- file upload -->
+                    <br>
+                    <span class="time"><i class="fas fa-camera"></i> Assign a picture to this shoebox</span>
+                    <br><br>
                     <input type="file" id="file">
-                <button type="button"  id="uploadButton">Submit</button>
-                </div>
-                        <br>
-                        <label for="invite-list">Invite Members</label>
-                        <ul class="list-group list-group-flush" id="invite-list">
-                            <li class="list-group-item box-btn" id="invite-new">
+                    <button class="btn btn-light btn-sm" id="uploadButton">Submit</button>
+                </div><!-- file upload-->
+                <hr>
+                <label for="shoebox-name">Shoebox Name</label>
+                <input type="text" class="form-control" id="shoebox-name">
+                <br>
+                <label for="shoebox-description">Description</label>
+                <input type="text" class="form-control" id="shoebox-description">
+            </div><!-- form group -->
+            <div> <!-- invite members -->
+                <ul class="list-group list-group-flush" id="invite-list">
+                    <li class="list-group-item">
+                        <button class="btn btn-light" id="invite-new">
+                            <br>
+                            <span id="invite-members-new">
                                 <i class="fas fa-plus-circle"></i>
-                                Invite by email
-                            </li>
-                        </ul>
-                    </div>
-                    <button id="create-shoebox-submit" class="btn btn-primary">Create</button>
-                </form>
-            </div>
-        </div>
+                                Invite members by email
+                            </span>
+                        </button>
+                    </li>
+                </ul>
+            </div> <!-- invite members -->
+        </form>
+    </div>
     `)
 }

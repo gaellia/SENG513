@@ -1,18 +1,16 @@
 // create new shoebox workflow button listeners
-$(document).on('click', '.box-btn', ({target: {id}}) => {
-    switch(id) {
-        case "box-new":
-            view.createShoebox()
-            $("#file").on("change", function(event) {
-                GLOBAL_FILE = event.target.files[0]
-                
-            })
+$(document).on('click', '#box-new', () => {
+    view.createShoeBox()
+    $("#file").on("change", function(event) {
+        GLOBAL_FILE = event.target.files[0]
+    })
+})
 
-            break
+$(document).on('click', '#invite-new', e => {
+    e.preventDefault()
 
-        case 'invite-new':
-            view.inviteMember()
-    }
+    if(e.target.id==='invite-members-new')
+        view.inviteMember()
 })
 
 // view all shoeboxes button listener

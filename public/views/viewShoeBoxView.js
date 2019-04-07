@@ -63,7 +63,7 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
         <!-- Message input -->
         <div class="send">
             <form id="msg-form" actions="">
-                <input id="m" autocomplete="off" /><button><i class="far fa-paper-plane"></i></button>
+                <input id="m" autocomplete="off" /><button style="padding-left: 0.5em; padding-right: 1.75em"><i class="far fa-paper-plane"></i></button>
             </form>
         </div>
 

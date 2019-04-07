@@ -1,4 +1,4 @@
-const selectShoeBoxView = boxRepeat => {
+const selectShoeBoxView = ({MID}, boxRepeat) => {
     const user = model.local('user')
     const boxes = model.local('boxes')
     let boxList = boxRepeat(boxes)
@@ -14,7 +14,7 @@ const selectShoeBoxView = boxRepeat => {
                 <ul class="list-group list-group-flush">
                     ${boxList}
                     <li class="list-group-item">
-                        <button class="btn  box-btn maxw">
+                        <button class="btn maxw"  data-toggle="modal" data-target="#modal-container">
                             <span id="box-new">
                                 <i class="fas fa-plus-circle"></i>
                                 Create new...
@@ -23,7 +23,7 @@ const selectShoeBoxView = boxRepeat => {
                     </li>
                     <li class="list-group-item">
                         <button class="btn maxw logout">
-                            <span id="box-new">
+                            <span>
                                 <i class="fas fa-sign-out-alt"></i>
                                 Logout
                             </span>

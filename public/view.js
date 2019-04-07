@@ -17,7 +17,7 @@ const v = () => {
     }
 
     // Returns an array containing the HTML of each column in the main view as a string
-    const loadCards = card => {
+    const loadCards = cards => {
         let cols = ["", "", ""]
 
         let index = 0
@@ -31,7 +31,7 @@ const v = () => {
     }
 
     const boxRepeat = boxes => {
-        const result = ``
+        let result = ``
         if(boxes.length!==0) {
             boxes.forEach(box => {
                 result = `${result}
@@ -53,7 +53,7 @@ const v = () => {
         if(boxes.length!==0) {
             boxes.forEach(box => {
                 result = `${result}
-                <li class="list-group-item box-btn view-box-btn">
+                <li class="list-group-item view-box-btn">
                     <button class="btn maxw" style="text-align: center">
                         <div  id="${box.boxID}">
                             <image src="${box.logoURL}" style="width: 64px; height: 64px""></image>
@@ -76,7 +76,7 @@ const v = () => {
     return {
         auth: () => authView(views),
         selectShoeBox: () => selectShoeBoxView(views, boxRepeat),
-        createShoebox: () => createShoeBoxView(views),
+        createShoeBox: () => createShoeBoxView(views),
         viewShoeBox: box => viewShoeBoxView(views, box, viewBoxRepeat, loadCards),
         inviteMember: () => inviteMemberView(views),
         profileModal: () => profileModalView(views),
