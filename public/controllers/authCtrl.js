@@ -28,7 +28,9 @@ auth.onAuthStateChanged(user => {
         authGlobal.fetchBoxes(user)
       }
     })
-  }
+  } else {
+    authGlobal.init()
+    }
 })
 
 // profile button listener
@@ -58,7 +60,8 @@ const authGlobal = {
       auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     
     // auth ctrl inner
-    new firebaseui.auth.AuthUI(auth).start('#firebaseui-auth-container', {
+    let ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth)
+    ui.start('#firebaseui-auth-container', {
       callbacks: {
         signInSuccessWithAuthResult: (authResult, redirectUrl) => false,
       },
@@ -69,3 +72,10 @@ const authGlobal = {
     })
   }
 }
+
+// listener for the logout button
+$(document).on('click', '.logout', () => {
+  firebase.auth().signOut().then( () => {
+      location.reload()
+  })
+})

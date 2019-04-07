@@ -6,7 +6,7 @@
     const BAR_MENU = $('#bar-menu')
     const WINDOW = $(window)
     const BANNER = $("#banner")
-
+    
     const hide = (arr, speed) => arr.forEach(e => e.hide(speed))
     const show = (arr, speed) => arr.forEach(e => e.show(speed))
 
@@ -39,6 +39,8 @@
         if(!RIGHT.is(':visible')) {
             hide([MID, LEFT], 'fast')
             show([RIGHT], 'fast')
+            // scroll to bottom
+            $('#chat').scrollTop($('#chat')[0].scrollHeight)
             $("html, body").animate({ scrollTop: $(document).height() }, "slow")
         } else {
             mediaCheck()
