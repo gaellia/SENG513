@@ -5,7 +5,7 @@ $(document).on('click', '.box-btn', ({target: {id}}) => {
             view.createShoebox()
             $("#file").on("change", function(event) {
                 GLOBAL_FILE = event.target.files[0]
-
+                
             })
 
             break
@@ -32,7 +32,7 @@ $(document).on('click', '.view-box-btn', ({target: {id}}) => {
 
                     $('#chat').append($('<li>').html(`<i class='fas fa-user'><span id='username'>${change.doc.data().displayName}</span></i><br>
                     <p id='message'>${change.doc.data().message}</p>
-                    <span id='time'>${timestamp}</span>`))
+                    <span class='time'>${timestamp}</span>`))
 
                     // scroll to bottom
                     if($('#chat')[0]) $('#chat').scrollTop($('#chat')[0].scrollHeight)

@@ -28,7 +28,9 @@ auth.onAuthStateChanged(user => {
         authGlobal.fetchBoxes(user)
       }
     })
-  }
+  } else {
+    authGlobal.init()
+    }
 })
 
 // profile button listener
@@ -72,10 +74,8 @@ const authGlobal = {
 }
 
 // listener for the logout button
-$(document).on('click', '#logout', () => {
-  console.log("Logging out...")
+$(document).on('click', '.logout', () => {
   firebase.auth().signOut().then( () => {
-      console.log("Sign out successful")
       location.reload()
   })
 })

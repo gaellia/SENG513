@@ -37,7 +37,7 @@ const v = () => ({
     auth: () => {
         MID.html(`
         <div style="text-align: center">
-            <img style="width: 150px; display:block; margin-left: auto; margin-right: auto; margin-top: 2em; margin-bottom: 2em" src="./Illustration.png" />
+            <img style="width: 150px; display:block; margin-left: auto; margin-right: auto; margin-bottom: 2em" src="./Illustration.png" />
             <h1>Shoebox</h1>
             <br>
             <p> One place for all your memories </p>
@@ -56,9 +56,10 @@ const v = () => ({
         if(boxes.length!==0) {
             boxes.forEach(box => {
                 boxList = `${boxList}
-                <li class="list-group-item box-btn view-box-btn" id="${box.boxID}">
-                    <image src="${box.logoURL}" style="width: 64px; height: 64px"></image>
-                    ${box.name}
+                <li class="list-group-item">
+                    <button class="btn view-box-btn maxw">
+                        <h5 id="${box.boxID}"><image src="${box.logoURL}" style="width: 64px; height: 64px; margin-right: 16px"></image> ${box.name}</h5>
+                    </button>
                 </li>`
             });
         }
@@ -66,16 +67,29 @@ const v = () => ({
 
         MID.html(`
             <div style="text-align: center">
-                <br>
                 <h1>Welcome, ${user.displayName}</h1>
                 <br>
-                ${(() => boxes.length===0? `<p>Create a new shoebox to get started.</p><br>` : '')()}
+                ${(() => boxes.length===0? `<p>Create a new shoebox to get started.</p><br>` : 'Select a shoebox to continue.')()}
+                <br><br>
+
                 <div class="card" style="text-align: left">
                     <ul class="list-group list-group-flush">
                         ${boxList}
-                        <li class="list-group-item box-btn" id="box-new">
-                            <i class="fas fa-plus-circle"></i>
-                            Create new...
+                        <li class="list-group-item">
+                            <button class="btn  box-btn maxw">
+                                <span id="box-new">
+                                    <i class="fas fa-plus-circle"></i>
+                                    Create new...
+                                </span>
+                            </button>
+                        </li>
+                        <li class="list-group-item">
+                            <button class="btn maxw logout">
+                                <span id="box-new">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    Logout
+                                </span>
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -132,9 +146,14 @@ const v = () => ({
         if(boxes.length!==0) {
             boxes.forEach(box => {
                 boxList = `${boxList}
-                <li class="list-group-item box-btn view-box-btn" id="${box.boxID}">
-                    <image src="${box.logoURL}" style="width: 64px; height: 64px""></image>
-                    ${box.name}
+                <li class="list-group-item box-btn view-box-btn">
+                    <button class="btn maxw" style="text-align: center">
+                        <div  id="${box.boxID}">
+                            <image src="${box.logoURL}" style="width: 64px; height: 64px""></image>
+                            <br>
+                            <span class="time">${box.name}</span>
+                        </div>
+                    </button>
                 </li>`
             });
         }
@@ -159,7 +178,7 @@ const v = () => ({
             <div style="text-align: center;">
                 <h1>${box.name}</h1>
             </div>
-            <h1>Loading cards...</h1>
+            <div class="loader"></div>
 
         `)
 
@@ -214,7 +233,7 @@ const v = () => ({
     
                 $('#chat').append($('<li>').html(`<i class='fas fa-user'><span id='username'>${doc.data().displayName}</span></i><br>
                                                 <p id='message'>${doc.data().message}</p>
-                                                <span id='time'>${timestamp}</span>`))
+                                                <span class='time'>${timestamp}</span>`))
             });
     
             // scroll to bottom
@@ -252,7 +271,7 @@ const v = () => ({
             <div class="row><div class="col-12"><br><br></div></div>
             <div class="row">
                 <div class="col-12">
-                    <button type="button" class="btn btn-warning" id="logout"><i class="fas fa-sign-out-alt"></i>  Logout</button>
+                    <button type="button" class="btn btn-warning logout"><i class="fas fa-sign-out-alt"></i>  Logout</button>
                 </div>
             </div>`)
     }

@@ -1,3 +1,1 @@
 // initialize app
-
-authGlobal.init()
