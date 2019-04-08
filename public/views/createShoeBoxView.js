@@ -1,13 +1,12 @@
 const createShoeBoxView = () => {
-    (() => ({}))()// magic
-    
-    $('.modal-title').html(`New Shoebox`)
+    $('#modal-title').html(`New Shoebox`)
 
-    $(".modal-footer").html(`
+    $("#modal-footer").html(`
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary" id="create-shoebox-submit" data-dismiss="modal" id="save">Create</button>
     `)
-    $('.modal-body').html(`
+
+    $('#modal-body').html(`
     <div style="text-align: center">
         <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src="Illustration.png">
         <br>

@@ -1,5 +1,5 @@
 // create new shoebox workflow button listeners
-$(document).on('click', '#box-new', () => {
+$(document).on('click', '.box-new', () => {
     view.createShoeBox()
     $("#file").on("change", function(event) {
         GLOBAL_FILE = event.target.files[0]
@@ -15,6 +15,7 @@ $(document).on('click', '#invite-new', e => {
 
 // view all shoeboxes button listener
 $(document).on('click', '.view-box-btn', ({target: {id}}) => {
+    id = id.substr(4)
     model.shoebox().where('boxID', '==', id).get().then(response => {
         let bid = response.docs.map(docs => docs.data())[0]
         

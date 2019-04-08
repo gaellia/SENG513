@@ -37,8 +37,8 @@ const v = () => {
                 result = `${result}
                 <li class="list-group-item">
                     <button class="btn view-box-btn maxw">
-                        <h5 id="${box.boxID}">
-                            <image src="${box.logoURL}" style="width: 64px; height: 64px; margin-right: 16px">
+                        <h5 id="div-${box.boxID}">
+                            <image id="img-${box.boxID}" src="${box.logoURL}" style="width: 64px; height: 64px; margin-right: 16px">
                             ${box.name}
                         </h5>
                     </button>
@@ -55,10 +55,10 @@ const v = () => {
                 result = `${result}
                 <li class="list-group-item view-box-btn">
                     <button class="btn maxw" style="text-align: center">
-                        <div  id="${box.boxID}">
-                            <image src="${box.logoURL}" style="width: 64px; height: 64px""></image>
+                        <div id="div-${box.boxID}">
+                            <image id="img-${box.boxID}" src="${box.logoURL}" style="width: 64px; height: 64px""></image>
                             <br>
-                            <span class="time">${box.name}</span>
+                            <span id="lab-${box.boxID}" class="time">${box.name}</span>
                         </div>
                     </button>
                 </li>`
