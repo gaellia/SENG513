@@ -4,6 +4,7 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
     const boxList = viewBoxRepeat(boxes)
 
     $("#banner").css({'visibility': 'visible'})
+    $('#box-pic').hide('fast').attr('src', box.logoURL).show('fast')
 
     LEFT.html(`
     <div class="main-wrapper">
