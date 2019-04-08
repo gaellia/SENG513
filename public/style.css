@@ -8,15 +8,21 @@
 }
 
 #chat-container {
-    background-color: lightblue;
     position: absolute;
+    height: calc(100vh - 180px); /* take banner into account */
+}
+
+#right-container, #left-container {
+    height: calc(100vh - 180px);
+    width: 100vw; 
 }
 
 /** smol **/
 @media only screen and (max-width: 768px) {
     #chat-container {
-        height: calc(100vh - 125px); /* take banner into account */
-        width: 100%;
+        width: 95%;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
     }
 
     #middle-container {
@@ -24,15 +30,12 @@
     }
 }
 
-#msg-form input {
-    width: 80%!important;
-}
-
 /** big **/
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 768px) {
     #chat-container {
-        height: calc(100vh - 125px); /* take banner into account */
         width: 92%;
+        margin-left: 4%;
+        margin-right: 4%;
     }
 
     #middle-container {
@@ -43,10 +46,8 @@
 .main-wrapper {
     height: 100%;
     width: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
     padding-top: 50px;
+    overflow-y: auto;
 }
 
 .card-header {
@@ -76,12 +77,14 @@
 }
 
 #chat li {
-    background-color: white;
+    background-color: #eafcfc;
     padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
 }
 
 #chat li:nth-child(even) {
-    background-color: rgb(190, 207, 238);
+    background-color: #f0e5ff;
 }
 
 #username {
@@ -99,18 +102,37 @@
     width: 100%; 
     height: 100%;
 }
-#msg-form input { 
-    width: 90%; 
+#msg-form textarea { 
+    width: 85%; 
     padding: 5px;
-    margin-right: .5%; 
+    margin-right: 2%;
 }
 #msg-form button { 
-    width: 9%;
+    width: 13%;
     padding: 5px;
     border-radius: 5px;
     border: none;
-    background-color: lightblue;
+    background-color: #dbdbe0;
     color: rgb(108, 117, 125);
+    display:inline-block;
+    vertical-align: top;
+}
+
+#msg-form button:hover { 
+    width: 13%;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #d2d2d8;
+    color: rgb(108, 117, 125);
+    display:inline-block;
+    vertical-align: top;
+}
+
+.fa-paper-plane {
+    width: 20px;
+    height: 20px;
+    color: rgb(88, 138, 231);
 }
 
 #banner {
@@ -129,10 +151,6 @@
     border-color: #aaa6b2
 }
 
-#chat-btn {
-    margin-right: 1em;
-}
-
 #right-container, #left-container {
     margin-top: 3.5em;
 }
@@ -147,19 +165,18 @@
 
 
 /* Scrollbar things*/
-#chat::-webkit-scrollbar {
-    background-color:lightblue;
+::-webkit-scrollbar {
     width: 8px;
 }
-#chat::-webkit-scrollbar-track {
-    background-color:lightblue;
+::-webkit-scrollbar-track {
+    background-color:#dbdbe0;
 }   
-#chat::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color:#babac0;
     border-radius: 16px;
     border:4px solid #babac0;
 }
-#chat::-webkit-scrollbar-button {
+::-webkit-scrollbar-button {
     display: none;
 }
 

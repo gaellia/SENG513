@@ -9,6 +9,7 @@ function slugify(text) {
 }
 
 $(document).on('click', '#uploadButton', e => {
+    e.preventDefault()
     const selectedFile = GLOBAL_FILE
 
     const fileURL = `/images/${slugify(selectedFile.name)}`
