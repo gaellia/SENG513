@@ -44,10 +44,46 @@
 }
 
 .main-wrapper {
-    height: 100%;
+    height: calc(100vh - 230px);
     width: 100%;
-    padding-top: 50px;
     overflow-y: auto;
+}
+
+.start-wrapper {
+    height: calc(100vh - 500px);
+    width: 100%;
+    overflow-y: auto;
+}
+
+.card {
+    margin-bottom: 30px;
+}
+
+.middle-cards {
+    height: calc(100vh - 230px);
+    overflow-y: auto;
+}
+
+.add-btn { 
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #88bbff;
+    color: rgb(108, 117, 125);
+    display:inline-block;
+    vertical-align: top;
+}
+
+.add-btn:hover { 
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #78b1fc;
+    color: rgb(108, 117, 125);
+    display:inline-block;
+    vertical-align: top;
 }
 
 .card-header {

@@ -23,7 +23,7 @@ const v = () => {
         let index = 0
 
         cards.forEach(card => {
-            cols[index%cols.length] += getHTMLFor(card)
+            cols[index%cols.length] += getHTMLFor(card.data())
             index++
         });
 

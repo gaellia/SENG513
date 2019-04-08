@@ -34,61 +34,62 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
     // Asynchronously access the cards from the shoebox
     model.getByBoxID(box.boxID, "cards").then(res => {
         res.get().then(cards => {
-        cards.docs.map(doc => doc.data());
-        
-        let columnHTML = loadCards(cards)
 
-    MID.html(`
+            let columnHTML = loadCards(cards)
 
-        <div style="text-align: center;">
-            <h1>${box.name}</h1>
-        </div>
-        <div class="col-sm">
-            ${columnHTML[0]}
-        </div>
-        <div class="col-sm">
-            ${columnHTML[1]}
-        </div>
-        <div class="col-sm">
-            ${columnHTML[2]}
-        </div>
+            MID.html(`
+                <div class="row d-flex justify-content-center">
+                    <div style="text-align: center;">
+                        <h1>${box.name}</h1>
+                    </div>
+                </div>
+                <div class="row middle-cards d-flex justify-content-center">
+                    <div class="col-auto">
+                        ${columnHTML[0]}
+                    </div>
+                    <div class="col-auto">
+                        ${columnHTML[1]}
+                    </div>
+                    <div class="col-auto">
+                        ${columnHTML[2]}
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-end">
+                    <button class="fas fa-plus add-btn"></button>
+                </div>
 
-        <button class="fas fa-plus"></button>
-
-    `)
+            `)
    
-    RIGHT.html(`
-    <div id='chat-container'>
-        <ul id='chat'>
-        </ul>
+            RIGHT.html(`
+            <div id='chat-container'>
+                <ul id='chat'>
+                </ul>
 
-        <!-- Message input -->
-        <div class="send">
-            <form id="msg-form" actions="">
-                <textarea rows="3" id="m" autocomplete="off" /><button><i class="far fa-paper-plane"></i></button>
-            </form>
-        </div>
+                <!-- Message input -->
+                <div class="send">
+                    <form id="msg-form" actions="">
+                        <textarea rows="3" id="m" autocomplete="off" /><button><i class="far fa-paper-plane"></i></button>
+                    </form>
+                </div>
 
-    </div>`)
+            </div>`)
 
-    // loads the chat history for this box
-    model.shoebox(model.local('currentBox').boxID).collection('messages').orderBy('timestamp').get().then(snapshot => {
-        snapshot.forEach(doc => {
+            // loads the chat history for this box
+            model.shoebox(model.local('currentBox').boxID).collection('messages').orderBy('timestamp').get().then(snapshot => {
+                snapshot.forEach(doc => {
 
-            // show all messages in the shoebox
-            let timestamp = doc.data().timestamp.toDate().toString()
-            timestamp = timestamp.substr(0, timestamp.indexOf(':')+3)   //goes up to the minute 
+                    // show all messages in the shoebox
+                    let timestamp = doc.data().timestamp.toDate().toString()
+                    timestamp = timestamp.substr(0, timestamp.indexOf(':')+3)   //goes up to the minute 
 
-            $('#chat').append($('<li>').html(`<i class='fas fa-user'><span id='username'>${doc.data().displayName}</span></i><br>
-                                            <p id='message'>${doc.data().message}</p>
-                                            <span class='time'>${timestamp}</span>`))
-        });
+                    $('#chat').append($('<li>').html(`<i class='fas fa-user'><span id='username'>${doc.data().displayName}</span></i><br>
+                                                    <p id='message'>${doc.data().message}</p>
+                                                    <span class='time'>${timestamp}</span>`))
+                });
 
-        // scroll to bottom
-        $('#chat').scrollTop($('#chat')[0].scrollHeight)
+                // scroll to bottom
+                $('#chat').scrollTop($('#chat')[0].scrollHeight)
+            })
+        })
     })
-
-    })
-})
-
 }
