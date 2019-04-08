@@ -9,6 +9,8 @@ function slugify(text) {
 }
 
 $(document).on('click', '#uploadButton', e => {
+    console.error("WE ARE IN HERE")
+    console.error(GLOBAL_FILE)
     e.preventDefault()
     const selectedFile = GLOBAL_FILE
 
@@ -59,6 +61,7 @@ $(document).on('click', '#uploadButton', e => {
                 console.log('File available at', downloadURL)
     
                 $('#shoebox-image').attr("src", downloadURL)
+
     
             })
         }

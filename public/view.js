@@ -80,6 +80,8 @@ const v = () => {
         viewShoeBox: box => viewShoeBoxView(views, box, viewBoxRepeat, loadCards),
         inviteMember: () => inviteMemberView(views),
         profileModal: () => profileModalView(views),
+        settingsModal: () => settingModalView(views),
+
     }
 } 
 
