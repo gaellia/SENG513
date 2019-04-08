@@ -49,12 +49,6 @@
     overflow-y: auto;
 }
 
-.start-wrapper {
-    height: calc(100vh - 500px);
-    width: 100%;
-    overflow-y: auto;
-}
-
 .card {
     margin-bottom: 30px;
 }

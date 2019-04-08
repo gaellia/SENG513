@@ -10,11 +10,9 @@ const selectShoeBoxView = ({MID}, boxRepeat) => {
             ${(() => boxes.length===0? `<p>Create a new shoebox to get started.</p><br>` : 'Select a shoebox to continue.')()}
             <br><br>
 
-            <div class="card start-wrapper" style="text-align: left">
+            <div class="card" style="text-align: left">
                 <ul class="list-group list-group-flush">
                     ${boxList}
-            </div>
-            <div class="card" style="text-align: left">
                     <li class="list-group-item">
                         <button class="btn maxw"  data-toggle="modal" data-target="#modal-container">
                             <span id="box-new">
