@@ -17,7 +17,7 @@ const profileModalView = () => {
             <h6 class="col-1"><i class="fas fa-user-edit"></i></h6>
             <h6 class="col-2">Name:</h6>
             <h6 class="col-7" id="edit-name">${user.displayName}</h6>
-            <p class="col-2"><button id="edit-btn" class="btn btn-link">Edit...</button></p>
+            <p class="col-2"><button id="edit-btn" class="btn btn-link"><i class="fas fa-pencil-alt"></i></button></p>
         </div>
         <div class="row><div class="col-12"><br><br></div></div>
         <div class="row">
