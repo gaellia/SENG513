@@ -9,11 +9,11 @@
 
 #chat-container {
     position: absolute;
-    height: calc(100vh - 180px); /* take banner into account */
+    height: calc(100vh - 190px); /* take banner + padding into account */
 }
 
 #right-container, #left-container {
-    height: calc(100vh - 180px);
+    height: calc(100vh - 190px);
     width: 100vw; 
 }
 
@@ -44,10 +44,40 @@
 }
 
 .main-wrapper {
-    height: 100%;
+    height: calc(100vh - 240px);
     width: 100%;
-    padding-top: 50px;
     overflow-y: auto;
+}
+
+.card {
+    margin-bottom: 30px;
+}
+
+.middle-cards {
+    height: calc(100vh - 240px);
+    overflow-y: auto;
+}
+
+.add-btn { 
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #88bbff;
+    color: rgb(108, 117, 125);
+    display:inline-block;
+    vertical-align: top;
+}
+
+.add-btn:hover { 
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #78b1fc;
+    color: rgb(108, 117, 125);
+    display:inline-block;
+    vertical-align: top;
 }
 
 .card-header {
@@ -156,7 +186,7 @@
 }
 
 #middle-container {
-    margin-top: 6em;
+    margin-top: 4em;
 }
 
 .container-fluid {

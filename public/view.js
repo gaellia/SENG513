@@ -23,7 +23,7 @@ const v = () => {
         let index = 0
 
         cards.forEach(card => {
-            cols[index%cols.length] += getHTMLFor(card)
+            cols[index%cols.length] += getHTMLFor(card.data())
             index++
         });
 
@@ -80,6 +80,8 @@ const v = () => {
         viewShoeBox: box => viewShoeBoxView(views, box, viewBoxRepeat, loadCards),
         inviteMember: () => inviteMemberView(views),
         profileModal: () => profileModalView(views),
+        settingsModal: () => settingModalView(views),
+
     }
 } 
 
