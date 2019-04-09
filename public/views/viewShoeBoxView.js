@@ -6,16 +6,12 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
     $("#banner").css({'visibility': 'visible'})
 
     LEFT.html(`
-    <div class="card" style="text-align: left">
-    <div class="card" style="text-align: left">
-        <button class="btn btn=default" id="profile-btn" data-toggle="modal" data-target="#modal-container">
-        <h4 style="text-align: center; padding: 0.75em"><i class="far fa-user-circle"></i> ${user.displayName}</h4>
-        </button>
-    </div>
-        <div class="card" style="text-align: left">
-        <button class="btn btn=default" id="setting-btn" data-toggle="modal" data-target="#modal-container">
-        <h4 style="text-align: center; padding: 0.75em"><i class="fas fa-cog"></i> Settings</h4>
-        </button>
+    <div class="drawer" style="text-align: left; padding-top: 20px">
+        <div class="card">
+            <button class="btn btn-light" id="profile-btn" data-toggle="modal" data-target="#modal-container">
+            <h5 style="text-align: center; padding: 0.75em"><i class="far fa-user-circle"></i> ${user.displayName}</h5>
+            </button>
+        </div>
     </div>
 
     <div class="main-wrapper">
@@ -30,7 +26,7 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
 
     MID.html(`
         <div style="text-align: center;">
-            <h1>${box.name}</h1>
+            <h2>${box.name}</h2>
         </div>
         <div class="loader"></div>
 
@@ -44,9 +40,14 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
             let columnHTML = loadCards(cards)
 
             MID.html(`
-                <div class="row d-flex justify-content-center">
-                    <div style="text-align: center;">
-                        <h1>${box.name}</h1>
+                <div class="row d-flex justify-content-between">
+                    <div class="p-2" style="text-align: center;">
+                        <h2>${box.name}</h2>
+                    </div>
+                    <div class="p-2" style="text-align: left; padding-bottom: 20px;">
+                        <button class="btn btn-secondary" id="setting-btn" data-toggle="modal" data-target="#modal-container">
+                        <h6 style="text-align: center; padding-top: 0.5em"><i class="fas fa-cog"></i> Settings</h6>
+                        </button>
                     </div>
                 </div>
                 <div class="row middle-cards d-flex justify-content-center">
