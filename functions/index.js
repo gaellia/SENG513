@@ -2,13 +2,25 @@
  const firebase = require("firebase-admin")
  const functions = require('firebase-functions')
  const emailAPI = require('./API/emailAPI')
+ const bodyParser = require('body-parser')
+ const cors = require('cors')
  firebase.initializeApp(functions.config().firebase)
  
  const app = require('express')()
+ app.use(bodyParser.json())
+ app.use(bodyParser.urlencoded({extended: true}))
+ app.use(cors())
  
  // serving the client side
  app.get('/', (req, res) => res.sendFile(`${__dirname}/index.html`))
- app.get('/sendInvites', (req, res) => emailAPI.sendEmail())
+ app.post('/sendInvites', (req, res) => {
+     let members = req.body
+     for (let member of members) {
+         if (member.role === 'invited') {
+             emailAPI.sendEmail(member.email)
+         }
+     }
+ })
 
 
 /* firestore.collection('shoebox').onSnapshot(snapshot => {

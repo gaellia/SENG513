@@ -103,6 +103,8 @@ $(document).on('click', '#create-shoebox-submit', e => {
         }
     }
 
-    request.open("GET","http://localhost:5000/shoebox513/us-central1/app/sendInvites",true);
-    request.send();
+    request.open("POST","http://localhost:5000/shoebox513/us-central1/app/sendInvites",true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.setRequestHeader('Access-Control-Allow-Headers', '*');
+    request.send(JSON.stringify(members));
 })

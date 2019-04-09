@@ -8,14 +8,14 @@ const transporter = nodemailer.createTransport({
     }
 })
 
-let mailOptions = {
-    from: 'seng513shoebox@gmail.com',
-    to: 'rnarshmallow2017@hotmail.com',
-    subject: 'Sending Email using Node.js',
-    text: 'That was easy!'
-}
-
-function sendEmail() {
+function sendEmail(recipient) {
+    console.log('Recipient: ' + recipient)
+    mailOptions = {
+        from: 'seng513shoebox@gmail.com',
+        to: recipient,
+        subject: 'Sending Email using Node.js',
+        text: 'You\'ve been invited to join a shoebox!\nhttp://localhost:63342/shoebox2/SENG513/public/index.html'
+    }
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
             console.log(error);

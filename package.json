@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/elvinlimpin/SENG513#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "firebase-admin": "^7.1.0",
     "firebase-functions": "^2.2.1"
   }
