@@ -14,8 +14,8 @@ const selectShoeBoxView = ({MID}, boxRepeat) => {
                 <ul class="list-group list-group-flush">
                     ${boxList}
                     <li class="list-group-item">
-                        <button class="btn maxw"  data-toggle="modal" data-target="#modal-container">
-                            <span id="box-new">
+                        <button class="btn maxw box-new" data-toggle="modal" data-target="#modal-container">
+                            <span class="box-new">
                                 <i class="fas fa-plus-circle"></i>
                                 Create new...
                             </span>

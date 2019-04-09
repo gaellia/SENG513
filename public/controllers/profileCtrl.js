@@ -1,6 +1,5 @@
 // listener for the edit button
 $(document).on('click', '#edit-btn', () => {
-    console.error("THE EDIT BUTTON HAS BEEN TOGGLED")
     // toggle edits
     if ($('#edit-name').find('#change-name').length > 0) {
         $('#edit-name').html($('#change-name').val())
