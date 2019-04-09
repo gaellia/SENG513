@@ -7,7 +7,7 @@ $(document).on('submit', '#msg-form', e => {
         let bid = model.local('currentBox').boxID
         
         let msg = {displayName: name, 
-                    message: $('#m').val(),
+                    message: $('#m').val().replace(/</g, "&lt").replace(/>/g, "&gt"),
                     timestamp: currentTime}
     
         // add to database
