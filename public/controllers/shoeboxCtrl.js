@@ -1,7 +1,15 @@
 // create new shoebox workflow button listeners
 $(document).on('click', '.box-new', () => {
     view.createShoeBox()
-    $("#file").on("change", function(event) {
+
+    $(".file").on("change", function(event) {
+        GLOBAL_FILE = event.target.files[0]
+    })
+})
+
+$(document).on('click', '#setting-btn', () => {
+    view.settingsModal()
+    $(".file").on("change", function(event) {
         GLOBAL_FILE = event.target.files[0]
     })
 })

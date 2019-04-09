@@ -18,7 +18,7 @@ const createShoeBoxView = () => {
                     <br>
                     <span class="time"><i class="fas fa-camera"></i> Assign a picture to this shoebox</span>
                     <br><br>
-                    <input type="file" id="file">
+                    <input type="file" class="file">
                     <button class="btn btn-light btn-sm" id="uploadButton">Submit</button>
                 </div><!-- file upload-->
                 <hr>
