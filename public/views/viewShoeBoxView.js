@@ -7,8 +7,14 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
 
     LEFT.html(`
     <div class="card" style="text-align: left">
+    <div class="card" style="text-align: left">
         <button class="btn btn=default" id="profile-btn" data-toggle="modal" data-target="#modal-container">
         <h4 style="text-align: center; padding: 0.75em"><i class="far fa-user-circle"></i> ${user.displayName}</h4>
+        </button>
+    </div>
+        <div class="card" style="text-align: left">
+        <button class="btn btn=default" id="setting-btn" data-toggle="modal" data-target="#modal-container">
+        <h4 style="text-align: center; padding: 0.75em"><i class="fas fa-cog"></i> Settings</h4>
         </button>
     </div>
 
