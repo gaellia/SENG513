@@ -15,12 +15,37 @@ $(document).on('click', '#editboxname-btn', () => {
     }
 })
 
+
+
+$(document).on('click', '#editboxdescription-btn', () => {
+    // toggle edits
+    if ($('#editboxdescription-name').find('#change-name').length > 0) {
+        $('#editboxdescription-name').html($('#change-name').val())
+        $('#editboxdescription-btn').html('Edit...')
+
+        // only shows save when it is not editable
+        $('#save').show()
+    } else {
+        $('#editboxdescription-name').html(`<input id="change-name" value="${$('#editboxdescription-name').html()}"></input>`)
+        $('#editboxdescription-btn').html('Save')
+
+        $('#save').hide()
+    }
+})
+
+
+
+
+
+
 // listener for the save button
 $(document).on('click', '#save', () => {
     const user = model.local('user')
     const box = model.local('currentBox')
 
     let newName = $('#editboxname-name').html()
+    let newPhoto =  $('#shoebox-image').attr("src")
+    let newDescription = $('#editboxdescription-name').html()
 
     if (box.name !== newName) {
         // update database with edited name
@@ -38,4 +63,30 @@ $(document).on('click', '#save', () => {
         // let authUser = firebase.auth().currentUser
         // authUser.updateProfile({name: newName})
     }
+
+
+
+
+    if (box.logoURL !== newPhoto) {
+        model.shoebox().where('name', '==', box.name).get().then(response => {
+            response.docs.map(doc => {
+                model.shoebox(doc.id).update({"logoURL": newPhoto})
+            })
+        })
+        model.local('currentBox', {logoURL: newPhoto})
+
+    }
+    if (box.description !== newDescription) {
+        model.shoebox().where('name', '==', box.name).get().then(response => {
+            response.docs.map(doc => {
+                model.shoebox(doc.id).update({"description": newDescription})
+            })
+        })
+        model.local('currentBox', {description: newDescription})
+
+    }
+
+
+
+
 })

@@ -4,6 +4,8 @@ const settingModalView = () => {
     console.error("THESE ARE THE BOXES")
     console.error(model.local('currentBox'))
     console.error("ANOTHER THING I WANT TO CONSOLE LOG ")
+    console.error("MEMBERS IN THE SHOEBOX ")
+
     // console.error(model.shoebox(model.local('currentBox')));
 
     $(".modal-title").html("Settings")
@@ -21,6 +23,13 @@ const settingModalView = () => {
              <h6 class="col-7" id="editboxname-name">${model.local('currentBox').name}</h6>
 
             <p class="col-2"><button id="editboxname-btn" class="btn btn-link">Edit...</button></p>
+
+
+            <h6 class="col-2">Shoebox description: </h6>
+             <h6 class="col-7" id="editboxdescription-name">${model.local('currentBox').description}</h6>
+
+            <p class="col-2"><button id="editboxdescription-btn" class="btn btn-link">Edit...</button></p>
+
             
             
             <h6 class="col-4">Shoebox Cover Image </h6>
@@ -29,8 +38,16 @@ const settingModalView = () => {
                     <input type="file" class="file">
                     <button class="btn btn-light btn-sm" id="uploadButton">Submit</button>
 
-            <!--<p class="col-2"><button id="editboxphoto-btn" class="btn btn-link">Edit...</button></p>-->
-            
+
+
+
+
+            <h6 class="col-2">Shoebox members: </h6>
+             <h6 class="col-7" id="editmember-name">${model.local('currentBox').name}</h6>
+             <h6 class="col-7" id="memberList"> ${model.local('currentBox').memberEmails} </h6>
+
+
+            <!--<p class="col-2"><button id="editmember-btn" class="btn btn-link">Edit...</button></p>-->
             
             
 
