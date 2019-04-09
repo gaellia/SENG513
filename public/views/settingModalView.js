@@ -1,6 +1,7 @@
 const settingModalView = () => {
     const user = model.local('user')
     const boxes = model.local('currentBox').name
+    const members = model.local('currentBox').memberEmails
     console.error("THESE ARE THE BOXES")
     console.error(model.local('currentBox'))
     console.error("ANOTHER THING I WANT TO CONSOLE LOG ")
@@ -17,44 +18,32 @@ const settingModalView = () => {
 
     $('.modal-body').html(`
         <div class="row">
-            <!--<img class="col-1"><i class="fas fa-envelope"></i></img>-->
-             <!--<img style="height: 40px; width: 40px; text-align: center" id="shoebox-image" src="Illustration.png">-->
-            <h6 class="col-2">Shoebox name: </h6>
-             <h6 class="col-7" id="editboxname-name">${model.local('currentBox').name}</h6>
-
-            <p class="col-2"><button id="editboxname-btn" class="btn btn-link">Edit...</button></p>
-
-
-            <h6 class="col-2">Shoebox description: </h6>
-             <h6 class="col-7" id="editboxdescription-name">${model.local('currentBox').description}</h6>
-
-            <p class="col-2"><button id="editboxdescription-btn" class="btn btn-link">Edit...</button></p>
-
-            
-            
-            <h6 class="col-4">Shoebox Cover Image </h6>
-           
-              <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src=${model.local('currentBox').logoURL}>
-                    <input type="file" class="file">
-                    <button class="btn btn-light btn-sm" id="uploadButton">Submit</button>
-
-
-
-
-
-            <h6 class="col-2">Shoebox members: </h6>
-             <h6 class="col-7" id="editmember-name">${model.local('currentBox').name}</h6>
-             <h6 class="col-7" id="memberList"> ${model.local('currentBox').memberEmails} </h6>
-
-
-            <!--<p class="col-2"><button id="editmember-btn" class="btn btn-link">Edit...</button></p>-->
-            
-            
-
+            <h6 class="col-3">Name:</h6>
+            <h6 class="col-7" id="editboxname-name">${model.local('currentBox').name}</h6>
+            <p class="col-2"><button id="editboxname-btn" class="btn btn-link">Edit...</button></p>    
         </div>
- 
-        <div class="row><div class="col-12"><br><br></div></div>
         <div class="row">
-    
-        </div>`)
+            <h6 class="col-3">Description:</h6>
+            <h6 class="col-7" id="editboxdescription-name">${model.local('currentBox').description}</h6>
+            <p class="col-2"><button id="editboxdescription-btn" class="btn btn-link">Edit...</button></p>
+        </div>
+        <div class="row">
+            <h6 class="col-3">Cover Image:</h6>
+            <div class="col-9"><input type="file" class="file"></div>
+            <!--<button class="btn btn-light btn-sm" id="uploadButton">Submit</button>-->
+        </div>
+        <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src=${model.local('currentBox').logoURL}>
+        <br><br>
+        <h6>Members:</h6>
+        <div id="members-list"></div>
+    `)
+
+    for(let member of members) {
+        $('#members-list').append(
+            '<div class="row">' +
+                '<h6 class="col-11">' + member + '</h6>' +
+                '<button class="col-1 btn-danger">X</button>' +
+            '</div>'
+        )
+    }
 }
