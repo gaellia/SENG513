@@ -5,9 +5,10 @@ const v = () => {
     // Returns HTML for a given card
     const getHTMLFor = card => {
         let cardBody = `<div style="text-align: center"><div class="card" style="width: 18rem;"><div class="card-header">
-        <div class="delete-card-icon">
-            <i class="fas fa-trash"></i>
-        </div></div>`
+        <div class="delete-card-icon">`
+        
+            `<button id="card-delete-btn" class="btn btn-link" ${model.local('user').email === card.author? `` : `disabled`}><i class="fas fa-trash"></i></button>`
+        `</div></div>`
         if (card.mediaType !== "text"){
             cardBody += `<img class="card-img-top" src="${card.resourceURL}">`
         }
