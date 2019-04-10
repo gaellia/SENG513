@@ -2,10 +2,6 @@ const settingModalView = () => {
     const user = model.local('user')
     const boxes = model.local('currentBox').name
     const members = model.local('currentBox').memberEmails
-    console.error("THESE ARE THE BOXES")
-    console.error(model.local('currentBox'))
-    console.error("ANOTHER THING I WANT TO CONSOLE LOG ")
-    console.error("MEMBERS IN THE SHOEBOX ")
 
     // console.error(model.shoebox(model.local('currentBox')));
 
@@ -13,7 +9,7 @@ const settingModalView = () => {
 
     $(".modal-footer").html(`
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-box">Save</button>
     `)
 
     $('.modal-body').html(`
@@ -29,12 +25,14 @@ const settingModalView = () => {
         </div>
         <div class="row">
             <h6 class="col-3">Cover Image:</h6>
-            <div class="col-9"><input type="file" class="file"></div>
-            <!--<button class="btn btn-light btn-sm" id="uploadButton">Submit</button>-->
+            <div class="col-7"><input type="file" class="file"></div>
+            <p class="col-2"><button class="btn btn-light btn-sm" id="uploadButton">Submit</button></p>
         </div>
+        <div class="row d-flex justify-content-center">
         <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src=${model.local('currentBox').logoURL}>
         <button class="btn btn-light btn-sm" id="uploadButton">Submit</button>
 
+        </div>
         <br><br>
         <h6>Members:</h6>
         <div id="members-list"></div>

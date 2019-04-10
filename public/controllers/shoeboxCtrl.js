@@ -93,4 +93,19 @@ $(document).on('click', '#create-shoebox-submit', e => {
     }).catch(err => {
         console.log('err', err)
     })
+
+    // send invite emails
+    let request = new XMLHttpRequest()
+    request.onreadystatechange = function()
+    {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            console.log('emails sent')
+        }
+    }
+
+    request.open("POST","http://localhost:5000/shoebox513/us-central1/app/sendInvites",true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.setRequestHeader('Access-Control-Allow-Headers', '*');
+    request.send(JSON.stringify(members));
 })
