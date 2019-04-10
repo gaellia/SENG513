@@ -63,10 +63,38 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
                     </div>
                 </div>
                 <div class="row d-flex justify-content-end">
-                    <button class="fas fa-plus add-btn"></button>
+                 <button id="addButton" class="fas fa-plus add-btn"></button>
+                 
                 </div>
-
+                <button class="col-auto" id="addNote"> Add note</button>
+            <input class="col-auto" id="newFile" type="file">
             `)
+
+            $('#addNote').hide()
+            $('#newFile').hide()
+
+            $(document).on('click', '#addButton', e => {
+                console.error("WE ARE IN HERE")
+                if ($('#addNote').is(':visible')){
+                    console.error("WE IN HERE !")
+                    $('#addNote').hide()
+                }
+                else{
+                    console.error("WE IN HERE 2")
+
+                    $('#addNote').show()
+
+                }
+                if ($('#newFile').is(':visible')){
+                    $('#newFile').hide()
+                }
+                else{
+                    $('#newFile').show()
+
+                }
+            })
+
+
    
             RIGHT.html(`
             <div id='chat-container'>
