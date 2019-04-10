@@ -20,6 +20,14 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
             <div class="card" style="text-align: left">
                 <ul class="list-group list-group-flush">
                     ${boxList}
+                    <li class="list-group-item">
+                        <button class="btn maxw box-new" data-toggle="modal" data-target="#modal-container">
+                            <span class="box-new">
+                                <i class="fas fa-plus-circle"></i>
+                                Create new...
+                            </span>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>

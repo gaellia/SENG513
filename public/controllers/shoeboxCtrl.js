@@ -76,36 +76,30 @@ $(document).on('click', '#create-shoebox-submit', e => {
         if (!DOWNLOAD_URL)
             DOWNLOAD_URL = DEFAULT_LOGOS[Math.floor(Math.random()*DEFAULT_LOGOS.length)]
 
-        model.shoebox(id).set({
+        const boxObject = {
             name: $('#shoebox-name').val(),
             description: $('#shoebox-description').val(),
             boxID: id,
             memberEmails: members.map(({email}) => email),
             logoURL: $('#shoebox-image').attr('src')
-        })
+        }
+
+        model.shoebox(id).set(boxObject)
         
         for(let member of members)
             model.shoebox(id).collection('members').add(member)
 
-            authGlobal.fetchBoxes(model.local('user'))
-            view.selectShoeBox()
+        // send invite emails
+        requestService(`/sendInvites`, "POST", {
+                boxObject,
+                members,
+                user: model.local('user')
+            })
+
+        authGlobal.fetchBoxes(model.local('user'))
+        view.selectShoeBox()
 
     }).catch(err => {
         console.log('err', err)
     })
-
-    // send invite emails
-    let request = new XMLHttpRequest()
-    request.onreadystatechange = function()
-    {
-        if (this.readyState == 4 && this.status == 200)
-        {
-            console.log('emails sent')
-        }
-    }
-
-    request.open("POST","http://localhost:5000/shoebox513/us-central1/app/sendInvites",true);
-    request.setRequestHeader("Content-Type", "application/json");
-    request.setRequestHeader('Access-Control-Allow-Headers', '*');
-    request.send(JSON.stringify(members));
 })
