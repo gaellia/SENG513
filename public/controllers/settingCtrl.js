@@ -17,6 +17,63 @@ $(document).on('click', '#editboxname-btn', () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+$(document).on('click', '.col-1.btn-danger', (e) => {
+    console.error(e)
+    let id = "#" +e.target.id
+    console.error(id)
+    let username =  $( id ).prev().text();
+    $( id ).prev().hide();
+
+    const box = model.local('currentBox')
+
+
+
+        // update database with edited name
+        model.shoebox().where('name', '==', box.name).get().then(response => {
+            response.docs.map(doc => {
+                model.shoebox(doc.id).update({"memberEmails": (box.memberEmails).filter(function(e) { return e !== username })})
+            })
+            console.error(box.memberEmails)
+        })
+
+        model.local('currentBox',{"memberEmails": (box.memberEmails).filter(function(e) { return e !== username })})
+
+
+
+
+
+
+
+
+
+
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
 $(document).on('click', '#editboxdescription-btn', () => {
     // toggle edits
     if ($('#editboxdescription-name').find('#change-name').length > 0) {

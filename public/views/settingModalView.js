@@ -33,16 +33,20 @@ const settingModalView = () => {
             <!--<button class="btn btn-light btn-sm" id="uploadButton">Submit</button>-->
         </div>
         <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src=${model.local('currentBox').logoURL}>
+        <button class="btn btn-light btn-sm" id="uploadButton">Submit</button>
+
         <br><br>
         <h6>Members:</h6>
         <div id="members-list"></div>
     `)
-
+    let count = 0
     for(let member of members) {
-        $('#members-list').append(
-            '<div class="row">' +
+        count = count + 1
+        let deleteButton = '<button id="deleteMember' +count+"\" "+  'class="col-1 btn-danger">X</button>'
+            $('#members-list').append(
+                '<div class="row" >' +
                 '<h6 class="col-11">' + member + '</h6>' +
-                '<button class="col-1 btn-danger">X</button>' +
+                deleteButton +
             '</div>'
         )
     }

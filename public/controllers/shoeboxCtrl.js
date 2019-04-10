@@ -4,6 +4,7 @@ $(document).on('click', '.box-new', () => {
 
     $(".file").on("change", function(event) {
         GLOBAL_FILE = event.target.files[0]
+
     })
 })
 
