@@ -38,10 +38,6 @@ $(document).on('click', '#profile-btn', () => {
   view.profileModal()
 })
 
-$(document).on('click', '#setting-btn', () => {
-  view.settingsModal()
-})
-
 const authGlobal = {
   // returns shoeboxes of user
   fetchBoxes: function(user) {
