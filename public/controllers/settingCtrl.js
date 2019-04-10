@@ -34,13 +34,12 @@ $(document).on('click', '.col-1.btn-danger', (e) => {
     let id = "#" +e.target.id
     console.error(id)
     let username =  $( id ).prev().text();
-    $( id ).prev().hide();
 
     const box = model.local('currentBox')
 
+    if (confirm("Are you Sure you want to delete this user")) {
+        $( id ).prev().hide();
 
-
-        // update database with edited name
         model.shoebox().where('name', '==', box.name).get().then(response => {
             response.docs.map(doc => {
                 model.shoebox(doc.id).update({"memberEmails": (box.memberEmails).filter(function(e) { return e !== username })})
@@ -50,6 +49,13 @@ $(document).on('click', '.col-1.btn-danger', (e) => {
 
         model.local('currentBox',{"memberEmails": (box.memberEmails).filter(function(e) { return e !== username })})
 
+    } else {
+        console.error("cancel")
+        // txt = "You pressed Cancel!";
+    }
+
+
+        // update database with edited name
 
 
 
