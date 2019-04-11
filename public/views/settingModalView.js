@@ -40,10 +40,10 @@ const settingModalView = () => {
     let count = 0
     for(let member of members) {
         count = count + 1
-        let deleteButton = '<button id="deleteMember' +count+"\" "+  'class="col-1 btn-danger">X</button>'
+        let deleteButton = '<button id="deleteMember' +count+"\" "+  'class="col-1 btn btn-danger btn-xs"><i class="fas fa-times"></i></button>'
             $('#members-list').append(
                 '<div class="row" >' +
-                '<h6 class="col-11">' + member + '</h6>' +
+                '<h6 class="col-10">' + member + '</h6>' +
                 deleteButton +
             '</div>'
         )

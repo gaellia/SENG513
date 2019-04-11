@@ -79,6 +79,15 @@ const authGlobal = {
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
       ],
     })
+
+    $(".firebaseui-title").html('Log in or create account')
+    $(document).on('click', '#to-top', () => {
+      $("html, body").animate({ scrollTop: 0 }, "slow")
+    })
+
+    $(document).on('click', '#home-learn-more', () => {
+      $("html, body").animate({ scrollTop: $(document).height() }, "slow")
+    })
   }
 }
 

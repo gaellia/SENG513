@@ -23,7 +23,7 @@ function sendEmail(to, user, name, description, logoURL) {
 
                     <br><br>
                     <h4>${user.displayName} invited you to join a ShoeBox:</h4>
-                    <img id="mainLogo" src="${logoURL==="Illustration.png"? URL: logoURL}" style="max-width: 100px">
+                    <img id="mainLogo" src="${logoURL.includes(`Illustration.png`)? URL: logoURL}" style="max-width: 100px">
                     <h3>${name}</h3>
                     <p>${description || ""}</p>
 
