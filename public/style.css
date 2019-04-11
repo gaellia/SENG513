@@ -152,7 +152,7 @@ a {
     width: 100%; 
     height: 100%;
 }
-#msg-form textarea { 
+#msg-form input { 
     width: 85%; 
     padding: 5px;
     margin-right: 2%;

@@ -112,27 +112,16 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
                 <!-- Message input -->
                 <div class="send">
                     <form id="msg-form" actions="">
-                        <textarea rows="3" id="m" autocomplete="off" /><button><i class="far fa-paper-plane"></i></button>
+                        <input rows="3" id="m" autocomplete="off" /><button><i class="far fa-paper-plane"></i></button>
                     </form>
                 </div>
 
             </div>`)
 
             // loads the chat history for this box
-            model.shoebox(model.local('currentBox').boxID).collection('messages').orderBy('timestamp').get().then(snapshot => {
-                snapshot.forEach(doc => {
-
-                    // show all messages in the shoebox
-                    let timestamp = doc.data().timestamp.toDate().toString()
-                    timestamp = timestamp.substr(0, timestamp.indexOf(':')+3)   //goes up to the minute 
-
-                    $('#chat').append($('<li>').html(`<i class='fas fa-user'><span id='username'>${doc.data().displayName}</span></i><br>
-                                                    <p id='message'>${doc.data().message}</p>
-                                                    <span class='time'>${timestamp}</span>`))
-                });
-
-                // scroll to bottom
-                $('#chat').scrollTop($('#chat')[0].scrollHeight)
+            chatGlobal.msgREF().orderBy('timestamp').get().then(snapshot => {
+                snapshot.forEach(doc => chatGlobal.display(doc.data()))
+                chatGlobal.toBottom()
             })
 
         })

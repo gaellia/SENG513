@@ -137,11 +137,13 @@ $(document).on('click', '#save-box', () => {
     let newDescription = $('#editboxdescription-name').html()
 
     if (box.name !== newName) {
+        chatGlobal.bot(`${model.local('user').displayName} renamed this box to <strong>${newName}</strong>.`)
+
         // update database with edited name
         model.shoebox().where('boxID', '==', box.boxID).get().then(response => {
-            response.docs.map(doc => {
+            response.docs.forEach(({id}) => {
                 // update database with edited name
-                model.shoebox(doc.id).update({"name": newName})
+                model.shoebox(id).update({"name": newName})
             })
         })
 
@@ -157,10 +159,9 @@ $(document).on('click', '#save-box', () => {
         $('h2').text(newName)
     }
 
-
-
-
     if (box.logoURL !== newPhoto) {
+        chatGlobal.bot(`${model.local('user').displayName} changed the box photo.`)
+
         model.shoebox().where('boxID', '==', box.boxID).get().then(response => {
             response.docs.map(doc => {
                 model.shoebox(doc.id).update({"logoURL": newPhoto})
@@ -180,6 +181,8 @@ $(document).on('click', '#save-box', () => {
 
     }
     if (box.description !== newDescription) {
+        chatGlobal.bot(`${model.local('user').displayName} changed the description.`)
+
         model.shoebox().where('boxID', '==', box.boxID).get().then(response => {
             response.docs.map(doc => {
                 model.shoebox(doc.id).update({"description": newDescription})
@@ -191,5 +194,5 @@ $(document).on('click', '#save-box', () => {
     // update local for all
     model.local('currentBox', {boxID: box.boxID, name: newName, description: newDescription, memberEmails: box.memberEmails, logoURL: newPhoto})
 
-
+    
 })
