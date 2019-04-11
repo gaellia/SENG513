@@ -73,8 +73,13 @@ const authGlobal = {
 
     if(developmentMode)
       auth.setPersistence(firebase.auth.Auth.Persistence.NONE)
-    else
+    else {
+      // turn off console logs and console errors
+      console = {log(){}, error(){}}
+
+      // stay logged in
       auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    }
     
     // auth ctrl inner
     let ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth)
@@ -86,6 +91,15 @@ const authGlobal = {
       signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
       ],
+    })
+
+    $(".firebaseui-title").html('Log in or create account')
+    $(document).on('click', '#to-top', () => {
+      $("html, body").animate({ scrollTop: 0 }, "slow")
+    })
+
+    $(document).on('click', '#home-learn-more', () => {
+      $("html, body").animate({ scrollTop: $(document).height() }, "slow")
     })
   }
 }
