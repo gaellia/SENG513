@@ -10,18 +10,22 @@ const viewGlobal = {
         
         const hide = (arr, speed) => arr.forEach(e => e.hide(speed))
         const show = (arr, speed) => arr.forEach(e => e.show(speed))
+
+        let currentWidth = WINDOW.width() // closure
     
         const mediaCheck = () => {
-            // banner
-            if(WINDOW.width() < 768) {
-                hide([RIGHT, LEFT], 'fast')
-                show([CHAT_BTN, MID, BAR_MENU], 'fast')
-            }
-            // desktop
-            else {
-                show([LEFT, RIGHT, MID], 'fast')
-                hide([CHAT_BTN, BAR_MENU], 'fast')
-        
+            if(currentWidth!==WINDOW.width()) {
+                // banner
+                if(WINDOW.width() < 768) {
+                    hide([RIGHT, LEFT], 'fast')
+                    show([CHAT_BTN, MID, BAR_MENU], 'fast')
+                }
+                // desktop
+                else {
+                    show([LEFT, RIGHT, MID], 'fast')
+                    hide([CHAT_BTN, BAR_MENU], 'fast')
+                }
+            currentWidth = WINDOW.width()
             }
         }
         
