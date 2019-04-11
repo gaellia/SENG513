@@ -11,7 +11,7 @@ const viewGlobal = {
         const hide = (arr, speed) => arr.forEach(e => e.hide(speed))
         const show = (arr, speed) => arr.forEach(e => e.show(speed))
 
-        let currentWidth = WINDOW.width() // closure
+        let currentWidth = 0 // closure
     
         const mediaCheck = () => {
             if(currentWidth!==WINDOW.width()) {
@@ -31,7 +31,11 @@ const viewGlobal = {
         
         // init and watch
         mediaCheck()
-        WINDOW.resize(mediaCheck)
+
+        // resize listener if not mobile
+        if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            WINDOW.resize(mediaCheck)
+        }
     
         BANNER.click(({target: {id}}) => {
             if(!MID.is(':visible') && !id.includes('-banner')) {
