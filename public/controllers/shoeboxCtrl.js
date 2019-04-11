@@ -22,6 +22,38 @@ $(document).on('click', '#invite-new', e => {
         view.inviteMember()
 })
 
+$(document).on('click', '.btn-accept-invite', ({target: {id}}) => {
+    id = id.substr(7)
+    model.shoebox().where('boxID', '==', id).get().then(response => {
+        let box = response.docs.map(docs => docs.data())[0]
+        response.docs.map(docs => {
+            model.shoebox(id).collection('members').where('email', '==', model.local('user').email).get().then(res => {
+                res.docs.map(doc => {
+                    model.shoebox(id).collection('members').doc(doc.id).update({'role': 'member'})
+                    view.viewShoeBox(box)
+                })
+            })
+        })
+    })
+})
+
+$(document).on('click', '.btn-reject-invite', ({target: {id}}) => {
+    id = id.substr(7)
+    model.shoebox().where('boxID', '==', id).get().then(response => {
+        let box = response.docs.map(docs => docs.data())[0]
+        model.shoebox(id).update({"memberEmails": (box.memberEmails).filter(function(e) { return e !== model.local('user').email })})
+        response.docs.map(docs => {
+            model.shoebox(id).collection('members').where('email', '==', model.local('user').email).get().then(res => {
+                res.docs.map(doc => {
+                    model.shoebox(id).collection('members').doc(doc.id).delete().then(function() {
+                        location.reload()
+                    })
+                })
+            })
+        })
+    })
+})
+
 // view all shoeboxes button listener
 $(document).on('click', '.view-box-btn', ({target: {id}}) => {
     id = id.substr(4)

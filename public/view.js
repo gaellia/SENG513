@@ -31,18 +31,37 @@ const v = () => {
     }
 
     const boxRepeat = boxes => {
+        let pending = model.local('pendingBoxes')
         let result = ``
         if(boxes.length!==0) {
             boxes.forEach(box => {
-                result = `${result}
-                <li class="list-group-item">
-                    <button class="btn view-box-btn maxw">
-                        <h5 id="div-${box.boxID}">
-                            <image id="img-${box.boxID}" src="${box.logoURL}" style="width: 64px; height: 64px; margin-right: 16px">
-                            ${box.name}
-                        </h5>
-                    </button>
-                </li>`
+                if (pending.includes(box.boxID)) {
+                    result = `${result}
+                    <li class="list-group-item">
+                        <div class="row">
+                            <button class="btn view-box-btn maxw col-8">
+                                <h5 id="div-${box.boxID}">
+                                    <image id="img-${box.boxID}" src="${box.logoURL}" style="width: 64px; height: 64px; margin-right: 16px">
+                                    ${box.name}
+                                </h5>
+                                <button class="col-2 btn btn-primary btn-accept-invite" id="accept-${box.boxID}">Accept</button>
+                                <button class="col-2 btn btn-danger btn-reject-invite" id="reject-${box.boxID}">Reject</button>
+                            </button>
+                        </div>
+                    </li>`
+                } else {
+                    result = `${result}
+                    <li class="list-group-item">
+                        <div class="row">
+                            <button class="btn view-box-btn maxw">
+                                <h5 id="div-${box.boxID}">
+                                    <image id="img-${box.boxID}" src="${box.logoURL}" style="width: 64px; height: 64px; margin-right: 16px">
+                                    ${box.name}
+                                </h5>
+                            </button>
+                        </div>
+                    </li>`
+                }
             })
         }
         return result
