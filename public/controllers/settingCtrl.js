@@ -19,69 +19,44 @@ $(document).on('click', '#editboxname-btn', () => {
     }
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$(document).on('click', '.col-1.btn-danger', (e) => {
-    console.error(e)
+$(document).on('click', '.col-2.btn-danger', (e) => {
     let id = "#" +e.target.id
-    console.error(id)
     let username =  $( id ).prev().text();
 
     const box = model.local('currentBox')
+    const user = model.local('user')
 
-    if (confirm("Are you Sure you want to delete this user")) {
+    if (confirm("Are you sure you want to delete this user?")) {
         $( id ).prev().hide();
+        $( id ).hide();
 
-        model.shoebox().where('name', '==', box.name).get().then(response => {
+        model.shoebox().where('boxID', '==', box.boxID).get().then(response => {
             response.docs.map(doc => {
                 model.shoebox(doc.id).update({"memberEmails": (box.memberEmails).filter(function(e) { return e !== username })})
+
+                model.shoebox(doc.id).collection('members').where('email', '==', username).get().then(res => {
+                    res.docs.map(memberDoc => {
+                        model.shoebox(doc.id).collection('members').doc(memberDoc.id).delete().then( () => {
+                            console.log("Successfully deleted member")
+                        })
+                    })
+
+                    // if you remove yourself, refresh
+                    if (username === user.email) {
+                        location.reload()
+                    }
+                })
             })
-            console.error(box.memberEmails)
+            //console.error(box.memberEmails)
         })
 
-        model.local('currentBox',{"memberEmails": (box.memberEmails).filter(function(e) { return e !== username })})
+        model.local('currentBox', {boxID: box.boxID, name: box.name, description: box.description, memberEmails: (box.memberEmails).filter(function(e) { return e !== username }), logoURL: box.logoURL})
 
     } else {
-        console.error("cancel")
-        // txt = "You pressed Cancel!";
+        //console.log("cancel")
     }
 
-
-        // update database with edited name
-
-
-
-
-
-
-
-
-
-
 })
-
-
-
-
-
-
-
-
-
-
-
 
 
 $(document).on('click', '#editboxdescription-btn', () => {
@@ -105,7 +80,51 @@ $(document).on('click', '#editboxdescription-btn', () => {
 })
 
 
+// listener to delete the box
+$(document).on('click', '#delete-box', () => {
 
+    const box = model.local('currentBox')
+
+    if (confirm("Are you sure you want to delete this box?")) {
+        console.log("Starting delete...")
+
+        // delete from database
+        model.shoebox().where('boxID', '==', box.boxID).get().then(response => {
+            response.docs.map(doc => {
+                // delete messages
+                model.shoebox(doc.id).collection('messages').get().then( s => {
+                    s.forEach(chatDoc => {
+                        model.shoebox(doc.id).collection('messages').doc(chatDoc.id).delete()
+                    })
+                })
+                console.log("Chat deleted.")
+
+                // delete members
+                model.shoebox(doc.id).collection('members').get().then( s => {
+                    s.forEach(memDoc => {
+                        model.shoebox(doc.id).collection('members').doc(memDoc.id).delete()
+                    })
+                })
+                console.log("Members deleted.")
+
+                // delete cards
+                model.shoebox(doc.id).collection('cards').get().then( s => {
+                    s.forEach(cardDoc => {
+                        model.shoebox(doc.id).collection('cards').doc(cardDoc.id).delete()
+                    })
+                })
+                console.log("Cards deleted.")
+
+                // delete box
+                model.shoebox(doc.id).delete().then( () => {
+                    console.log("Deleted Box.")        
+                    // refresh the page
+                    location.reload()
+                })
+            })
+        })   
+    }
+})
 
 
 

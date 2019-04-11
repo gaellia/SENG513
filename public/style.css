@@ -34,6 +34,12 @@ a {
     width: 100vw; 
 }
 
+.btn-danger {
+    max-height: 40px;
+    max-width: 40px;
+    margin-bottom: 10px;
+}
+
 /** smol **/
 @media only screen and (max-width: 768px) {
     #chat-container {

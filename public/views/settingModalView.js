@@ -1,36 +1,49 @@
 const settingModalView = () => {
     const user = model.local('user')
-    const boxes = model.local('currentBox').name
+    const box = model.local('currentBox')
     const members = model.local('currentBox').memberEmails
-
-    // console.error(model.shoebox(model.local('currentBox')));
 
     $(".modal-title").html("Settings")
 
     $(".modal-footer").html(`
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <div id="show-delete-box"></div>
+        <button type="button" class="btn btn-secondary ml-auto" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" id="save-box">Save</button>
     `)
+
+    // check ownership
+    model.shoebox().where('boxID', '==', box.boxID).get().then(response => {
+        response.docs.map(doc => {
+            model.shoebox(doc.id).collection('members').where('role', '==', "owner").get().then(res => {
+                res.docs.map(memberDoc => {
+
+                    if (memberDoc.data().email == user.email) {
+                        $('#show-delete-box').html('<button type="button" class="btn btn-outline-danger mr-auto" data-dismiss="modal" id="delete-box">Delete Box</button>')
+                    }
+
+                })
+            })
+        })
+    })
 
     $('.modal-body').html(`
         <div class="row">
             <h6 class="col-3">Name:</h6>
-            <h6 class="col-7" id="editboxname-name">${model.local('currentBox').name}</h6>
-            <p class="col-2"><button id="editboxname-btn" class="btn btn-link">Edit...</button></p>    
+            <h6 class="col-6" id="editboxname-name">${model.local('currentBox').name}</h6>
+            <p class="col-3"><button id="editboxname-btn" class="btn btn-link">Edit...</button></p>    
         </div>
         <div class="row">
             <h6 class="col-3">Description:</h6>
-            <h6 class="col-7" id="editboxdescription-name">${model.local('currentBox').description}</h6>
-            <p class="col-2"><button id="editboxdescription-btn" class="btn btn-link">Edit...</button></p>
+            <h6 class="col-6" id="editboxdescription-name">${model.local('currentBox').description}</h6>
+            <p class="col-3"><button id="editboxdescription-btn" class="btn btn-link">Edit...</button></p>
         </div>
         <div class="row">
             <h6 class="col-3">Cover Image:</h6>
-            <div class="col-7"><input type="file" class="file"></div>
-            <p class="col-2"><button class="btn btn-light btn-sm" id="uploadButton">Submit</button></p>
+            <div class="col-6"><input type="file" class="file"></div>
+            <p class="col-3"><button class="btn btn-light btn-sm" id="uploadButton">Submit</button></p>
         </div>
         <div class="row d-flex justify-content-center">
         <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src=${model.local('currentBox').logoURL}>
-        <button class="btn btn-light btn-sm" id="uploadButton">Submit</button>
 
         </div>
         <br><br>
