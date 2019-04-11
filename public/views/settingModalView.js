@@ -30,12 +30,12 @@ const settingModalView = () => {
         <div class="row">
             <h6 class="col-3">Name:</h6>
             <h6 class="col-6" id="editboxname-name">${model.local('currentBox').name}</h6>
-            <p class="col-3"><button id="editboxname-btn" class="btn btn-link">Edit...</button></p>    
+            <p class="col-2"><button id="editboxname-btn" class="btn btn-link"><i class="fas fa-pencil-alt"></i></button></p>    
         </div>
         <div class="row">
             <h6 class="col-3">Description:</h6>
             <h6 class="col-6" id="editboxdescription-name">${model.local('currentBox').description}</h6>
-            <p class="col-3"><button id="editboxdescription-btn" class="btn btn-link">Edit...</button></p>
+            <p class="col-2"><button id="editboxdescription-btn" class="btn btn-link"><i class="fas fa-pencil-alt"></i></button></p>
         </div>
         <div class="row">
             <h6 class="col-3">Cover Image:</h6>
