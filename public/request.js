@@ -17,9 +17,9 @@ const requestService = (url, method, params) => {
         }
     }
 
-    req.open(method,`https://shoebox513.firebaseapp.com${url}`,true)
+    req.open(method,`https://${config.authDomain}${url}`,true)
     req.setRequestHeader("Content-Type", "application/json")
     req.setRequestHeader('Access-Control-Allow-Headers', '*')
-    req.setRequestHeader('Access-Control-Allow-Origin', 'https://shoebox513.firebaseapp.com/')
+    req.setRequestHeader('Access-Control-Allow-Origin', `https://${config.authDomain}/`)
     req.send(JSON.stringify(params))
 }

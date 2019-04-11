@@ -30,6 +30,9 @@ $(document).on('click', '.btn-accept-invite', ({target: {id}}) => {
             model.shoebox(id).collection('members').where('email', '==', model.local('user').email).get().then(res => {
                 res.docs.map(doc => {
                     model.shoebox(id).collection('members').doc(doc.id).update({'role': 'member'})
+
+                    // not sure if this works
+                    // chatGlobal.bot(`<strong>${model.local(`user`).displayName}</strong> has joined this shoebox!`)
                     view.viewShoeBox(box)
                 })
             })
@@ -63,24 +66,17 @@ $(document).on('click', '.view-box-btn', ({target: {id}}) => {
         // listen for added messages
         if (MSG_LISTENER) 
             MSG_LISTENER()
-        MSG_LISTENER = model.shoebox(response.docs[0].id).collection('messages').onSnapshot(s => {
-            s.docChanges().forEach( change => {
-                if (change.type === 'added') {
-                    // display new messages
-                    let timestamp = change.doc.data().timestamp.toDate().toString()
-                    timestamp = timestamp.substr(0, timestamp.indexOf(':')+3)   //goes up to the minute 
-
-                    $('#chat').append($('<li>').html(`<i class='fas fa-user'><span id='username'>${change.doc.data().displayName}</span></i><br>
-                    <p id='message'>${change.doc.data().message}</p>
-                    <span class='time'>${timestamp}</span>`))
-
-                    // scroll to bottom
-                    if($('#chat')[0]) $('#chat').scrollTop($('#chat')[0].scrollHeight)
+        MSG_LISTENER = chatGlobal.msgREF(response.docs[0].id).onSnapshot(s => {
+            s.docChanges().forEach(({type, doc}) => {
+                if (type === 'added') {
+                    chatGlobal.display(doc.data())
+                    chatGlobal.toBottom()
                 }
             })
         })
         model.local('currentBox', bid)
         view.viewShoeBox(bid)
+        viewGlobal.mediaCheck()
     })
 })
 

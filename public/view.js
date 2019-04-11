@@ -3,17 +3,49 @@ const v = () => {
     // For parsing cards (TODO get it out of here)
     
     // Returns HTML for a given card
-    const getHTMLFor = card => {
-        let cardBody = `<div style="text-align: center"><div class="card" style="width: 18rem;"><div class="card-header">
-        <div class="delete-card-icon">
-            <i class="fas fa-trash"></i>
-        </div></div>`
-        if (card.mediaType !== "text"){
-            cardBody += `<img class="card-img-top" src="${card.resourceURL}">`
-        }
-        cardBody += `<div class="card-body"><h5 class="card-title">${card.title}</h5><p class="card-text">${card.text}</p></div></div></div>`
 
-        return cardBody;
+    const getHTMLFor = {
+        cards: card => {
+            let cardBody = `<div style="text-align: center"><div class="card" style="width: 18rem;"><div class="card-header">
+            <div class="delete-card-icon">
+                <i class="fas fa-trash"></i>
+            </div></div>`
+            if (card.mediaType !== "text"){
+                cardBody += `<img class="card-img-top" src="${card.resourceURL}">`
+            }
+            cardBody += `<div class="card-body"><h5 class="card-title">${card.title}</h5><p class="card-text">${card.text}</p></div></div></div>`
+    
+            return cardBody;
+        },
+        placeholder: () => [``, `
+            <div style="text-align: center">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Your cards will go here</h5>
+                        <p class="card-text">Post the first card in this shoebox!</p>
+                        <button id="addButton" class="btn btn-lg btn-light" style="width:100%">
+                            <h1 style="font-size: 5rem">
+                                <i class="fas fa-plus"></i>
+                            </h1>
+                        </button>
+                    </div>
+                </div>
+            </div>`, ``],
+
+        addButton: () => `
+            <div style="text-align: center">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body" style="padding: 0!important">
+                        <button id="addButton" style="width: 100%; height: 18rem; margin:0" class="btn btn-light">
+                            <h1 style="font-size: 7rem">
+                                <i class="fas fa-plus"></i>
+                            </h1>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `
     }
 
     // Returns an array containing the HTML of each column in the main view as a string
@@ -23,11 +55,12 @@ const v = () => {
         let index = 0
 
         cards.forEach(card => {
-            cols[index%cols.length] += getHTMLFor(card.data())
+            cols[index%cols.length] += getHTMLFor.cards(card.data())
             index++
-        });
+        })
+        cols[index%cols.length] += getHTMLFor.addButton()
 
-        return cols
+        return index===0? getHTMLFor.placeholder(): cols
     }
 
     const boxRepeat = boxes => {

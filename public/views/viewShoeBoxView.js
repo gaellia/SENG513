@@ -7,12 +7,19 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
     $('#box-pic').hide('fast').attr('src', box.logoURL).show('fast')
 
     LEFT.html(`
-    <div class="drawer" style="text-align: left; padding-top: 20px">
-        <div class="card">
-            <button class="btn btn-light" id="profile-btn" data-toggle="modal" data-target="#modal-container">
-            <h5 style="text-align: center; padding: 0.75em"><i class="far fa-user-circle"></i> ${user.displayName}</h5>
-            </button>
-        </div>
+    <div class="drawer" style="text-align: center; padding-top: 20px">
+        <button class="btn btn-light" id="profile-btn" data-toggle="modal" data-target="#modal-container" style="min-width: 90%">
+            <div class="d-flex justify-content-between">
+                <div class="p-2">
+                    <h5><i class="far fa-user-circle"></i> ${user.displayName}</h5>
+                </div>
+                <div class="p-2">
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+            </div><!-- flex box --> 
+        </button>
+        <br>
+        <br>
     </div>
 
     <div class="main-wrapper">
@@ -49,16 +56,17 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
             let columnHTML = loadCards(cards)
 
             MID.html(`
-                <div class="row d-flex justify-content-between">
-                    <div class="p-2" style="text-align: center;">
+            <div class="row d-flex justify-content-between">
+                <div class="p-2" style="text-align: center;">
                         <h2>${box.name}</h2>
                     </div>
                     <div class="p-2" style="text-align: left; padding-bottom: 20px;">
-                        <button class="btn btn-secondary" id="setting-btn" data-toggle="modal" data-target="#modal-container">
-                        <h6 style="text-align: center; padding-top: 0.5em"><i class="fas fa-cog"></i> Settings</h6>
+                        <button style="padding: 0.5rem 1.25rem" class="btn btn-light btn-lg" id="setting-btn" data-toggle="modal" data-target="#modal-container">
+                        <i class="fas fa-ellipsis-v"></i>
                         </button>
                     </div>
                 </div>
+                <hr>
                 <div class="row middle-cards d-flex justify-content-center">
                     <div class="col-auto">
                         ${columnHTML[0]}
@@ -71,7 +79,6 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
                     </div>
                 </div>
                 <div class="row d-flex justify-content-end">
-                 <button id="addButton" class="fas fa-plus add-btn"></button>
                  
                 </div>
                 <button class="col-auto" id="addNote"> Add note</button>
@@ -112,27 +119,16 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
                 <!-- Message input -->
                 <div class="send">
                     <form id="msg-form" actions="">
-                        <textarea rows="3" id="m" autocomplete="off" /><button><i class="far fa-paper-plane"></i></button>
+                        <input rows="3" id="m" autocomplete="off" /><button><i class="far fa-paper-plane"></i></button>
                     </form>
                 </div>
 
             </div>`)
 
             // loads the chat history for this box
-            model.shoebox(model.local('currentBox').boxID).collection('messages').orderBy('timestamp').get().then(snapshot => {
-                snapshot.forEach(doc => {
-
-                    // show all messages in the shoebox
-                    let timestamp = doc.data().timestamp.toDate().toString()
-                    timestamp = timestamp.substr(0, timestamp.indexOf(':')+3)   //goes up to the minute 
-
-                    $('#chat').append($('<li>').html(`<i class='fas fa-user'><span id='username'>${doc.data().displayName}</span></i><br>
-                                                    <p id='message'>${doc.data().message}</p>
-                                                    <span class='time'>${timestamp}</span>`))
-                });
-
-                // scroll to bottom
-                $('#chat').scrollTop($('#chat')[0].scrollHeight)
+            chatGlobal.msgREF().orderBy('timestamp').get().then(snapshot => {
+                snapshot.forEach(doc => chatGlobal.display(doc.data()))
+                chatGlobal.toBottom()
             })
 
         })
