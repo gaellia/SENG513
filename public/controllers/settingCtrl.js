@@ -3,7 +3,7 @@ $(document).on('click', '#editboxname-btn', () => {
     // toggle edits
     if ($('#editboxname-name').find('#change-name').length > 0) {
         $('#editboxname-name').html($('#change-name').val())
-        $('#editboxname-btn').html('Edit...')
+        $('#editboxname-btn').html('<i class="fas fa-pencil-alt"></i>')
 
         // only shows save when it is not editable
         $('#save-box').show()
@@ -12,7 +12,7 @@ $(document).on('click', '#editboxname-btn', () => {
 
     } else {
         $('#editboxname-name').html(`<input id="change-name" value="${$('#editboxname-name').html()}"></input>`)
-        $('#editboxname-btn').html('Save')
+        $('#editboxname-btn').html('<i class="fas fa-save"></i>')
 
         $('#save-box').hide()
         $('#editboxdescription-btn').hide()
@@ -63,7 +63,7 @@ $(document).on('click', '#editboxdescription-btn', () => {
     // toggle edits
     if ($('#editboxdescription-name').find('#change-desc').length > 0) {
         $('#editboxdescription-name').html($('#change-desc').val())
-        $('#editboxdescription-btn').html('Edit...')
+        $('#editboxdescription-btn').html('<i class="fas fa-pencil-alt"></i>')
 
         // only shows save when it is not editable
         $('#save-box').show()
@@ -72,7 +72,7 @@ $(document).on('click', '#editboxdescription-btn', () => {
         
     } else {
         $('#editboxdescription-name').html(`<textarea rows="4" id="change-desc" style="min-width: 100%">${$('#editboxdescription-name').html()}</textarea>`)
-        $('#editboxdescription-btn').html('Save')
+        $('#editboxdescription-btn').html('<i class="fas fa-save"></i>')
 
         $('#save-box').hide()
         $('#editboxname-btn').hide()

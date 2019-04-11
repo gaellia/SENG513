@@ -30,12 +30,12 @@ const settingModalView = () => {
         <div class="row">
             <h6 class="col-3">Name:</h6>
             <h6 class="col-6" id="editboxname-name">${model.local('currentBox').name}</h6>
-            <p class="col-3"><button id="editboxname-btn" class="btn btn-link">Edit...</button></p>    
+            <p class="col-2"><button id="editboxname-btn" class="btn btn-link"><i class="fas fa-pencil-alt"></i></button></p>    
         </div>
         <div class="row">
             <h6 class="col-3">Description:</h6>
             <h6 class="col-6" id="editboxdescription-name">${model.local('currentBox').description}</h6>
-            <p class="col-3"><button id="editboxdescription-btn" class="btn btn-link">Edit...</button></p>
+            <p class="col-2"><button id="editboxdescription-btn" class="btn btn-link"><i class="fas fa-pencil-alt"></i></button></p>
         </div>
         <div class="row">
             <h6 class="col-3">Cover Image:</h6>
@@ -50,15 +50,46 @@ const settingModalView = () => {
         <h6>Members:</h6>
         <div id="members-list"></div>
     `)
-    let count = 0
-    for(let member of members) {
-        count = count + 1
-        let deleteButton = '<button id="deleteMember' +count+"\" "+  'class="col-1 btn btn-danger btn-xs"><i class="fas fa-times"></i></button>'
-            $('#members-list').append(
-                '<div class="row" >' +
-                '<h6 class="col-10">' + member + '</h6>' +
-                deleteButton +
-            '</div>'
-        )
-    }
+    
+    // find the owner of the box
+    model.shoebox().where('boxID', '==', box.boxID).get().then(response => {
+        response.docs.map(doc => {
+            model.shoebox(doc.id).collection('members').where('role', '==', "owner").get().then(res => {
+                res.docs.map(memberDoc => {
+                    let ownerMail = memberDoc.data().email
+
+                    let count = 0
+                    let deleteButton = ""
+                    for(let member of members) {
+                        count = count + 1
+
+                        if (user.email === ownerMail) {
+                            deleteButton = '<button id="deleteMember' +count+"\" "+  'class="col-2 btn btn-danger fas fa-times"></button>'
+                            if (user.email === member) {
+                                // don't delete the owner
+                                deleteButton = "(Owner)"
+                            }
+                        } else {
+                            deleteButton = ""
+                            if (ownerMail === member) {
+                                // indicate the owner
+                                deleteButton = "(Owner)"
+                            }
+                            if (member === user.email) {
+                                // you can remove yourself
+                                deleteButton = '<button id="deleteMember' +count+"\" "+  'class="col-2 btn btn-danger fas fa-times"></button>'
+                            }
+                        }
+
+                        $('#members-list').append(
+                            '<div class="row" >' +
+                                '<h6 class="col-10">' + member + '</h6>' + deleteButton +
+                            '</div>'
+                        )
+                    }
+
+                })
+            })
+        })
+    })
 }
