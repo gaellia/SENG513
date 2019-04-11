@@ -30,6 +30,9 @@ $(document).on('click', '.btn-accept-invite', ({target: {id}}) => {
             model.shoebox(id).collection('members').where('email', '==', model.local('user').email).get().then(res => {
                 res.docs.map(doc => {
                     model.shoebox(id).collection('members').doc(doc.id).update({'role': 'member'})
+
+                    // not sure if this works
+                    // chatGlobal.bot(`<strong>${model.local(`user`).displayName}</strong> has joined this shoebox!`)
                     view.viewShoeBox(box)
                 })
             })
