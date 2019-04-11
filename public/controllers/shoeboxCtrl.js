@@ -22,6 +22,38 @@ $(document).on('click', '#invite-new', e => {
         view.inviteMember()
 })
 
+$(document).on('click', '.btn-accept-invite', ({target: {id}}) => {
+    id = id.substr(7)
+    model.shoebox().where('boxID', '==', id).get().then(response => {
+        let box = response.docs.map(docs => docs.data())[0]
+        response.docs.map(docs => {
+            model.shoebox(id).collection('members').where('email', '==', model.local('user').email).get().then(res => {
+                res.docs.map(doc => {
+                    model.shoebox(id).collection('members').doc(doc.id).update({'role': 'member'})
+                    view.viewShoeBox(box)
+                })
+            })
+        })
+    })
+})
+
+$(document).on('click', '.btn-reject-invite', ({target: {id}}) => {
+    id = id.substr(7)
+    model.shoebox().where('boxID', '==', id).get().then(response => {
+        let box = response.docs.map(docs => docs.data())[0]
+        model.shoebox(id).update({"memberEmails": (box.memberEmails).filter(function(e) { return e !== model.local('user').email })})
+        response.docs.map(docs => {
+            model.shoebox(id).collection('members').where('email', '==', model.local('user').email).get().then(res => {
+                res.docs.map(doc => {
+                    model.shoebox(id).collection('members').doc(doc.id).delete().then(function() {
+                        location.reload()
+                    })
+                })
+            })
+        })
+    })
+})
+
 // view all shoeboxes button listener
 $(document).on('click', '.view-box-btn', ({target: {id}}) => {
     id = id.substr(4)
@@ -76,36 +108,30 @@ $(document).on('click', '#create-shoebox-submit', e => {
         if (!DOWNLOAD_URL)
             DOWNLOAD_URL = DEFAULT_LOGOS[Math.floor(Math.random()*DEFAULT_LOGOS.length)]
 
-        model.shoebox(id).set({
+        const boxObject = {
             name: $('#shoebox-name').val(),
             description: $('#shoebox-description').val(),
             boxID: id,
             memberEmails: members.map(({email}) => email),
             logoURL: $('#shoebox-image').attr('src')
-        })
+        }
+
+        model.shoebox(id).set(boxObject)
         
         for(let member of members)
             model.shoebox(id).collection('members').add(member)
 
-            authGlobal.fetchBoxes(model.local('user'))
-            view.selectShoeBox()
+        // send invite emails
+        requestService(`/sendInvites`, "POST", {
+                boxObject,
+                members,
+                user: model.local('user')
+            })
+
+        authGlobal.fetchBoxes(model.local('user'))
+        view.selectShoeBox()
 
     }).catch(err => {
         console.log('err', err)
     })
-
-    // send invite emails
-    let request = new XMLHttpRequest()
-    request.onreadystatechange = function()
-    {
-        if (this.readyState == 4 && this.status == 200)
-        {
-            console.log('emails sent')
-        }
-    }
-
-    request.open("POST","http://localhost:5000/shoebox513/us-central1/app/sendInvites",true);
-    request.setRequestHeader("Content-Type", "application/json");
-    request.setRequestHeader('Access-Control-Allow-Headers', '*');
-    request.send(JSON.stringify(members));
 })

@@ -45,8 +45,21 @@ const authGlobal = {
 
       model.local('user', {uid: user.uid, displayName: user.displayName, email: user.email})
       model.local('boxes', response.docs.map(docs => docs.data()))
+      model.local('pendingBoxes', [])
+      model.shoebox().get().then(res => {
+        let allBoxes = res.docs.map(docs => docs.data())
+        allBoxes.forEach(box => {
+          model.shoebox(box.boxID).collection('members').where('role', '==', 'invited').where('email', '==', model.local('user').email).get().then(members => {
+            if (members.docs.map(docs => docs.data()).length > 0) {
+              let pending = model.local('pendingBoxes')
+              pending.push(box.boxID)
+              model.local('pendingBoxes', pending)
+            }
 
-      view.selectShoeBox()
+            view.selectShoeBox()
+          })
+        })
+      })
     })
   },
 
@@ -56,8 +69,13 @@ const authGlobal = {
 
     if(developmentMode)
       auth.setPersistence(firebase.auth.Auth.Persistence.NONE)
-    else
+    else {
+      // turn off console logs and console errors
+      console = {log(){}, error(){}}
+
+      // stay logged in
       auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    }
     
     // auth ctrl inner
     let ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth)
@@ -69,6 +87,15 @@ const authGlobal = {
       signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
       ],
+    })
+
+    $(".firebaseui-title").html('Log in or create account')
+    $(document).on('click', '#to-top', () => {
+      $("html, body").animate({ scrollTop: 0 }, "slow")
+    })
+
+    $(document).on('click', '#home-learn-more', () => {
+      $("html, body").animate({ scrollTop: $(document).height() }, "slow")
     })
   }
 }
