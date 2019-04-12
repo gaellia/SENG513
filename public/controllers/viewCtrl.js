@@ -10,24 +10,33 @@ const viewGlobal = {
         
         const hide = (arr, speed) => arr.forEach(e => e.hide(speed))
         const show = (arr, speed) => arr.forEach(e => e.show(speed))
+
+        let currentWidth = 0 // closure
     
-        const mediaCheck = () => {
-            // banner
-            if(WINDOW.width() < 768) {
-                hide([RIGHT, LEFT], 'fast')
-                show([CHAT_BTN, MID, BAR_MENU], 'fast')
-            }
-            // desktop
-            else {
-                show([LEFT, RIGHT, MID], 'fast')
-                hide([CHAT_BTN, BAR_MENU], 'fast')
-        
+        const mediaCheck = override => {
+            const WIDTH = WINDOW.width()
+            if(override || (currentWidth!==WIDTH && ($(document.activeElement).prop('type') !== 'text'))) {
+                // banner
+                if(WIDTH < 768) {
+                    hide([RIGHT, LEFT], 'fast')
+                    show([CHAT_BTN, MID, BAR_MENU], 'fast')
+                }
+                // desktop
+                else {
+                    show([LEFT, RIGHT, MID], 'fast')
+                    hide([CHAT_BTN, BAR_MENU], 'fast')
+                }
+            currentWidth = WIDTH
             }
         }
         
         // init and watch
         mediaCheck()
-        WINDOW.resize(mediaCheck)
+
+        // resize listener if not mobile
+        if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(navigator.userAgent) ) {
+            WINDOW.resize(mediaCheck)
+        }
     
         BANNER.click(({target: {id}}) => {
             if(!MID.is(':visible') && !id.includes('-banner')) {
@@ -44,7 +53,7 @@ const viewGlobal = {
                 chatGlobal.toBottom()
                 $("html, body").animate({ scrollTop: $(document).height() }, "slow")
             } else {
-                mediaCheck()
+                mediaCheck(true)
             }
         })
     
@@ -54,7 +63,7 @@ const viewGlobal = {
                 hide([MID, RIGHT], 'fast')
                 show([LEFT], 'fast')
             } else {
-                mediaCheck()
+                mediaCheck(true)
             }
         })
         return mediaCheck

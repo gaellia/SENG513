@@ -45,3 +45,12 @@ $(document).on('submit', '#msg-form', e => {
         $('#m').val("") // clear send box
     }
 })
+
+// listen for enter keypress
+$(document).on('keypress', '#m', e => {
+    if(e.which == 13) {
+        console.log("HI")
+        e.preventDefault()
+        $('#msg-form').submit()
+    }
+})
