@@ -76,7 +76,7 @@ $(document).on('click', '.view-box-btn', ({target: {id}}) => {
         })
         model.local('currentBox', bid)
         view.viewShoeBox(bid)
-        viewGlobal.mediaCheck()
+        viewGlobal.mediaCheck(true)
     })
 })
 

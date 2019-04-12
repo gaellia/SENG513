@@ -13,10 +13,11 @@ const viewGlobal = {
 
         let currentWidth = 0 // closure
     
-        const mediaCheck = () => {
-            if(currentWidth!==WINDOW.width()) {
+        const mediaCheck = override => {
+            const WIDTH = WINDOW.width()
+            if(override || (currentWidth!==WIDTH && ($(document.activeElement).prop('type') !== 'text'))) {
                 // banner
-                if(WINDOW.width() < 768) {
+                if(WIDTH < 768) {
                     hide([RIGHT, LEFT], 'fast')
                     show([CHAT_BTN, MID, BAR_MENU], 'fast')
                 }
@@ -25,7 +26,7 @@ const viewGlobal = {
                     show([LEFT, RIGHT, MID], 'fast')
                     hide([CHAT_BTN, BAR_MENU], 'fast')
                 }
-            currentWidth = WINDOW.width()
+            currentWidth = WIDTH
             }
         }
         
@@ -33,7 +34,7 @@ const viewGlobal = {
         mediaCheck()
 
         // resize listener if not mobile
-        if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(navigator.userAgent) ) {
             WINDOW.resize(mediaCheck)
         }
     
@@ -52,7 +53,7 @@ const viewGlobal = {
                 chatGlobal.toBottom()
                 $("html, body").animate({ scrollTop: $(document).height() }, "slow")
             } else {
-                mediaCheck()
+                mediaCheck(true)
             }
         })
     
@@ -62,7 +63,7 @@ const viewGlobal = {
                 hide([MID, RIGHT], 'fast')
                 show([LEFT], 'fast')
             } else {
-                mediaCheck()
+                mediaCheck(true)
             }
         })
         return mediaCheck
