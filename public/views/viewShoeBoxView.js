@@ -78,9 +78,6 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
                         ${columnHTML[2]}
                     </div>
                 </div>
-                <div class="row d-flex justify-content-end">
-                 
-                </div>
                 <button class="col-auto" id="addNote"> Add note</button>
             <input class="col-auto" id="newFile" type="file">
             `)
