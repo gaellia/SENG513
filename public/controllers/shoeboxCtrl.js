@@ -119,18 +119,19 @@ $(document).on('click', '#create-shoebox-submit', e => {
             user: model.local('user')
             })
 
-        model.shoebox(id).set(boxObject).then(() => {            
+        model.shoebox(id).set(boxObject).then(() => {  
+
             for(let member of members) {
-                model.shoebox(id).collection('members').add(member).then( () => {
-                    // update local
-                    model.local('currentBox', boxObject)
-                    let tempBoxes = model.local('boxes')
-                    tempBoxes.push(boxObject)
-                    model.local('boxes', tempBoxes)
-                    // change view to the newly created box
-                    view.viewShoeBox(boxObject)
-                })
-            }
+                model.shoebox(id).collection('members').add(member)
+            }       
+            
+            // update local
+            model.local('currentBox', boxObject)
+            let tempBoxes = model.local('boxes')
+            tempBoxes.push(boxObject)
+            model.local('boxes', tempBoxes)
+            // change view to the newly created box
+            view.viewShoeBox(boxObject)
         })
 
     }).catch(err => {

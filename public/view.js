@@ -72,14 +72,14 @@ const v = () => {
                     result = `${result}
                     <li class="list-group-item">
                         <div class="row">
-                            <button class="btn view-box-btn maxw col-8">
+                            <div class="btn maxw col-8">
                                 <h5 id="div-${box.boxID}">
                                     <image id="img-${box.boxID}" src="${box.logoURL}" style="width: 64px; height: 64px; margin-right: 16px">
                                     ${box.name}
                                 </h5>
-                                <button class="col-2 btn btn-primary btn-accept-invite" id="accept-${box.boxID}">Accept</button>
-                                <button class="col-2 btn btn-danger btn-reject-invite" id="reject-${box.boxID}">Reject</button>
-                            </button>
+                            </div>
+                            <button class="col-2 btn btn-primary btn-accept-invite" id="accept-${box.boxID}">Accept</button>
+                            <button class="col-2 btn btn-danger btn-reject-invite" id="reject-${box.boxID}">Reject</button>
                         </div>
                     </li>`
                 } else {

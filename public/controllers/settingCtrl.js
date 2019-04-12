@@ -19,7 +19,7 @@ $(document).on('click', '#editboxname-btn', () => {
     }
 })
 
-$(document).on('click', '.col-2.btn-danger', (e) => {
+$(document).on('click', '.btn-danger.fa-times', (e) => {
     let id = "#" +e.target.id
     let username =  $( id ).prev().text();
 
