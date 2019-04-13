@@ -27,6 +27,7 @@ $(document).on('click', '#uploadButton', e => {
     
                 case firebase.storage.TaskState.RUNNING: // or 'running'
                     $('#shoebox-image').hide('fast')
+                    $('#card-image').hide('fast')
                     $('#loader-container').show()
                     $('#up-loader').show()
                     // do stuff
@@ -58,6 +59,9 @@ $(document).on('click', '#uploadButton', e => {
                 $('#up-loader').hide()
                 $('#loader-container').hide('slow')
                 $('#shoebox-image').attr("src", downloadURL).delay(500).show('fast')
+
+                $('#card-image').attr("src", downloadURL).delay(500).show('fast')
+                $('#card-image').show('fast')
     
             })
         }

@@ -132,7 +132,7 @@ const v = () => {
         inviteMember: () => inviteMemberView(views),
         profileModal: () => profileModalView(views),
         settingsModal: () => settingModalView(views),
-
+        createCard: () => createCardView(views)
     }
 } 
 

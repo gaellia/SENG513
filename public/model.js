@@ -2,7 +2,6 @@
 
 // global variables
 let GLOBAL_FILE
-let DOWNLOAD_URL
 let MSG_LISTENER
 let GLOBAL_DOWNLOAD
 

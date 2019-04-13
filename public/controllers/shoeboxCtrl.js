@@ -4,8 +4,9 @@ $(document).on('click', '.box-new', () => {
 
     $(".file").on("change", function(event) {
         GLOBAL_FILE = event.target.files[0]
-
     })
+
+    $('#shoebox-image').attr("src", DEFAULT_LOGOS[Math.floor(Math.random()*DEFAULT_LOGOS.length)])
 })
 
 $(document).on('click', '#setting-btn', () => {
@@ -100,11 +101,7 @@ $(document).on('click', '#create-shoebox-submit', e => {
     })
 
     model.shoebox().add({}).then(({id}) => {
-        // In the case that a logo image failed to upload, grab random default
-        if (!DOWNLOAD_URL)
-            DOWNLOAD_URL = DEFAULT_LOGOS[Math.floor(Math.random()*DEFAULT_LOGOS.length)]
-
-        const boxObject = {
+         const boxObject = {
             name: $('#shoebox-name').val(),
             description: $('#shoebox-description').val(),
             boxID: id,
