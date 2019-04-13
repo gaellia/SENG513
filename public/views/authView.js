@@ -1,8 +1,7 @@
 const authView = ({MID}) => {
     MID.html(`
     <div style="text-align: center">
-        <img style="width: 100px; display:block; margin-left: auto; margin-right: auto; margin-bottom: 2em" src="./img/Illustration.png" />
-        <h1>ShoeBox</h1>
+        <img style="width: 150px; display:block; margin-left: auto; margin-right: auto; margin-bottom: 2em" src="./Shoebox_Logo.png" />
         <br>
         <p> The place to keep your memories.</p>
         <hr>

@@ -3,17 +3,16 @@ const v = () => {
     // For parsing cards (TODO get it out of here)
     
     // Returns HTML for a given card
-
     const getHTMLFor = {
         cards: card => {
-            let cardBody = `<div style="text-align: center"><div class="card" style="width: 18rem;"><div class="card-header">
+            let cardBody = `<div class="card" style="width: 18rem;"><div class="card-header">
             <div class="delete-card-icon">
                 <i class="fas fa-trash"></i>
             </div></div>`
             if (card.mediaType !== "text"){
                 cardBody += `<img class="card-img-top" src="${card.resourceURL}">`
             }
-            cardBody += `<div class="card-body"><h5 class="card-title">${card.title}</h5><p class="card-text">${card.text}</p></div></div></div>`
+            cardBody += `<div class="card-body"><h5 class="card-title">${card.title}</h5><p class="card-text">${card.text}</p></div></div>`
     
             return cardBody;
         },

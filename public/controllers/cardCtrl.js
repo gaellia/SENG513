@@ -1,5 +1,5 @@
 // Creates a new card from the given parametres
-function createNewCard(type, title, text, resourceURL, authorEmail) {
+createNewCard: (type, title, text, resourceURL, authorEmail) => {
     switch (type) {
         case 'text':
             return {

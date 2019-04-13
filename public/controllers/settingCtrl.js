@@ -61,6 +61,7 @@ $(document).on('click', '.btn-danger.fa-times', (e) => {
 
 $(document).on('click', '#editboxdescription-btn', () => {
     // toggle edits
+
     if ($('#editboxdescription-name').find('#change-desc').length > 0) {
         $('#editboxdescription-name').html($('#change-desc').val())
         $('#editboxdescription-btn').html('<i class="fas fa-pencil-alt"></i>')
