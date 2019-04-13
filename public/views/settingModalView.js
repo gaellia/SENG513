@@ -43,11 +43,29 @@ const settingModalView = () => {
             <p class="col-3"><button class="btn btn-light btn-sm" id="uploadButton">Submit</button></p>
         </div>
         <div class="row d-flex justify-content-center">
-        <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src=${model.local('currentBox').logoURL}>
-
+            <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src=${model.local('currentBox').logoURL}>
+        </div>
+        <br>
+        <div class="row">
+            <h6 class="col-3">Invite:</h6><br>
+            <div class="col-6">
+                <ul class="list-group list-group-flush" id="invite-list">
+                    <li class="list-group-item">
+                        <button class="btn btn-light" id="invite-new">
+                            <br>
+                            <span id="invite-members-new">
+                                <i class="fas fa-plus-circle"></i>
+                                Invite by email
+                            </span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <p class="col-3"><button id="sendAll-btn" class="btn btn-light btn-sm">Send All</button></p>
         </div>
         <br><br>
         <h6>Members:</h6>
+        <br>
         <div id="members-list"></div>
     `)
     
