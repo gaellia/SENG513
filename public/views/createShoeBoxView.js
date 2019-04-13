@@ -9,7 +9,7 @@ const createShoeBoxView = () => {
     $('#modal-body').html(`
     <div style="text-align: center">
         <div class="loader" id="up-loader" style="margin-top: -15.2em; display: none"></div>
-        <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src="Illustration.png">
+        <img style="height: 80px; width: 80px; text-align: center" id="shoebox-image" src="Shoebox_Logo.png">
         <div id="loader-container" style="padding-top:80px; display: none"></div>
         <br>
         <form id="create-shoebox-form">
