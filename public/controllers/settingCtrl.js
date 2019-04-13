@@ -19,7 +19,7 @@ $(document).on('click', '#editboxname-btn', () => {
     }
 })
 
-$(document).on('click', '.col-2.btn-danger', (e) => {
+$(document).on('click', '.btn-danger.fa-times', (e) => {
     let id = "#" +e.target.id
     let username =  $( id ).prev().text();
 
@@ -194,5 +194,58 @@ $(document).on('click', '#save-box', () => {
     // update local for all
     model.local('currentBox', {boxID: box.boxID, name: newName, description: newDescription, memberEmails: box.memberEmails, logoURL: newPhoto})
 
-    
+})
+
+// listener to send emails
+$(document).on('click', '#sendAll-btn', e => {
+    e.preventDefault() // access form elements here
+    const box = model.local('currentBox')
+    const inviteList = $('#invite-list li input')
+
+    if (inviteList.length === 0) {
+        $('#sendAll-btn').html('Send All')
+        $('#sendAll-btn').prop('disabled', false)
+    } else {
+        $('#sendAll-btn').html(`Sending...`)
+        $('#sendAll-btn').prop('disabled', true)
+    }
+
+    const newMemberEmails = box.memberEmails
+    const newMembers = []
+
+    for(let member of inviteList) {
+        if (!newMemberEmails.includes(member.value)) {
+            newMemberEmails.push(member.value)
+
+            newMembers.push({
+                email: member.value,
+                role: 'invited'
+            })
+        }
+    }
+ 
+    model.shoebox().where('boxID', '==', box.boxID).get().then(response => {
+        response.docs.map(doc => {
+            // update emails
+            model.shoebox(doc.id).update({
+                memberEmails: newMemberEmails
+            })
+            // update member collection
+            for(let member of newMembers) {
+                    model.shoebox(doc.id).collection('members').add(member)
+            }
+
+            // send invite emails
+            requestService(`/sendInvites`, "POST", {
+            box,
+            newMembers,
+            user: model.local('user')
+            })
+
+            $('#sendAll-btn').html(`Sent.`)
+        })
+    })
+
+    // update local
+    model.local('currentBox', {boxID: box.boxID, name: box.name, description: box.description, memberEmails: newMemberEmails, logoURL: box.logoURL})
 })

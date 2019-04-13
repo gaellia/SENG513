@@ -11,7 +11,7 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
         <button class="btn btn-light" id="profile-btn" data-toggle="modal" data-target="#modal-container" style="min-width: 90%">
             <div class="d-flex justify-content-between">
                 <div class="p-2">
-                    <h5><i class="far fa-user-circle"></i> ${user.displayName}</h5>
+                    <h5><i class="far fa-user-circle"></i><span id="profileName"> ${user.displayName}</span></h5>
                 </div>
                 <div class="p-2">
                     <i class="fas fa-ellipsis-v"></i>
@@ -78,38 +78,12 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
                         ${columnHTML[2]}
                     </div>
                 </div>
-                <div class="row d-flex justify-content-end">
-                 
-                </div>
                 <button class="col-auto" id="addNote"> Add note</button>
             <input class="col-auto" id="newFile" type="file">
             `)
 
             $('#addNote').hide()
             $('#newFile').hide()
-
-            $(document).on('click', '#addButton', e => {
-                console.error("WE ARE IN HERE")
-                if ($('#addNote').is(':visible')){
-                    console.error("WE IN HERE !")
-                    $('#addNote').hide()
-                }
-                else{
-                    console.error("WE IN HERE 2")
-
-                    $('#addNote').show()
-
-                }
-                if ($('#newFile').is(':visible')){
-                    $('#newFile').hide()
-                }
-                else{
-                    $('#newFile').show()
-
-                }
-            })
-
-
    
             RIGHT.html(`
             <div id='chat-container'>

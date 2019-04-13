@@ -34,7 +34,7 @@ a {
     width: 100vw; 
 }
 
-.btn-danger {
+.btn-danger.fa-times {
     max-height: 40px;
     max-width: 40px;
     margin-bottom: 10px;

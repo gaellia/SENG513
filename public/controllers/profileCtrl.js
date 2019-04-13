@@ -35,5 +35,8 @@ $(document).on('click', '#save', () => {
         // update auth profile with edited name
         let authUser = firebase.auth().currentUser
         authUser.updateProfile({displayName: newName})
+
+        // update profile on left
+        $('#profileName').text(" "+newName)    
     }
 })

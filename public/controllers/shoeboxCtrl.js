@@ -112,20 +112,27 @@ $(document).on('click', '#create-shoebox-submit', e => {
             logoURL: $('#shoebox-image').attr('src')
         }
 
-        model.shoebox(id).set(boxObject)
-        
-        for(let member of members)
-            model.shoebox(id).collection('members').add(member)
-
         // send invite emails
         requestService(`/sendInvites`, "POST", {
-                boxObject,
-                members,
-                user: model.local('user')
+            boxObject,
+            members,
+            user: model.local('user')
             })
 
-        authGlobal.fetchBoxes(model.local('user'))
-        view.selectShoeBox()
+        model.shoebox(id).set(boxObject).then(() => {  
+
+            for(let member of members) {
+                model.shoebox(id).collection('members').add(member)
+            }       
+            
+            // update local
+            model.local('currentBox', boxObject)
+            let tempBoxes = model.local('boxes')
+            tempBoxes.push(boxObject)
+            model.local('boxes', tempBoxes)
+            // change view to the newly created box
+            view.viewShoeBox(boxObject)
+        })
 
     }).catch(err => {
         console.log('err', err)
