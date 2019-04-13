@@ -1,6 +1,4 @@
 const v = () => {
-
-    // For parsing cards (TODO get it out of here)
     
     // Returns HTML for a given card
     const getHTMLFor = {
@@ -23,7 +21,7 @@ const v = () => {
                     <div class="card-body">
                         <h5 class="card-title">Your cards will go here</h5>
                         <p class="card-text">Post the first card in this shoebox!</p>
-                        <button id="addButton" class="btn btn-lg btn-light" style="width:100%"  data-toggle="modal" data-target="#modal-container>
+                        <button id="addButton" class="btn btn-lg btn-light" style="width:100%"  data-toggle="modal" data-target="#modal-container">
                             <h1 style="font-size: 5rem">
                                 <i class="fas fa-plus"></i>
                             </h1>
@@ -36,7 +34,7 @@ const v = () => {
             <div style="text-align: center">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body" style="padding: 0!important">
-                        <button id="addButton" style="width: 100%; height: 18rem; margin:0" class="btn btn-light"  data-toggle="modal" data-target="#modal-container>
+                        <button id="addButton" style="width: 100%; height: 18rem; margin:0" class="btn btn-light"  data-toggle="modal" data-target="#modal-container">
                             <h1 style="font-size: 7rem">
                                 <i class="fas fa-plus"></i>
                             </h1>

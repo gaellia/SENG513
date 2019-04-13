@@ -21,57 +21,58 @@ createNewCard: (type, title, text, resourceURL, authorEmail) => {
     }
 }
 
+// Closure for uploaded file flag
+const setFileUpdateFlag = () => {
+    let uploadedFile = false
+    
+    return { setTrue: () => {
+        uploadedFile = true},
+        value: () => {return uploadedFile}
+    }
+}
+
+let fileChanged = setFileUpdateFlag()
+
 // listens to the add button
 $(document).on('click', '#addButton', e => {
     view.createCard()
 
     $(".file").on("change", function(event) {
         GLOBAL_FILE = event.target.files[0]
+        fileChanged.setTrue()
     })
     
     $('#card-image').hide()
 })
 
 
-// create new shoebox form submit
+// create new card form submit
 $(document).on('click', '#create-card-submit', e => {
     e.preventDefault() // access form elements here
+    
+    let newCard = {
+        title: $('#card-name').val(),
+        text: $('#card-text').val(),
+        author: model.local("user").email,
+    }
+    
+    if (fileChanged) {
+        // TODO add video recgonition to differentiate
+        newCard.mediaType = "picture"
+        newCard.resourceURL = $('#shoebox-image').attr('src')
+    } else newCard.mediaType = "text"
 
-    model.shoebox().add({}).then(({id}) => {
-        // In the case that a logo image failed to upload, grab random default
-        if (!DOWNLOAD_URL)
-            DOWNLOAD_URL = DEFAULT_LOGOS[Math.floor(Math.random()*DEFAULT_LOGOS.length)]
+    model.getByBoxID(model.local('currentBox').boxID, "cards").then(res => {
+        res.get().then(cards => {
+            console.log(cards.docs.data)
+            cards.push(newCard)
 
-        const boxObject = {
-            name: $('#shoebox-name').val(),
-            description: $('#shoebox-description').val(),
-            boxID: id,
-            memberEmails: members.map(({email}) => email),
-            logoURL: $('#shoebox-image').attr('src')
-        }
+            model.getByBoxID(model.local('currentBox').boxID, "cards").then(res => {
+                res.set(cards)})
 
-        // send invite emails
-        requestService(`/sendInvites`, "POST", {
-            boxObject,
-            members,
-            user: model.local('user')
-            })
 
-        model.shoebox(id).set(boxObject).then(() => {  
-
-            for(let member of members) {
-                model.shoebox(id).collection('members').add(member)
-            }       
-            
-            // update local
-            model.local('currentBox', boxObject)
-            let tempBoxes = model.local('boxes')
-            tempBoxes.push(boxObject)
-            model.local('boxes', tempBoxes)
-            // change view to the newly created box
-            view.viewShoeBox(boxObject)
+            // TODO is this correct and how to push update to other viewers
         })
-
     }).catch(err => {
         console.log('err', err)
     })
