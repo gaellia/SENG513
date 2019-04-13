@@ -41,4 +41,12 @@ $(document).on('click', '#addButton', e => {
         $('#newFile').show()
 
     }
+    if ($('#uploadButton').is(':visible')){
+        $('#uploadButton').hide()
+    }
+    else{
+        $('#uploadButton').show()
+
+    }
+
 })

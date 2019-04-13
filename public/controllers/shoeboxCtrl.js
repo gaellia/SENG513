@@ -8,6 +8,20 @@ $(document).on('click', '.box-new', () => {
     })
 })
 
+
+$(document).on('click', '#addButton', () => {
+    console.error("WE ARE INSIDE OF HERE")
+    console.error(view)
+    console.error( $("#newfile"))
+    console.error("CAN WE FIND THE ID ")
+    $("#newFile").on("change", function(event) {
+        console.error("WE IN HERE")
+        GLOBAL_FILE = event.target.files[0]
+    })
+})
+
+
+
 $(document).on('click', '#setting-btn', () => {
     view.settingsModal()
     $(".file").on("change", function(event) {

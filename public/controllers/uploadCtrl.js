@@ -9,6 +9,7 @@ function slugify(text) {
 }
 
 $(document).on('click', '#uploadButton', e => {
+    console.error("INSIDE OF UPLOAD BUTTON")
     e.preventDefault()
     const selectedFile = GLOBAL_FILE
 
@@ -50,6 +51,9 @@ $(document).on('click', '#uploadButton', e => {
         },
 
         success() {
+
+
+
             // Upload completed successfully, now we can get the download URL
             uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
                 
@@ -57,7 +61,27 @@ $(document).on('click', '#uploadButton', e => {
 
                 $('#up-loader').hide()
                 $('#loader-container').hide('slow')
+
+
+
+
                 $('#shoebox-image').attr("src", downloadURL).delay(500).show('fast')
+                console.error("WE IN HERE IT A SUCESS")
+
+                if($(e.target).attr('class') === "addCard"){
+
+
+                    $('#middle-container').append('<div class="card" style="width: 18rem;"><div class="card-header">\n' +
+                        '            <div class="delete-card-icon">\n' +
+                        '                <i class="fas fa-trash"></i>\n' +
+                        '            </div></div><img class="card-img-top" src="'+downloadURL+'"><div class="card-body"><h5 class="card-title">Whiplash</h5><p class="card-text">Not quite my tempo.</p></div></div>')
+
+
+
+
+
+
+                }
     
             })
         }

@@ -80,11 +80,14 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
                 </div>
                 <button class="col-auto" id="addNote"> Add note</button>
             <input class="col-auto" id="newFile" type="file">
+            <button class="addCard" id="uploadButton"> upload photo</button>
+
             `)
 
             $('#addNote').hide()
             $('#newFile').hide()
-   
+            $('#uploadButton').hide()
+
             RIGHT.html(`
             <div id='chat-container'>
                 <ul id='chat'>
