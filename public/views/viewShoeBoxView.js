@@ -78,8 +78,6 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
                         ${columnHTML[2]}
                     </div>
                 </div>
-                <button class="col-auto" id="addNote"> Add note</button>
-            <input class="col-auto" id="newFile" type="file">
             `)
 
             $('#addNote').hide()
