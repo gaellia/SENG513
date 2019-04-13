@@ -57,7 +57,7 @@ const v = () => {
             cols[index%cols.length] += getHTMLFor.cards(card.data())
             index++
         })
-        cols[(index+1)%cols.length] += getHTMLFor.addButton()
+        cols[cols.length-1] += getHTMLFor.addButton()
 
         return index===0? getHTMLFor.placeholder(): cols
     }
