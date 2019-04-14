@@ -238,10 +238,10 @@ $(document).on('click', '#sendAll-btn', e => {
 
             // send invite emails
             requestService(`/sendInvites`, "POST", {
-            box,
-            newMembers,
-            user: model.local('user')
-            })
+                boxObject: box,
+                members: newMembers,
+                user: model.local('user')
+                })
 
             $('#sendAll-btn').html(`Sent.`)
         })

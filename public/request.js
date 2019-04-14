@@ -17,7 +17,7 @@ const requestService = (url, method, params) => {
         }
     }
 
-    req.open(method,`https://${config.authDomain}${url}`,true)
+    req.open(method,`https://us-central1-shoebox513.cloudfunctions.net/app${url}`,true)
     req.setRequestHeader("Content-Type", "application/json")
     req.setRequestHeader('Access-Control-Allow-Headers', '*')
     req.setRequestHeader('Access-Control-Allow-Origin', `https://${config.authDomain}/`)
