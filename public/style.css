@@ -70,6 +70,7 @@ a {
     height: calc(100vh - 240px);
     width: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .card {
@@ -235,4 +236,8 @@ a {
     100% { transform: rotate(360deg); }
   }
   
-  
+  .center-card {
+      margin: auto;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+  }

@@ -67,19 +67,21 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, boxRepeat, loadCards) => {
                     </div>
                 </div>
                 <hr>
-                <div class="row middle-cards d-flex justify-content-center">
-                    <div class="col-auto">
-                        ${columnHTML[0]}
-                    </div>
-                    <div class="col-auto">
-                        ${columnHTML[1]}
-                    </div>
-                    <div class="col-auto">
-                        ${columnHTML[2]}
+                <div class="middle-cards">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col">
+                            ${columnHTML[0]}
+                        </div>
+                        <div class="col">
+                            ${columnHTML[1]}
+                        </div>
+                        <div class="col">
+                            ${columnHTML[2]}
+                        </div>
                     </div>
                 </div>
-                <button class="col-auto" id="addNote"> Add note</button>
-            <input class="col-auto" id="newFile" type="file">
+                <button class="col" id="addNote"> Add note</button>
+            <input class="col" id="newFile" type="file">
             `)
 
             $('#addNote').hide()
