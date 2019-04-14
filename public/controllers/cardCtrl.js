@@ -1,22 +1,9 @@
-// Closure for uploaded file flag
-const setFileUpdateFlag = () => {
-    let uploadedFile = false
-    
-    return {
-        setTrue: () => {uploadedFile = true},
-        value: () => {return uploadedFile}
-    }
-}
-
-let fileChanged = setFileUpdateFlag()
-
 // listens to the add button
 $(document).on('click', '#addButton', e => {
     view.createCard()
 
     $(".file").on("change", function(event) {
         GLOBAL_FILE = event.target.files[0]
-        fileChanged.setTrue()
     })
     
     $('#card-image').hide()
@@ -35,7 +22,9 @@ $(document).on('click', '#create-card-submit', e => {
         author: model.local("user").email,
     }
 
-    if (fileChanged.value()) {
+    let imageSrc = $('#card-image').attr('src')
+
+    if (imageSrc !== "//:0") {
         // TODO add video recgonition to differentiate
         newCard.mediaType = "picture"
         newCard.resourceURL = $('#card-image').attr('src')
