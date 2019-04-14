@@ -80,9 +80,6 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
                 </div>
             `)
 
-            $('#addNote').hide()
-            $('#newFile').hide()
-   
             RIGHT.html(`
             <div id='chat-container'>
                 <ul id='chat'>

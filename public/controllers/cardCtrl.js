@@ -1,32 +1,9 @@
-// Creates a new card from the given parametres
-createNewCard: (type, title, text, resourceURL, authorEmail) => {
-    switch (type) {
-        case 'text':
-            return {
-                "mediaType": type,
-                "title": title,
-                "text": text,
-                "author": authorEmail
-            }
-            break
-        default:
-            return {
-                "mediaType": type,
-                "title": title,
-                "text": text,
-                "resourceURL": resourceURL,
-                "author": authorEmail
-            }
-            break
-    }
-}
-
 // Closure for uploaded file flag
 const setFileUpdateFlag = () => {
     let uploadedFile = false
     
-    return { setTrue: () => {
-        uploadedFile = true},
+    return {
+        setTrue: () => {uploadedFile = true},
         value: () => {return uploadedFile}
     }
 }
@@ -49,29 +26,27 @@ $(document).on('click', '#addButton', e => {
 // create new card form submit
 $(document).on('click', '#create-card-submit', e => {
     e.preventDefault() // access form elements here
+
+    let currentBox = model.local('currentBox').boxID
     
     let newCard = {
         title: $('#card-name').val(),
         text: $('#card-text').val(),
         author: model.local("user").email,
     }
-    
-    if (fileChanged) {
+
+    if (fileChanged.value()) {
         // TODO add video recgonition to differentiate
         newCard.mediaType = "picture"
-        newCard.resourceURL = $('#shoebox-image').attr('src')
-    } else newCard.mediaType = "text"
+        newCard.resourceURL = $('#card-image').attr('src')
+    }
+    else {newCard.mediaType = "text"}
 
-    model.getByBoxID(model.local('currentBox').boxID, "cards").then(res => {
-        res.get().then(cards => {
-            console.log(cards.docs.data)
-            cards.push(newCard)
-
-            model.getByBoxID(model.local('currentBox').boxID, "cards").then(res => {
-                res.set(cards)})
-
-
-            // TODO is this correct and how to push update to other viewers
+    console.log(currentBox)
+    model.getByBoxID(currentBox, "cards").then(res => {
+        res.add(newCard).then(() => {
+            console.log(currentBox)
+            view.viewShoeBox(currentBox)
         })
     }).catch(err => {
         console.log('err', err)
