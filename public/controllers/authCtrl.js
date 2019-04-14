@@ -46,18 +46,16 @@ const authGlobal = {
       model.local('user', {uid: user.uid, displayName: user.displayName, email: user.email})
       model.local('boxes', response.docs.map(docs => docs.data()))
       model.local('pendingBoxes', [])
-      model.shoebox().get().then(res => {
-        let allBoxes = res.docs.map(docs => docs.data())
-        allBoxes.forEach(box => {
-          model.shoebox(box.boxID).collection('members').where('role', '==', 'invited').where('email', '==', model.local('user').email).get().then(members => {
-            if (members.docs.map(docs => docs.data()).length > 0) {
-              let pending = model.local('pendingBoxes')
-              pending.push(box.boxID)
-              model.local('pendingBoxes', pending)
-            }
 
-            view.selectShoeBox()
-          })
+      let allBoxes = response.docs.map(docs => docs.data())
+      allBoxes.forEach(box => {
+        model.shoebox(box.boxID).collection('members').where('role', '==', 'invited').where('email', '==', model.local('user').email).get().then(members => {
+          if (members.docs.map(docs => docs.data()).length > 0) {
+            let pending = model.local('pendingBoxes')
+            pending.push(box.boxID)
+            model.local('pendingBoxes', pending)
+          }
+          view.selectShoeBox()
         })
       })
     })
