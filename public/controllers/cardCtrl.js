@@ -27,7 +27,7 @@ $(document).on('click', '#addButton', e => {
 $(document).on('click', '#create-card-submit', e => {
     e.preventDefault() // access form elements here
 
-    let currentBox = model.local('currentBox').boxID
+    let currentBox = model.local('currentBox')
     
     let newCard = {
         title: $('#card-name').val(),
@@ -42,10 +42,9 @@ $(document).on('click', '#create-card-submit', e => {
     }
     else {newCard.mediaType = "text"}
 
-    console.log(currentBox)
-    model.getByBoxID(currentBox, "cards").then(res => {
+    console.log(currentBox.boxID)
+    model.getByBoxID(currentBox.boxID, "cards").then(res => {
         res.add(newCard).then(() => {
-            console.log(currentBox)
             view.viewShoeBox(currentBox)
         })
     }).catch(err => {
