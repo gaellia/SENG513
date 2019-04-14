@@ -52,3 +52,14 @@ $(document).on('click', '#create-card-submit', e => {
         console.log('err', err)
     })
 })
+
+// listens to the edit button
+$(document).on('click', '#cardButton', e => {
+    view.editCard()
+
+    $(".file").on("change", function(event) {
+        GLOBAL_FILE = event.target.files[0]
+        fileChanged.setTrue()
+    })
+    
+})

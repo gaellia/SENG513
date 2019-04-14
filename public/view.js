@@ -3,14 +3,11 @@ const v = () => {
     // Returns HTML for a given card
     const getHTMLFor = {
         cards: card => {
-            let cardBody = `<div class="card" style="width: 18rem;"><div class="card-header">
-            <div class="delete-card-icon">
-                <i class="fas fa-trash"></i>
-            </div></div>`
+            let cardBody = `<button id="cardButton" class="btn" data-toggle="modal" data-target="#modal-container" value="${card.id}"><div class="card" style="width: 18rem;">`
             if (card.mediaType !== "text"){
                 cardBody += `<img class="card-img-top" src="${card.resourceURL}">`
             }
-            cardBody += `<div class="card-body"><h5 class="card-title">${card.title}</h5><p class="card-text">${card.text}</p></div></div>`
+            cardBody += `<div class="card-body"><h5 class="card-title">${card.title}</h5><p class="card-text">${card.text}</p></div></div></button>`
     
             return cardBody;
         },
@@ -130,7 +127,8 @@ const v = () => {
         inviteMember: () => inviteMemberView(views),
         profileModal: () => profileModalView(views),
         settingsModal: () => settingModalView(views),
-        createCard: () => createCardView()
+        createCard: () => createCardView(),
+        editCard: () => editCardView()
     }
 } 
 
