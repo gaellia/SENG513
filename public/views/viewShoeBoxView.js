@@ -1,7 +1,7 @@
-const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
+const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, boxRepeat, loadCards) => {
     const user = model.local('user')
     const boxes = model.local('boxes')
-    const boxList = viewBoxRepeat(boxes)
+    const boxList = boxRepeat(boxes)
 
     $("#banner").css({'visibility': 'visible'})
     $('#box-pic').hide('fast').attr('src', box.logoURL).show('fast')

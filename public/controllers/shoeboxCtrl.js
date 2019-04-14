@@ -33,6 +33,12 @@ $(document).on('click', '.btn-accept-invite', ({target: {id}}) => {
 
                     // not sure if this works
                     // chatGlobal.bot(`<strong>${model.local(`user`).displayName}</strong> has joined this shoebox!`)
+                    model.local('currentBox', box)
+
+                    // update local pendingBoxes
+                    let tmpPending = model.local('pendingBoxes').filter( e => e !== id)
+                    model.local('pendingBoxes', tmpPending)
+
                     view.viewShoeBox(box)
                 })
             })

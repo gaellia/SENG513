@@ -57,7 +57,7 @@ const v = () => {
             cols[index%cols.length] += getHTMLFor.cards(card.data())
             index++
         })
-        cols[(index+1)%cols.length] += getHTMLFor.addButton()
+        cols[cols.length-1] += getHTMLFor.addButton()
 
         return index===0? getHTMLFor.placeholder(): cols
     }
@@ -77,8 +77,8 @@ const v = () => {
                                     ${box.name}
                                 </h5>
                             </div>
-                            <button class="col-2 btn btn-primary btn-accept-invite" id="accept-${box.boxID}">Accept</button>
-                            <button class="col-2 btn btn-danger btn-reject-invite" id="reject-${box.boxID}">Reject</button>
+                            <button class="col-2 btn btn-outline-primary btn-accept-invite fas fa-check" id="accept-${box.boxID}"></button>
+                            <button class="col-2 btn btn-outline-danger btn-reject-invite fas fa-times" id="reject-${box.boxID}"></button>
                         </div>
                     </li>`
                 } else {
@@ -99,25 +99,6 @@ const v = () => {
         return result
     }
 
-    const viewBoxRepeat = boxes => {
-        let result = ``
-        if(boxes.length!==0) {
-            boxes.forEach(box => {
-                result = `${result}
-                <li class="list-group-item view-box-btn">
-                    <button class="btn maxw" style="text-align: center">
-                        <div id="div-${box.boxID}">
-                            <image id="img-${box.boxID}" src="${box.logoURL}" style="width: 64px; height: 64px""></image>
-                            <br>
-                            <span id="lab-${box.boxID}" class="time">${box.name}</span>
-                        </div>
-                    </button>
-                </li>`
-            })
-        }
-        return result
-    }
-
     const views = {
         MID: $('#middle-container'),
         LEFT: $('#left-container'),
@@ -128,7 +109,7 @@ const v = () => {
         auth: () => authView(views),
         selectShoeBox: () => selectShoeBoxView(views, boxRepeat),
         createShoeBox: () => createShoeBoxView(views),
-        viewShoeBox: box => viewShoeBoxView(views, box, viewBoxRepeat, loadCards),
+        viewShoeBox: box => viewShoeBoxView(views, box, boxRepeat, loadCards),
         inviteMember: () => inviteMemberView(views),
         profileModal: () => profileModalView(views),
         settingsModal: () => settingModalView(views),
