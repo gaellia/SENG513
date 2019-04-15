@@ -3,8 +3,9 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, boxRepeat, loadCards) => {
     const boxes = model.local('boxes')
     const boxList = boxRepeat(boxes, false)
 
-    $("#banner").css({'visibility': 'visible'})
-    $('#box-pic').hide('fast').attr('src', box.logoURL).show('fast')
+    viewGlobal.showBanner()
+    viewGlobal.mediaCheck(true)
+    viewGlobal.switchBoxLogo(box.logoURL)
 
     LEFT.html(`
     <div class="drawer" style="text-align: center; padding-top: 20px">

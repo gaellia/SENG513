@@ -2,7 +2,11 @@ const viewUtil = (() => {
     const containers = {
         MID: $('#middle-container'),
         LEFT: $('#left-container'),
-        RIGHT: $('#right-container')
+        RIGHT: $('#right-container'),
+        CHAT_BTN: $('#chat-btn-banner'),
+        BAR_MENU: $('#bar-menu-banner'),
+        WINDOW: $(window),
+        BANNER: $("#banner")
     }
     
     const templates = {

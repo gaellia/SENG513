@@ -5,8 +5,7 @@ const editCardView = cardID => {
     model.shoebox(model.local('currentBox').boxID).collection('cards').doc(cardID).get().then(response => {
         let {title, resourceURL, text, author} = response.data()
 
-        if (title)
-            $('#modal-title').html(card.title)
+        if (title) $('#modal-title').html(title)
 
         $("#modal-footer").html(`
             <div id="show-delete-card"></div>
