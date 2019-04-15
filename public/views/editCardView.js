@@ -32,7 +32,7 @@ const editCardView = cardID => {
 
         if (author===model.local('user').email) {
             $('#show-delete-card').html(`<button type="button" class="btn btn-danger mr-auto delete-card-btn" data-dismiss="modal" id="delete-card-${cardID}"><i class="fas fa-trash"></i></button>`)
-            $('#show-save-card').html(`<button type="button" class="btn btn-primary" id="create-card-submit" data-dismiss="modal" id="save-card-${cardID}">Save</button>`)
+            $('#show-save-card').html(`<button type="button" class="btn btn-primary save-card-btn" data-dismiss="modal" id="save-card-${cardID}">Save</button>`)
             $('#card-name').prop("disabled", false)
             $('#card-text').prop("disabled", false)
         }
