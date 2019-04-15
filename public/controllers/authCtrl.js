@@ -47,6 +47,10 @@ const authGlobal = {
       model.local('boxes', response.docs.map(docs => docs.data()))
       model.local('pendingBoxes', [])
 
+      if (model.local('boxes').length === 0) {
+        view.selectShoeBox()
+      }
+
       let allBoxes = response.docs.map(docs => docs.data())
       allBoxes.forEach(box => {
         model.shoebox(box.boxID).collection('members').where('role', '==', 'invited').where('email', '==', model.local('user').email).get().then(members => {

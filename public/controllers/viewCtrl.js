@@ -27,7 +27,6 @@ const viewGlobal = {
 
                     // after view shoebox
                     } else {
-                        console.log("HERE")
                         MID.css({'padding-left': '40px'}).attr('class', 'col-md-9')
 
                         show([RIGHT, MID, BAR_MENU], 'fast')
@@ -75,6 +74,10 @@ const viewGlobal = {
             if(!shown(LEFT)) {
                 hide([RIGHT], 'fast')
                 show([LEFT], 'fast')
+
+                if (currentWidth < 768) {
+                    hide([MID], 'fast')
+                }
 
             } else mediaCheck(true)
         })

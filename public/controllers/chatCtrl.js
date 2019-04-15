@@ -49,7 +49,6 @@ $(document).on('submit', '#msg-form', e => {
 // listen for enter keypress
 $(document).on('keypress', '#m', e => {
     if(e.which == 13) {
-        console.log("HI")
         e.preventDefault()
         $('#msg-form').submit()
     }

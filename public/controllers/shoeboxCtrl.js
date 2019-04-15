@@ -32,8 +32,8 @@ $(document).on('click', '.btn-accept-invite', ({target: {id}}) => {
                 res.docs.map(doc => {
                     model.shoebox(id).collection('members').doc(doc.id).update({'role': 'member'})
 
-                    chatGlobal.bot(`<strong>${model.local(`user`).displayName}</strong> has joined this shoebox!`)
                     model.local('currentBox', box)
+                    //chatGlobal.bot(`<strong>${model.local(`user`).displayName}</strong> has joined this shoebox!`)
 
                     // update local pendingBoxes
                     let tmpPending = model.local('pendingBoxes').filter( e => e !== id)
@@ -131,6 +131,17 @@ $(document).on('click', '#create-shoebox-submit', e => {
             let tempBoxes = model.local('boxes')
             tempBoxes.push(boxObject)
             model.local('boxes', tempBoxes)
+
+            // create listener for box
+            MSG_LISTENER = chatGlobal.msgREF().onSnapshot(s => {
+                s.docChanges().forEach(({type, doc}) => {
+                    if (type === 'added') {
+                        chatGlobal.display(doc.data())
+                        chatGlobal.toBottom()
+                    }
+                })
+            })
+
             // change view to the newly created box
             view.viewShoeBox(boxObject)
         })
