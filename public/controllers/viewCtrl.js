@@ -1,30 +1,38 @@
 const viewGlobal = {
-    mediaCheck: (() => {
-        const LEFT = $("#left-container")
-        const RIGHT = $("#right-container")
-        const MID = $("#middle-container")
-        const CHAT_BTN = $('#chat-btn-banner')
-        const BAR_MENU = $('#bar-menu-banner')
-        const WINDOW = $(window)
-        const BANNER = $("#banner")
-        
+    mediaCheck: (({containers: {MID, LEFT, RIGHT, WINDOW, BANNER, CHAT_BTN, BAR_MENU}}) => {
         const hide = (arr, speed) => arr.forEach(e => e.hide(speed))
         const show = (arr, speed) => arr.forEach(e => e.show(speed))
+        const shown = container => container.is(':visible')
+        const textIsFocus = () => $(document.activeElement).prop('type') !== 'text'
 
         let currentWidth = 0 // closure
     
         const mediaCheck = override => {
             const WIDTH = WINDOW.width()
-            if(override || (currentWidth!==WIDTH && ($(document.activeElement).prop('type') !== 'text'))) {
+            if(override || (currentWidth!==WIDTH && textIsFocus())) {
                 // banner
                 if(WIDTH < 768) {
                     hide([RIGHT, LEFT], 'fast')
-                    show([CHAT_BTN, MID, BAR_MENU], 'fast')
+                    show([CHAT_BTN, MID], 'fast')
                 }
                 // desktop
                 else {
-                    show([LEFT, RIGHT, MID], 'fast')
-                    hide([CHAT_BTN, BAR_MENU], 'fast')
+
+                    // before view shoebox
+                    if(BANNER.css('visibility')==="hidden") { // shown(BANNER) will not work
+                        MID.css({'padding-left': '0'}).attr('class', 'col-md-6')
+
+                        show([LEFT, RIGHT, MID], 'fast')
+                        hide([CHAT_BTN, BAR_MENU], 'fast')
+
+                    // after view shoebox
+                    } else {
+                        console.log("HERE")
+                        MID.css({'padding-left': '40px'}).attr('class', 'col-md-9')
+
+                        show([RIGHT, MID, BAR_MENU], 'fast')
+                        hide([CHAT_BTN, LEFT], 'fast')
+                    }
                 }
             currentWidth = WIDTH
             }
@@ -39,16 +47,21 @@ const viewGlobal = {
         }
     
         BANNER.click(({target: {id}}) => {
-            if(!MID.is(':visible') && !id.includes('-banner')) {
-                show([MID])
-                hide([RIGHT, LEFT], 'fast')
+            if(!id.includes(`-banner`)) {
+                if(!shown(MID)) {
+                    show([MID], 'fast')
+                    hide([RIGHT, LEFT], 'fast')
+                } else if(shown(LEFT) && shown(MID) && !shown(RIGHT)) {
+                    mediaCheck(true)
+                }
             }
         })
         
         CHAT_BTN.click(() => {
-            if(!RIGHT.is(':visible')) {
+            if(!shown(RIGHT)) {
                 hide([MID, LEFT], 'fast')
                 show([RIGHT], 'fast')
+
                 // scroll to bottom
                 chatGlobal.toBottom()
                 $("html, body").animate({ scrollTop: $(document).height() }, "slow")
@@ -59,13 +72,14 @@ const viewGlobal = {
     
             
         BAR_MENU.click(() => {
-            if(!LEFT.is(':visible')) {
-                hide([MID, RIGHT], 'fast')
+            if(!shown(LEFT)) {
+                hide([RIGHT], 'fast')
                 show([LEFT], 'fast')
-            } else {
-                mediaCheck(true)
-            }
+
+            } else mediaCheck(true)
         })
         return mediaCheck
-    })()
+    })(viewUtil),
+    showBanner: (() => $("#banner").hide().css({'visibility': 'visible'}).show('slow')),
+    switchBoxLogo: url => $('#box-pic').hide('fast').attr('src', url).show('fast')
 }

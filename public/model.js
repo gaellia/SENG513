@@ -97,7 +97,6 @@ const m = () => {
         //model.getByBoxID(boxID, 'members')
         // you may chain .add() || .set() || .get() || .where() || .orderBy() || .onSnapshot
         getByBoxID: (id, collectionName) => new Promise ((resolve, reject) => {
-            //console.log(id)
             db.collection('shoebox').where('boxID', '==', id).get().then(({docs}) => {
                 resolve(db.collection('shoebox').doc(docs[0].id).collection(collectionName))
             })

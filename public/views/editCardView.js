@@ -29,10 +29,12 @@ const editCardView = cardID => {
                         <label for="card-name">Card Title</label>
                         <input type="text" class="form-control" id="card-name" value="${title}">
                         <br>
-                        <label for="card-text">Card Text</label>
                         <textarea type="text" class="form-control" id="card-text" rows="6">${text}</textarea>
                     </div>
-                </form>`)
+                </form>
+                <p class="time" style="text-align: left">Added by ${author}</p>
+            </div>
+        `)
 
             $('#modal-title').html(`Editing ${title ? title : "Card"}`)
         }
