@@ -6,12 +6,12 @@ const editCardView = cardID => {
         let {title, resourceURL, text, author} = response.data()
 
         if (title)
-            $('#modal-title').html(card.title)
+            $('#modal-title').html(title)
 
         $("#modal-footer").html(`
             <div id="show-delete-card"></div>
-            <button type="button" class="btn btn-secondary ml-auto" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" id="create-card-submit" data-dismiss="modal" id="save">Create</button>
+            <button type="button" class="btn btn-secondary ml-auto" data-dismiss="modal">Close</button>
+            <div id="show-save-card"></div>
         `)
 
         $('#modal-body').html(`
@@ -21,16 +21,20 @@ const editCardView = cardID => {
                     <div class="form-group">
                         <hr>
                         <label for="card-name">Card Title</label>
-                        <input type="text" class="form-control" id="card-name" value="${title}">
+                        <input type="text" class="form-control" id="card-name" value="${title}" disabled>
                         <br>
                         <label for="card-text">Card Text</label>
-                        <textarea type="text" class="form-control" id="card-text" rows="6">${text}</textarea>
+                        <textarea type="text" class="form-control" id="card-text" rows="6" disabled>${text}</textarea>
                     </div>
                 </form>
             </div>
         `)
 
-        if (author===model.local('user').email)
+        if (author===model.local('user').email) {
             $('#show-delete-card').html(`<button type="button" class="btn btn-danger mr-auto delete-card-btn" data-dismiss="modal" id="delete-card-${cardID}"><i class="fas fa-trash"></i></button>`)
+            $('#show-save-card').html(`<button type="button" class="btn btn-primary" id="create-card-submit" data-dismiss="modal" id="save-card-${cardID}">Save</button>`)
+            $('#card-name').prop("disabled", false)
+            $('#card-text').prop("disabled", false)
+        }
     })
 }
