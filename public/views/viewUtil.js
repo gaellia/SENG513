@@ -12,13 +12,15 @@ const viewUtil = (() => {
                 <div class="card" style="width: 18rem;">`
             if (mediaType !== "text") cardBody += `
                     <img class="card-img-top" src="${resourceURL}">`
-            
+            if (title || text){
             cardBody += `
                     <div class="card-body">
                         <h5 class="card-title">${title}</h5>
                         <p class="card-text">${text}</p>
-                    </div>
-                </div>
+                    </div>`
+            }
+            cardBody +=
+                `</div>
             </button>`
     
             return cardBody

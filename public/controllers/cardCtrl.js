@@ -31,7 +31,6 @@ $(document).on('click', '#create-card-submit', e => {
     }
     else {newCard.mediaType = "text"}
 
-    console.log(currentBox.boxID)
     model.getByBoxID(currentBox.boxID, "cards").then(res => {
         res.add(newCard).then(() => {
             view.viewShoeBox(currentBox)
