@@ -42,12 +42,18 @@ $(document).on('click', '#create-card-submit', e => {
 })
 
 // listens to the edit button
-$(document).on('click', '#cardButton', e => {
-    view.editCard()
+$(document).on('click', '.edit-card-btn', e => {
+    view.editCard(e.currentTarget.id.substr(5))
 
     $(".file").on("change", function(event) {
         GLOBAL_FILE = event.target.files[0]
         fileChanged.setTrue()
     })
     
+})
+
+$(document).on('click', '.delete-card-btn', e => {
+    model.shoebox(model.local('currentBox').boxID).collection('cards').doc(e.currentTarget.id.substr(12)).delete().then(response => {
+        view.viewShoeBox(model.local('currentBox'))
+    })
 })

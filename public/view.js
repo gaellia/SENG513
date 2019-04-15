@@ -2,8 +2,8 @@ const v = () => {
     
     // Returns HTML for a given card
     const getHTMLFor = {
-        cards: card => {
-            let cardBody = `<button id="cardButton" class="btn" data-toggle="modal" data-target="#modal-container" value="${card.id}"><div class="card" style="width: 18rem;">`
+        cards: (cardID, card) => {
+            let cardBody = `<button id="card-${cardID}" class="btn edit-card-btn" data-toggle="modal" data-target="#modal-container" value="${card.id}"><div class="card" style="width: 18rem;">`
             if (card.mediaType !== "text"){
                 cardBody += `<img class="card-img-top" src="${card.resourceURL}">`
             }
@@ -49,7 +49,7 @@ const v = () => {
         let index = 0
 
         cards.forEach(card => {
-            cols[index%cols.length] += getHTMLFor.cards(card.data())
+            cols[index%cols.length] += getHTMLFor.cards(card.id, card.data())
             index++
         })
         cols[(index+1)%cols.length] += getHTMLFor.addButton()
@@ -128,7 +128,7 @@ const v = () => {
         profileModal: () => profileModalView(views),
         settingsModal: () => settingModalView(views),
         createCard: () => createCardView(),
-        editCard: () => editCardView()
+        editCard: (cardID) => editCardView(cardID)
     }
 } 
 
