@@ -75,25 +75,40 @@ const v = () => {
         }
     }
 
-    const boxRepeat = boxes => {
+    const boxRepeat = (boxes, shouldIncludePending) => {
         let pending = model.local('pendingBoxes')
         let result = ``
         if(boxes.length!==0) {
             boxes.forEach(box => {
                 if (pending.includes(box.boxID)) {
-                    result = `${result}
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="btn maxw col-8">
-                                <h5 id="div-${box.boxID}">
-                                    <image id="img-${box.boxID}" src="${box.logoURL}" style="width: 64px; height: 64px; margin-right: 16px">
-                                    ${box.name}
-                                </h5>
+                    if(shouldIncludePending) {
+                        result = `${result}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="btn maxw col-sm-8">
+                                    <h5>
+                                        <image id="img-${box.boxID}" src="${box.logoURL}" style="width: 64px; height: 64px; margin-right: 16px">
+                                        ${box.name}
+                                    </h5>
+                                </div>
+    
+                                <div class="col-sm-3">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="p-2">
+                                            <button class="btn btn-info center-card btn-accept-invite" id="accept-${box.boxID}">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                        </div>
+                                        <div class="p-2">
+                                            <button class="btn btn-danger center-card btn-reject-invite" id="reject-${box.boxID}">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <button class="col-2 btn btn-outline-primary btn-accept-invite fas fa-check" id="accept-${box.boxID}"></button>
-                            <button class="col-2 btn btn-outline-danger btn-reject-invite fas fa-times" id="reject-${box.boxID}"></button>
-                        </div>
-                    </li>`
+                        </li>`
+                    }
                 } else {
                     result = `${result}
                     <li class="list-group-item">
