@@ -1,6 +1,38 @@
 const v = () => {
     
     // Returns HTML for a given card
+
+
+//
+// <div class="card" id="mydiv">
+//         <div id="mydivheader">
+//         <button id="cardButton" class="btn" data-toggle="modal" data-target="#modal-container" value="undefined"> Edit<button>
+//
+//
+//         </div>
+//         <img class="card-img-top" src="https://firebasestorage.googleapis.com/v0/b/shoebox513.appspot.com/o/images%2F3572jpg%2Fimages%2F3572jpg?alt=media&amp;token=12f32c91-745e-4190-ac63-61daa2f872fd">
+//         <div class="card-body"><h5 class="card-title">THINGY</h5>
+//         <p class="card-text">thinghhhhhy</p></div>
+//
+//     </div>
+
+
+    //
+    // cards: card => {
+    //     let cardBody = `<div class="card" id="mydiv">
+    //     <div id="mydivheader">
+    //      <button id="cardButton" class="btn" data-toggle="modal" data-target="#modal-container" value="${card.id}""> Edit<button></div>`
+    //
+    //     if (card.mediaType !== "text"){
+    //         cardBody += `<img class="card-img-top" src="${card.resourceURL}">`
+    //     }
+    //     cardBody += `<div class="card-body"><h5 class="card-title">${card.title}</h5><p class="card-text">${card.text}</p></div></div></button>`
+    //
+    //     return cardBody;
+    // },
+
+
+
     const getHTMLFor = {
         cards: card => {
             let cardBody = `<button id="cardButton" class="btn" data-toggle="modal" data-target="#modal-container" value="${card.id}"><div class="card" style="width: 18rem;">`
@@ -8,7 +40,7 @@ const v = () => {
                 cardBody += `<img class="card-img-top" src="${card.resourceURL}">`
             }
             cardBody += `<div class="card-body"><h5 class="card-title">${card.title}</h5><p class="card-text">${card.text}</p></div></div></button>`
-    
+
             return cardBody;
         },
         placeholder: () => [``, `
