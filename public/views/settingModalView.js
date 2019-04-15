@@ -18,7 +18,7 @@ const settingModalView = () => {
                 res.docs.map(memberDoc => {
 
                     if (memberDoc.data().email == user.email) {
-                        $('#show-delete-box').html('<button type="button" class="btn btn-outline-danger mr-auto" data-dismiss="modal" id="delete-box">Delete Box</button>')
+                        $('#show-delete-box').html('<button type="button" class="btn btn-danger mr-auto" data-dismiss="modal" id="delete-box"> <i class="fas fa-trash"></i> Delete Box</button>')
                     }
 
                 })

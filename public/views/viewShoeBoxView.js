@@ -80,13 +80,8 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, boxRepeat, loadCards) => {
                         </div>
                     </div>
                 </div>
-                <button class="col" id="addNote"> Add note</button>
-            <input class="col" id="newFile" type="file">
             `)
 
-            $('#addNote').hide()
-            $('#newFile').hide()
-   
             RIGHT.html(`
             <div id='chat-container'>
                 <ul id='chat'>

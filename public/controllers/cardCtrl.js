@@ -1,44 +1,59 @@
-// Creates a new card from the given parametres
-createNewCard: (type, title, text, resourceURL, authorEmail) => {
-    switch (type) {
-        case 'text':
-            return {
-                "mediaType": type,
-                "title": title,
-                "text": text,
-                "author": authorEmail
-            }
-            break
-        default:
-            return {
-                "mediaType": type,
-                "title": title,
-                "text": text,
-                "resourceURL": resourceURL,
-                "author": authorEmail
-            }
-            break
-    }
-}
-
 // listens to the add button
 $(document).on('click', '#addButton', e => {
-    console.error("WE ARE IN HERE")
-    if ($('#addNote').is(':visible')){
-        console.error("WE IN HERE !")
-        $('#addNote').hide()
-    }
-    else{
-        console.error("WE IN HERE 2")
+    view.createCard()
 
-        $('#addNote').show()
+    $(".file").on("change", function(event) {
+        GLOBAL_FILE = event.target.files[0]
+    })
+    
+    $('#card-image').hide()
+})
 
-    }
-    if ($('#newFile').is(':visible')){
-        $('#newFile').hide()
-    }
-    else{
-        $('#newFile').show()
 
+// create new card form submit
+$(document).on('click', '#create-card-submit', e => {
+    e.preventDefault() // access form elements here
+
+    let currentBox = model.local('currentBox')
+    
+    let newCard = {
+        title: $('#card-name').val(),
+        text: $('#card-text').val(),
+        author: model.local("user").email,
     }
+
+    let imageSrc = $('#card-image').attr('src')
+
+    if (imageSrc !== "//:0") {
+        // TODO add video recgonition to differentiate
+        newCard.mediaType = "picture"
+        newCard.resourceURL = $('#card-image').attr('src')
+    }
+    else {newCard.mediaType = "text"}
+
+    console.log(currentBox.boxID)
+    model.getByBoxID(currentBox.boxID, "cards").then(res => {
+        res.add(newCard).then(() => {
+            view.viewShoeBox(currentBox)
+        })
+    }).catch(err => {
+        console.log('err', err)
+    })
+})
+
+// listens to the edit button
+$(document).on('click', '.edit-card-btn', e => {
+    view.editCard(e.currentTarget.id.substr(5))
+
+    $(".file").on("change", function(event) {
+        GLOBAL_FILE = event.target.files[0]
+        fileChanged.setTrue()
+    })
+    
+})
+
+$(document).on('click', '.delete-card-btn', e => {
+    model.shoebox(model.local('currentBox').boxID).collection('cards').doc(e.currentTarget.id.substr(12)).delete().then(response => {
+        view.viewShoeBox(model.local('currentBox'))
+    })
 })
