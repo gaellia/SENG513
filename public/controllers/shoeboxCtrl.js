@@ -32,8 +32,7 @@ $(document).on('click', '.btn-accept-invite', ({target: {id}}) => {
                 res.docs.map(doc => {
                     model.shoebox(id).collection('members').doc(doc.id).update({'role': 'member'})
 
-                    // not sure if this works
-                    // chatGlobal.bot(`<strong>${model.local(`user`).displayName}</strong> has joined this shoebox!`)
+                    chatGlobal.bot(`<strong>${model.local(`user`).displayName}</strong> has joined this shoebox!`)
                     model.local('currentBox', box)
 
                     // update local pendingBoxes
