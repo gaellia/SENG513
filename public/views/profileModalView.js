@@ -1,11 +1,12 @@
 const profileModalView = () => {
+    $(".modal-footer").html(`
+            <button type="button" class="btn btn-warning mr-auto logout" style="color: white" data-dismiss="modal"> <i class="fas fa-sign-out-alt"></i> Logout</button>
+            <button type="button" class="btn btn-secondary ml-auto" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save</button>
+    `)
+
     const user = model.local('user')
     $(".modal-title").html(`Hello, ${user.displayName}`)
-
-    $(".modal-footer").html(`
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save</button>
-    `)
 
     $('.modal-body').html(`
         <div class="row">
@@ -19,10 +20,5 @@ const profileModalView = () => {
             <h6 class="col-7" id="edit-name">${user.displayName}</h6>
             <p class="col-2"><button id="edit-btn" class="btn btn-link"><i class="fas fa-pencil-alt"></i></button></p>
         </div>
-        <div class="row><div class="col-12"><br><br></div></div>
-        <div class="row">
-            <div class="col-12">
-                <button type="button" class="btn btn-warning logout" style="color: white"><i class="fas fa-sign-out-alt"></i>  Logout</button>
-            </div>
-        </div>`)
+        <div class="row><div class="col-12"><br><br></div></div>`)
 }

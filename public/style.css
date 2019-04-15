@@ -80,6 +80,7 @@ a {
 .middle-cards {
     height: calc(100vh - 240px);
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .card-header {
@@ -240,4 +241,8 @@ a {
       margin: auto;
       margin-top: 1rem;
       margin-bottom: 1rem;
+  }
+
+  .btn-info {
+    background-color: rgb(63, 81, 181)
   }

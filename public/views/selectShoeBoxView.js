@@ -1,7 +1,7 @@
 const selectShoeBoxView = ({MID}, boxRepeat) => {
     const user = model.local('user')
     const boxes = model.local('boxes')
-    let boxList = boxRepeat(boxes)
+    let boxList = boxRepeat(boxes, true)
 
     MID.html(`
         <div style="text-align: center">
