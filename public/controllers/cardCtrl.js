@@ -47,7 +47,6 @@ $(document).on('click', '.edit-card-btn', e => {
 
     $(".file").on("change", function(event) {
         GLOBAL_FILE = event.target.files[0]
-        fileChanged.setTrue()
     })
     
 })
@@ -55,5 +54,27 @@ $(document).on('click', '.edit-card-btn', e => {
 $(document).on('click', '.delete-card-btn', e => {
     model.shoebox(model.local('currentBox').boxID).collection('cards').doc(e.currentTarget.id.substr(12)).delete().then(response => {
         view.viewShoeBox(model.local('currentBox'))
+    })
+})
+
+$(document).on('click', `.save-card-btn`, e => {
+
+    const box = model.local('currentBox')
+    const cardID = e.currentTarget.id.substr(10)
+
+    let newTitle = $('#card-name').val()
+    let newText = $('#card-text').val()
+
+    model.shoebox().where('boxID', '==', box.boxID).get().then(response => {
+        response.docs.map(doc => {
+
+            // update card
+            model.shoebox(doc.id).collection('cards').doc(cardID).update({
+                title: newTitle,
+                text: newText
+            }).then( () => {
+                view.viewShoeBox(box)
+            })
+        })
     })
 })

@@ -16,13 +16,15 @@ const viewUtil = (() => {
                 <div class="card" style="width: 18rem;">`
             if (mediaType !== "text") cardBody += `
                     <img class="card-img-top" src="${resourceURL}">`
-            
+            if (title || text){
             cardBody += `
                     <div class="card-body">
                         <h5 class="card-title">${title}</h5>
                         <p class="card-text">${text}</p>
-                    </div>
-                </div>
+                    </div>`
+            }
+            cardBody +=
+                `</div>
             </button>`
     
             return cardBody
@@ -86,7 +88,7 @@ const viewUtil = (() => {
                 <button class="btn view-box-btn maxw">
                     <h5 id="div-${boxID}">
                         <image id="img-${boxID}" src="${logoURL}" style="width: 64px; height: 64px; margin-right: 16px">
-                        ${name}
+                        <span id="boxName-${boxID}">${name}</span>
                     </h5>
                 </button>
             </div>
