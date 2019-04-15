@@ -5,6 +5,8 @@ const editCardView = cardID => {
     model.shoebox(model.local('currentBox').boxID).collection('cards').doc(cardID).get().then(response => {
         let {title, resourceURL, text, author} = response.data()
 
+        console.log(response.data())
+
         if (title)
             $('#modal-title').html(title)
 
@@ -16,7 +18,7 @@ const editCardView = cardID => {
 
         $('#modal-body').html(`
             <div style="text-align: center">
-                <img style="width: 90%; text-align: center" id="card-image" src="${resourceURL}">
+                ${resourceURL ? `<img style="width: 90%; text-align: center" id="card-image" src="${resourceURL}">` : ``}
                 <form id="create-card-form">
                     <div class="form-group">
                         <hr>
