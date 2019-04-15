@@ -76,7 +76,7 @@ const viewUtil = (() => {
             </div><!-- row -->
         </li>`,
 
-        notPendingBox = ({boxID, logoURL, name}) => `
+        notPendingBox: ({boxID, logoURL, name}) => `
         <li class="list-group-item">
             <div class="row">
                 <button class="btn view-box-btn maxw">
@@ -89,5 +89,5 @@ const viewUtil = (() => {
         </li>`
     }
 
-    return { templates, containers }
+    return ({ templates, containers })
 })()

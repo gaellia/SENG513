@@ -53,4 +53,4 @@ const v = ({templates, containers}) => {
     }
 } 
 
-const view = v(viewUtil())
+const view = v(viewUtil)
