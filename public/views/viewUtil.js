@@ -82,7 +82,7 @@ const viewUtil = (() => {
                 <button class="btn view-box-btn maxw">
                     <h5 id="div-${boxID}">
                         <image id="img-${boxID}" src="${logoURL}" style="width: 64px; height: 64px; margin-right: 16px">
-                        ${name}
+                        <span id="boxName-${boxID}">${name}</span>
                     </h5>
                 </button>
             </div>

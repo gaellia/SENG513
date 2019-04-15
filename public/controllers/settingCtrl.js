@@ -155,7 +155,7 @@ $(document).on('click', '#save-box', () => {
         model.local('boxes', tempBoxes)
 
         // update drawer with edited name
-        $('#lab-' + box.boxID).text(newName)
+        $('#boxName-' + box.boxID).text(newName)
         // update box title with edited name
         $('h2').text(newName)
     }

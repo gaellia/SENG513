@@ -57,11 +57,24 @@ $(document).on('click', '.delete-card-btn', e => {
     })
 })
 
-$(document).on('click', `.save-id-${cardID}`, e => {
-    view.editCard(e.currentTarget.id.substr(5))
+$(document).on('click', `.save-card-btn`, e => {
 
-    $(".file").on("change", function(event) {
-        GLOBAL_FILE = event.target.files[0]
+    const box = model.local('currentBox')
+    const cardID = e.currentTarget.id.substr(10)
+
+    let newTitle = $('#card-name').val()
+    let newText = $('#card-text').val()
+
+    model.shoebox().where('boxID', '==', box.boxID).get().then(response => {
+        response.docs.map(doc => {
+
+            // update card
+            model.shoebox(doc.id).collection('cards').doc(cardID).update({
+                title: newTitle,
+                text: newText
+            }).then( () => {
+                view.viewShoeBox(box)
+            })
+        })
     })
-    
 })
