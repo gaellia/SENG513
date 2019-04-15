@@ -1,7 +1,7 @@
-const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
+const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, boxRepeat, loadCards) => {
     const user = model.local('user')
     const boxes = model.local('boxes')
-    const boxList = viewBoxRepeat(boxes)
+    const boxList = boxRepeat(boxes)
 
     $("#banner").css({'visibility': 'visible'})
     $('#box-pic').hide('fast').attr('src', box.logoURL).show('fast')
@@ -67,15 +67,17 @@ const viewShoeBoxView = ({LEFT, RIGHT, MID}, box, viewBoxRepeat, loadCards) => {
                     </div>
                 </div>
                 <hr>
-                <div class="row middle-cards d-flex justify-content-center">
-                    <div class="col-auto">
-                        ${columnHTML[0]}
-                    </div>
-                    <div class="col-auto">
-                        ${columnHTML[1]}
-                    </div>
-                    <div class="col-auto">
-                        ${columnHTML[2]}
+                <div class="middle-cards">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col">
+                            ${columnHTML[0]}
+                        </div>
+                        <div class="col">
+                            ${columnHTML[1]}
+                        </div>
+                        <div class="col">
+                            ${columnHTML[2]}
+                        </div>
                     </div>
                 </div>
             `)

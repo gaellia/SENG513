@@ -3,20 +3,28 @@ const v = () => {
     // Returns HTML for a given card
     const getHTMLFor = {
         cards: (cardID, card) => {
-            let cardBody = `<button id="card-${cardID}" class="btn edit-card-btn" data-toggle="modal" data-target="#modal-container" value="${card.id}"><div class="card" style="width: 18rem;">`
-            if (card.mediaType !== "text"){
-                cardBody += `<img class="card-img-top" src="${card.resourceURL}">`
-            }
-            cardBody += `<div class="card-body"><h5 class="card-title">${card.title}</h5><p class="card-text">${card.text}</p></div></div></button>`
+            let cardBody = `
+            <button id="card-${cardID}" class="btn edit-card-btn" data-toggle="modal" data-target="#modal-container" value="${card.id}">
+                <div class="card" style="width: 18rem;">`
+            if (card.mediaType !== "text") cardBody += `
+                    <img class="card-img-top" src="${card.resourceURL}">`
+            
+            cardBody += `
+                    <div class="card-body">
+                        <h5 class="card-title">${card.title}</h5>
+                        <p class="card-text">${card.text}</p>
+                    </div>
+                </div>
+            </button>`
     
             return cardBody;
         },
         placeholder: () => [``, `
-            <div style="text-align: center">
                 <div class="card" style="width: 18rem;">
                     <div class="card-header"></div>
                     <div class="card-body">
-                        <h5 class="card-title">Your cards will go here</h5>
+                        <h4 class="card-title">Your cards will go here</h4>
+                        <br>
                         <p class="card-text">Post the first card in this shoebox!</p>
                         <button id="addButton" class="btn btn-lg btn-light" style="width:100%"  data-toggle="modal" data-target="#modal-container">
                             <h1 style="font-size: 5rem">
@@ -24,11 +32,9 @@ const v = () => {
                             </h1>
                         </button>
                     </div>
-                </div>
             </div>`, ``],
 
         addButton: () => `
-            <div style="text-align: center">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body" style="padding: 0!important">
                         <button id="addButton" style="width: 100%; height: 18rem; margin:0" class="btn btn-light"  data-toggle="modal" data-target="#modal-container">
@@ -37,24 +43,36 @@ const v = () => {
                             </h1>
                         </button>
                     </div>
-                </div>
-            </div>
-        `
+            </div>`
     }
 
     // Returns an array containing the HTML of each column in the main view as a string
     const loadCards = cards => {
-        let cols = ["", "", ""]
-
-        let index = 0
-
+        let count = 1, cardArr = []
         cards.forEach(card => {
-            cols[index%cols.length] += getHTMLFor.cards(card.id, card.data())
-            index++
+            cardArr.push(card.data())
+            count++
         })
-        cols[(index+1)%cols.length] += getHTMLFor.addButton()
 
-        return index===0? getHTMLFor.placeholder(): cols
+        const cols = ["", "", ""]
+        const getIDX = i => Math.floor((i*cols.length)/count)
+
+        cardArr.forEach((card, i) => {
+            cols[getIDX(i)] += getHTMLFor.cards(card.id, card)
+        })
+        
+        switch(cardArr.length) {
+            case 0:
+                return getHTMLFor.placeholder()
+            
+            case 1:
+                cols[1] += getHTMLFor.addButton()
+                return cols
+
+            default:
+                cols[2] += getHTMLFor.addButton()
+                return cols
+        }
     }
 
     const boxRepeat = boxes => {
@@ -72,8 +90,8 @@ const v = () => {
                                     ${box.name}
                                 </h5>
                             </div>
-                            <button class="col-2 btn btn-primary btn-accept-invite" id="accept-${box.boxID}">Accept</button>
-                            <button class="col-2 btn btn-danger btn-reject-invite" id="reject-${box.boxID}">Reject</button>
+                            <button class="col-2 btn btn-outline-primary btn-accept-invite fas fa-check" id="accept-${box.boxID}"></button>
+                            <button class="col-2 btn btn-outline-danger btn-reject-invite fas fa-times" id="reject-${box.boxID}"></button>
                         </div>
                     </li>`
                 } else {
@@ -94,25 +112,6 @@ const v = () => {
         return result
     }
 
-    const viewBoxRepeat = boxes => {
-        let result = ``
-        if(boxes.length!==0) {
-            boxes.forEach(box => {
-                result = `${result}
-                <li class="list-group-item view-box-btn">
-                    <button class="btn maxw" style="text-align: center">
-                        <div id="div-${box.boxID}">
-                            <image id="img-${box.boxID}" src="${box.logoURL}" style="width: 64px; height: 64px""></image>
-                            <br>
-                            <span id="lab-${box.boxID}" class="time">${box.name}</span>
-                        </div>
-                    </button>
-                </li>`
-            })
-        }
-        return result
-    }
-
     const views = {
         MID: $('#middle-container'),
         LEFT: $('#left-container'),
@@ -123,7 +122,7 @@ const v = () => {
         auth: () => authView(views),
         selectShoeBox: () => selectShoeBoxView(views, boxRepeat),
         createShoeBox: () => createShoeBoxView(views),
-        viewShoeBox: box => viewShoeBoxView(views, box, viewBoxRepeat, loadCards),
+        viewShoeBox: box => viewShoeBoxView(views, box, boxRepeat, loadCards),
         inviteMember: () => inviteMemberView(views),
         profileModal: () => profileModalView(views),
         settingsModal: () => settingModalView(views),
