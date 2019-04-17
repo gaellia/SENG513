@@ -13,10 +13,26 @@ const editCardView = cardID => {
             <div id="show-save-card"></div>
         `)
 
+        // check box ownership
+        model.shoebox().where('boxID', '==', model.local('currentBox').boxID).get().then(response => {
+            response.docs.map(doc => {
+                model.shoebox(doc.id).collection('members').where('role', '==', "owner").get().then(res => {
+                    res.docs.map(memberDoc => {
+            
+                        if (memberDoc.data().email === model.local('user').email) {
+                            $('#show-delete-card').html(`<button type="button" class="btn btn-danger mr-auto delete-card-btn" data-dismiss="modal" id="delete-card-${cardID}"><i class="fas fa-trash"></i></button>`)
+                        }
+            
+                    })
+                })
+            })
+        })
+
         $('#modal-body').html(`
             <div style="text-align: center">
                 ${resourceURL ? `<img style="width: 90%; text-align: center" id="card-image" src="${resourceURL}"><hr>` : ``}
                 <div id="card-body">${text ? text : ""}</div>
+                <p class="time" style="text-align: left">Added by ${author}</p>
             </div>
         `)
 
@@ -32,9 +48,7 @@ const editCardView = cardID => {
                         <textarea type="text" class="form-control" id="card-text" rows="6">${text}</textarea>
                     </div>
                 </form>
-                <p class="time" style="text-align: left">Added by ${author}</p>
-            </div>
-        `)
+            </div>`)
 
             $('#modal-title').html(`Editing ${title ? title : "Card"}`)
         }

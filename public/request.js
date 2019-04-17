@@ -8,7 +8,7 @@ const requestService = (url, method, params) => {
     let req = new XMLHttpRequest()
     
     req.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 200)
+        if (this.readyState === 4 && this.status === 200)
             console.log('success!')
         else if(this.readyState==4) {
             console.log("ERROR")

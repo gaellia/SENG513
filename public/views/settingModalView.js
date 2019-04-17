@@ -17,7 +17,7 @@ const settingModalView = () => {
             model.shoebox(doc.id).collection('members').where('role', '==', "owner").get().then(res => {
                 res.docs.map(memberDoc => {
 
-                    if (memberDoc.data().email == user.email) {
+                    if (memberDoc.data().email === user.email) {
                         $('#show-delete-box').html('<button type="button" class="btn btn-danger mr-auto" data-dismiss="modal" id="delete-box"> <i class="fas fa-trash"></i> Delete Box</button>')
                     }
 
