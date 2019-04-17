@@ -12,11 +12,22 @@ $(document).on('click', '#uploadButton', e => {
     e.preventDefault()
     const selectedFile = GLOBAL_FILE
 
-    const fileURL = `/images/${slugify(selectedFile.name)}`
+    let fileURL
+
+    if ($('#modal-title').text() === 'New Shoebox') {
+        // this is a cover photo
+        fileURL = 'cover_photos'
+    } else {
+        // this is a card
+        fileURL = `images/${model.local('currentBox').boxID}`
+    }
+
+    //hacky way to ensure uniqueness
+    let time = firebase.firestore.Timestamp.now().seconds
 
     // back end call here
 
-    const uploadTask = firebase.storage().ref(fileURL).child(fileURL).put(selectedFile, { contentType: 'image/jpeg' })
+    const uploadTask = firebase.storage().ref(fileURL).child(time + selectedFile.name).put(selectedFile, { contentType: 'image/jpeg' })
 
     const uploadCB = {
         inProgress(snapshot) {
